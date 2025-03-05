@@ -4,7 +4,7 @@
 .display-flex {
 	display: flex;
 }
-// Grid, Flex - Justify
+/* Grid, Flex - Justify */
 $justify-list: (
 	"left": flex-start,
 	"right": flex-end,
@@ -19,7 +19,7 @@ $justify-list: (
 		justify-content: $justify;
 	}
 }
-// Grid, Flex - Align
+/* Grid, Flex - Align */
 $align-list: (
 	"upper": flex-start,
 	"center": center,
@@ -49,13 +49,13 @@ $align-list: (
 .display-grid.direction-column {
 	grid-auto-flow: column;
 }
-// Spacing (Gap)
+/* Spacing (Gap) */
 @for $spacing from 0 through 40 {
 	.gap-#{calc($spacing * 2)} {
 		gap: #{calc($spacing * 2)}px;
 	}
 }
-// Border Radius
+/* Border Radius */
 @for $radius from 0 through 32 {
 	.radius-#{calc($radius * 2)} {
 		border-radius: #{calc($radius * 2)}px;
@@ -67,8 +67,20 @@ $align-list: (
 .radius-circle {
 	border-radius: 100%;
 }
-// Padding
-@for $padding from 1 through 20 {
+/* Padding */
+@for $padding from 1 through 25 {
+	.pl-#{calc($padding * 2)} {
+		padding-left: #{calc($padding * 2)}px;
+	}
+	.pr-#{calc($padding * 2)} {
+		padding-right: #{calc($padding * 2)}px;
+	}
+	.pt-#{calc($padding * 2)} {
+		padding-top: #{calc($padding * 2)}px;
+	}
+	.pb-#{calc($padding * 2)} {
+		padding-bottom: #{calc($padding * 2)}px;
+	}
 	.px-#{calc($padding * 2)} {
 		padding-left: #{calc($padding * 2)}px;
 		padding-right: #{calc($padding * 2)}px;
@@ -78,13 +90,29 @@ $align-list: (
 		padding-bottom: #{calc($padding * 2)}px;
 	}
 }
-// Margin
-@for $margin from 1 through 20 {
-	.px-#{calc($margin * 2)} {
+/* Margin */
+.mx-auto {
+	margin-left: auto;
+	margin-right: auto;
+}
+@for $margin from 1 through 34 {
+	.pl-#{calc($margin * 2)} {
+		margin-left: #{calc($margin * 2)}px;
+	}
+	.pr-#{calc($margin * 2)} {
+		margin-right: #{calc($margin * 2)}px;
+	}
+	.pt-#{calc($margin * 2)} {
+		margin-top: #{calc($margin * 2)}px;
+	}
+	.pb-#{calc($margin * 2)} {
+		margin-bottom: #{calc($margin * 2)}px;
+	}
+	.mx-#{calc($margin * 2)} {
 		margin-left: #{calc($margin * 2)}px;
 		margin-right: #{calc($margin * 2)}px;
 	}
-	.py-#{calc($margin * 2)} {
+	.my-#{calc($margin * 2)} {
 		margin-top: #{calc($margin * 2)}px;
 		margin-bottom: #{calc($margin * 2)}px;
 	}
