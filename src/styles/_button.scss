@@ -47,6 +47,9 @@ button.free {
 button.large {
   width: 477px;
   height: 42px;
+  @media (width < 768px) {
+    width: 230px;
+  }
 }
 button.semi-large {
   width: 326px;
@@ -57,7 +60,6 @@ button.medium {
   height: 42px;
   @media (width < 768px) {
     width: 142px;
-    height: fit-content;
   }
 }
 button.small {
