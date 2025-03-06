@@ -14,7 +14,7 @@ This is a React project created with Vite.
 - REST API 사용해보는 경험
 - 발생할 수 있는 예외 처리 능력
 
-### 아이비알 커머스 [(주제 선정 가이드)](https://codeit.notion.site/_-1a46fd228e8d81b3bda8e073f5b5876e)
+### [주제 선정 가이드](https://codeit.notion.site/_-1a46fd228e8d81b3bda8e073f5b5876e)
 
 - API 탐색과 적용을 통해 원활한 기능 작동을 경험
 - 재활용할 수 있는 UI를 구현함으로써 효율성 최대화<br />(후원하기 및 투표하기 버튼, 아이돌 이미지, 인기 투표 차트 등 공통 컴포넌트)
@@ -24,7 +24,7 @@ This is a React project created with Vite.
 
 - [ ] 예외 처리
 - [ ] 에러 팝업
-- [ ]
+- [ ] 스켈레톤 UI
 
 ## Updates 📝
 
@@ -52,6 +52,7 @@ src/app/
 |   +-- _color.scss
 |   +-- _layout.scss
 |   +-- _typography.scss
+|   +-- _button.scss
 
 +-- component/ (reusable UI Components having atoms combined)
 |   +-- Button.jsx
@@ -67,7 +68,9 @@ src/app/
 |   +-- list/
 |   |   +-- components/
 |   |   |   +-- TributeContainer.jsx
+|   |   |   +-- tribute.scss
 |   |   |   +-- ChartContainer.jsx
+|   |   |   +-- chart.scss
 |   |   +-- ListPage.jsx
 |   |   +-- listpage.scss
 |   +-- mypage/
@@ -76,8 +79,8 @@ src/app/
 |   |   |   +-- IdolListContainer.jsx
 |   |   +-- MyPage.jsx
 |   |   +-- mypage.scss
-|   +-- Home.jsx
-|   +-- home.scss
+|   +-- LandingPage.jsx
+|   +-- landingpage.scss
 .
 .
 .
@@ -87,7 +90,7 @@ src/app/
 
 ### 1) Naming Conventions 📝
 
-- file, page, component name: PascalCase
+- JSX file (page, component) name: PascalCase
 - folder name, route path: nocase
 - variable, function: camelCase
 - constant variable: SCREAMING_SNAKE_CASE
@@ -110,7 +113,7 @@ src/app/
 
 #### ❗️주의
 
-- 페이지 별 스타일시트는 페이지 JSX 파일과 같은 폴더 안에 위치시킴.
+- 페이지 혹은 컴포넌트 별 스타일시트는 JSX 파일과 같은 폴더 안에 위치시킴.
 - 페이지 별 컴포넌트는 페이지 JSX 파일의 하위 폴더 (components) 안에 위치시킴.
 - 화면 파일명이 길어지는 경우 최대 35자, 영단어 5개까지로 제한.
 - 목록 컴포넌트는 List, 목록 요소(행, 열 등)은 ListItem으로 끝나는 이름으로 사용.
@@ -132,7 +135,7 @@ src/app/
 
 ## Getting Started 🚀
 
-**Node.js 설치 필수**
+-
 
 1. Getting Start React Project with Vite
 
@@ -155,14 +158,32 @@ npm install axios
 
 ## Quick Start 🚀
 
-### 1. clone project & install modules
+### 1. 설치 및 세팅
+
+#### 설치
+
+- Node.js (최신 LTS 버전) https://nodejs.org/en
+- VScode https://code.visualstudio.com/download
+- extentions in VScode
+  - ESLint : 문법 검사
+  - snippets: 코드 자동완성 <br /> (JavaScript(ES6) code snippets, ES7 React snippets 등 ES6 이상의 스니펫이면 모두 가능)
+  - Prettier: 코드 포맷터
+
+#### VScode 세팅 (File > Prefrerences > Settings)
+
+- Editor: Default Formatter => `Prettier - Code Formatter`
+- Editor: Tab Size => `2`
+- Prettier: Tab Width => `2`
+- Prettier: Print Width => `100`
+
+### 2. clone project & install modules
 
 ```
 git clone https://github.com/codeit-fe-14-first-project-team2/fandom-k.git
 npm install
 ```
 
-### 2. run the development server
+### 3. run the development server
 
 ```
 npm run dev
