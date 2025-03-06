@@ -5,15 +5,42 @@
 @use "button";
 
 html {
-	background-color: var(--black-02000E);
-	color: var(--white-ffffff);
+  background-image: url("../assets/img/background-design.svg");
+  background-repeat: no-repeat;
+  background-position: top left;
+  background-color: var(--black-02000E);
+  color: var(--white-FFFFFF);
+  font-size: 16px;
+}
+main {
+  margin: 0 auto;
+  width: 1200px;
+  @media (width < 1200px) {
+    /* Tablet */
+    width: inherit;
+    margin-left: 24px;
+    margin-right: 24px;
+  }
+  @media (width < 768px) {
+    /* Mobile */
+  }
 }
 * {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: inherit;
 }
 a {
-	text-decoration: none;
-	color: inherit;
+  text-decoration: none;
+  color: inherit;
+}
+.img-wrapper {
+  aspect-ratio: 1;
+  overflow: hidden;
+  > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
