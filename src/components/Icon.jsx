@@ -18,25 +18,27 @@ import "./icon.scss";
  * }} param
  */
 export default function Icon({ iconNm = "credit", size = 16, rotate = 0, className, ...props }) {
-  const ICONS = {
-    "button-left": ButtonLeft,
-    "button-right": ButtonRight,
-    chart: Chart,
-    check: Check,
-    chevron: Chevron,
-    close: Close,
-    credit: Credit,
-    "credit-white": CreditWhite,
-    delete: Delete,
-    plus: Plus,
-  };
+	const ICONS = {
+		"button-left": ButtonLeft,
+		"button-right": ButtonRight,
+		chart: Chart,
+		check: Check,
+		chevron: Chevron,
+		close: Close,
+		credit: Credit,
+		"credit-white": CreditWhite,
+		delete: Delete,
+		plus: Plus,
+	};
 
-  return (
-    <img
-      src={ICONS[iconNm]}
-      className={`icon icon-${size} icon-rotate-${rotate} ${className}`}
-      alt="아이콘 이미지"
-      {...props}
-    />
-  );
+	return iconNm === "credit" || iconNm === "credit-white" ? (
+		<div className={`icon-${iconNm} icon-${size} icon-rotate-${rotate} ${className}`} />
+	) : (
+		<img
+			src={ICONS[iconNm]}
+			className={`icon-${iconNm} icon-${size} icon-rotate-${rotate} ${className}`}
+			alt="아이콘 이미지"
+			{...props}
+		/>
+	);
 }
