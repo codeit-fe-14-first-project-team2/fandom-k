@@ -11,7 +11,7 @@ export default function Header() {
         <img src={Logo} alt="상단 로고 이미지" />
       </a>
       <Link to="/mypage" id="profile">
-        <div className="img-wrapper">
+        <div className="img-wrapper radius-circle">
           <img src={Profile} alt="상단 프로필 이미지" />
         </div>
       </Link>

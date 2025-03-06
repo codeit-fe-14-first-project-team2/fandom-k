@@ -1,3 +1,4 @@
+import "./button.scss";
 /**
  * @param {{
  *  btnStyle: "primary" | "outlined" | "outlined-bottom" | "invert",
