@@ -1,16 +1,14 @@
 /**
- *
  * @param {{
  *  btnStyle: "primary" | "outlined" | "outlined-bottom" | "invert",
  *  size: "free" | "large" | "semi-large" | "middle" | "small" | "extra-small",
  *  isRound: boolean
  * }} params
- * @returns
  */
 export default function Button({
   btnStyle = "primary",
   size = "middle",
-  isRound = true,
+  isRound = false,
   onClick,
   children,
   ...props

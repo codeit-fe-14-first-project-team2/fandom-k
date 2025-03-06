@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import Logo from "../assets/img/logo.svg";
-import "./landingpage.scss";
-import { useSetCredit } from "../contexts/CreditContext";
 import Button from "../components/Button";
+import { useSetCredit } from "../contexts/CreditContext";
+import "./landingpage.scss";
 
 export default function LandingPage() {
   const navigate = useNavigate();
