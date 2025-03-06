@@ -1,9 +1,31 @@
 html:has(.modal-wrapper) {
-  overflow-y: hidden;
+	overflow-y: hidden;
 }
 .modal-wrapper {
-  z-index: 1;
-  position: fixed;
-  background: rgba($color: #000000, $alpha: 0.8);
-  inset: 0;
+	z-index: 1;
+	position: fixed;
+	background: rgba($color: #000000, $alpha: 0.8);
+	inset: 0;
+	@keyframes fadeIn {
+		0% {
+			opacity: 0;
+			margin-top: 50px;
+		}
+		100% {
+			opacity: 1;
+			margin-top: 0;
+		}
+	}
+	> section {
+		animation: fadeIn 0.3s ease-in-out;
+	}
+}
+#error-modal {
+	background-image: url("../assets/img/credit_113px.svg");
+	background-size: 187px;
+	background-position: center 4px;
+	background-repeat: no-repeat;
+	#error-image {
+		height: 113px;
+	}
 }
