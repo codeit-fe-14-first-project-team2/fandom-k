@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../assets/img/logo.svg";
 import Home1 from "../assets/img/landing-page-web-01-home.png";
 import Home2 from "../assets/img/landing-page-web-02-home.png";
@@ -12,7 +12,7 @@ export default function LandingPage() {
   const setCredit = useSetCredit();
 
   function handleBtnClick() {
-    setCredit(0);
+    setCredit(); // localStorage 초기화
     navigate("/list");
   }
 
@@ -25,7 +25,9 @@ export default function LandingPage() {
           가장 <span className="text-brand-orange">쉽게</span> 덕질 하는 방법
         </h1>
         <div className="display-flex justify-sides align-center direction-column">
-          <img src={Logo} alt="로고 이미지" />
+          <Link to="/list">
+            <img src={Logo} alt="로고 이미지" id="logo" />
+          </Link>
           <Button size="large" onClick={handleBtnClick}>
             시작하기
           </Button>
