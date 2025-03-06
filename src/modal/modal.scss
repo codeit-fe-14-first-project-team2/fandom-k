@@ -1,0 +1,9 @@
+html:has(.modal-wrapper) {
+  overflow-y: hidden;
+}
+.modal-wrapper {
+  z-index: 1;
+  position: fixed;
+  background: rgba($color: #000000, $alpha: 0.8);
+  inset: 0;
+}
