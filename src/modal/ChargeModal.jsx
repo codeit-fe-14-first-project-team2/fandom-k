@@ -1,8 +1,6 @@
 import { useState } from "react";
-import IconX from "../assets/btn/btn_delete_24px.svg";
-import IconCredit from "../assets/icon/ic_credit.svg";
-import ImgCredit from "../assets/img/credit.svg";
 import Button from "../components/Button";
+import Icon from "../components/Icon";
 import { useCredit, useSetCredit, useSetModal } from "../contexts/CreditContext";
 import "./modal.scss";
 
@@ -27,7 +25,7 @@ export default function ChargeModal() {
         } display-flex justify-sides align-center radius-8 px-20 py-18`}
       >
         <div className="display-flex gap-4 text-20 text-bold">
-          <img src={ImgCredit} alt="크레딧 아이콘" />
+          <Icon iconNm="credit" size={24} alt="크레딧 아이콘" />
           <span>{credit}</span>
         </div>
         <input
@@ -49,7 +47,7 @@ export default function ChargeModal() {
         <div className="display-flex justify-sides align-center">
           <h3 className="text-secondary text-18 text-semibold">크레딧 충전하기</h3>
           <button onClick={() => setModal()}>
-            <img src={IconX} alt="크레딧 충전하기 모달 닫기 아이콘" />
+            <Icon iconNm="close" size={24} alt="크레딧 충전하기 모달 닫기 아이콘" />
           </button>
         </div>
         <div className="display-grid justify-stretch gap-8">
@@ -58,7 +56,7 @@ export default function ChargeModal() {
           ))}
         </div>
         <Button onClick={handleCharge}>
-          <img src={IconCredit} alt="충전하기 버튼 아이콘" />
+          <Icon iconNm="credit-white" size={21} alt="충전하기 버튼 아이콘" />
           충전하기
         </Button>
       </section>
