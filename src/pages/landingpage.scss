@@ -1,0 +1,39 @@
+#landing-page {
+  text-align: center;
+  > #hero {
+    > div {
+      height: 1080px;
+      background-image: url("../assets/img/landing-page-hero.svg");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      > img {
+        height: 97px;
+      }
+    }
+  }
+
+  @media (width < 1200px) {
+    > #hero {
+      padding: 120px 0;
+      > div {
+        height: 880px;
+        > img {
+          height: 62px;
+        }
+      }
+    }
+  }
+  @media (width < 768px) {
+    /* Mobile */
+    > #hero {
+      padding: 100px 0;
+      > div {
+        height: 544px;
+      }
+      > img {
+        height: 45px;
+      }
+    }
+  }
+}
