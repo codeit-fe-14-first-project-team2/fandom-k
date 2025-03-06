@@ -1,5 +1,5 @@
 import Icon from "./Icon";
-import "./iconprofile.scss";
+import "./idolprofile.scss";
 
 /**
  * @param {{
