@@ -7,7 +7,7 @@
 - [ ] 3. 관심 있는 아이돌 설정할 수 있는 프로필 페이지
 - [ ] 4. 차트를 보여주고 투표하는 상세 페이지
 
-## (주제 선정 가이드)](https://codeit.notion.site/_-1a46fd228e8d81b3bda8e073f5b5876e)
+## [주제 선정 가이드](https://codeit.notion.site/_-1a46fd228e8d81b3bda8e073f5b5876e)
 
 ### 1) 공통
 
