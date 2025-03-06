@@ -1,0 +1,66 @@
+/* button style */
+button.primary {
+  background: linear-gradient(var(--brand-orange), var(--brand-pink));
+}
+button.primary:disabled {
+  background: var(--gray-828282);
+}
+button.outlined {
+  border: 1px solid #f1eef9;
+  background-color: rgba($color: #ffffff, $alpha: 0.1);
+  padding: 8px 143px;
+}
+button.outlined-bottom {
+  border-bottom: 1px solid #f1eef9;
+  background-color: rgba($color: #ffffff, $alpha: 0.1);
+  padding: 8px 143px;
+}
+button.invert {
+  color: var(--gray-828282);
+  background-color: transparent;
+}
+/* button size */
+button.free {
+  width: inherit;
+}
+button.large {
+  width: 477px;
+  height: 42px;
+  @media (width < 768px) {
+    width: 230px;
+  }
+}
+button.semi-large {
+  width: 326px;
+  height: 42px;
+}
+button.medium {
+  width: 295px;
+  height: 42px;
+  gap: 4px;
+}
+button.small {
+  width: 234px;
+  height: 40px;
+  padding: 2px 16px 3px;
+  font-size: 13px;
+  line-height: normal;
+  gap: 4px;
+  @media (width < 768px) {
+    width: 142px;
+  }
+}
+button.extra-small {
+  width: 128px;
+  height: 32px;
+  padding: 2px 16px 3px;
+  font-size: 13px;
+  line-height: normal;
+  gap: 4px;
+}
+/* button shape */
+button.round {
+  width: 255px;
+  height: 48px;
+  border-radius: 24px;
+}
