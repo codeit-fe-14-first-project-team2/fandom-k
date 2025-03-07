@@ -6,7 +6,6 @@ import { createVote } from "../api/votes";
 import { getChart } from "../api/charts";
 import ErrorModal from "./ErrorModal";
 import ChartItem from "../pages/list/components/ChartItem";
-import "./modal.scss";
 
 export default function VoteModal({ selectedTab, onVoteSuccess }) {
   const currentCredit = useCredit();
