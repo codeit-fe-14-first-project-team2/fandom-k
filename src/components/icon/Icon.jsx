@@ -1,13 +1,13 @@
-import Close from "../assets/btn/btn_delete_24px.svg";
-import ButtonLeft from "../assets/btn/btn_pagination_arrow_left.svg";
-import ButtonRight from "../assets/btn/btn_pagination_arrow_right.svg";
-import Chevron from "../assets/icon/ic_arrow_left.svg";
-import Chart from "../assets/icon/ic_chart.svg";
-import Check from "../assets/icon/ic_check.svg";
-import CreditWhite from "../assets/icon/ic_credit.svg";
-import Delete from "../assets/icon/ic_delete.svg";
-import Plus from "../assets/icon/ic_plus_24px.svg";
-import Credit from "../assets/img/credit.svg";
+import Close from "../../assets/btn/btn_delete_24px.svg";
+import ButtonLeft from "../../assets/btn/btn_pagination_arrow_left.svg";
+import ButtonRight from "../../assets/btn/btn_pagination_arrow_right.svg";
+import Chevron from "../../assets/icon/ic_arrow_left.svg";
+import Chart from "../../assets/icon/ic_chart.svg";
+import Check from "../../assets/icon/ic_check.svg";
+import CreditWhite from "../../assets/icon/ic_credit.svg";
+import Delete from "../../assets/icon/ic_delete.svg";
+import Plus from "../../assets/icon/ic_plus_24px.svg";
+import Credit from "../../assets/img/credit.svg";
 import "./icon.scss";
 
 /**
