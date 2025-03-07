@@ -1,5 +1,5 @@
-import Button from "../../../components/Button";
-import Icon from "../../../components/Icon";
+import Button from "../../../components/button/Button";
+import Icon from "../../../components/icon/Icon";
 export default function TributeContainer() {
   return (
     <div className="my-50">
