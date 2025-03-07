@@ -1,5 +1,5 @@
-import Button from "../components/Button";
-import Icon from "../components/Icon";
+import Button from "../components/button/Button";
+import Icon from "../components/icon/Icon";
 import { useSetModal } from "../contexts/CreditContext";
 import "./modal.scss";
 
@@ -16,13 +16,24 @@ export default function ErrorModal({ message }) {
 					</button>
 				</div>
 				<div className="display-grid justify-center gap-32">
-					<div id="error-image" />
 					{message ? (
-						<div className="text-16 text-medium">{message}</div>
+						<>
+							<div id="error-image" />
+							<div className="text-16 text-medium">
+								<p>
+									{message}
+									<br />
+									잠시 후 다시 시도해주세요.
+								</p>
+							</div>
+						</>
 					) : (
-						<div className="text-16 text-medium">
-							앗! 투표하기 위한 <span className="text-brand-orange">크레딧</span>이 부족해요
-						</div>
+						<>
+							<div id="error-image" className="credit" />
+							<div className="text-16 text-medium">
+								앗! 투표하기 위한 <span className="text-brand-orange">크레딧</span>이 부족해요
+							</div>
+						</>
 					)}
 					<Button onClick={() => setModal()}>확인</Button>
 				</div>

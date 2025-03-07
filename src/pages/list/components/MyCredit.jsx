@@ -1,4 +1,4 @@
-import Icon from "../../../components/Icon";
+import Icon from "../../../components/icon/Icon";
 import { useSetModal } from "../../../contexts/CreditContext";
 import ChargeModal from "../../../modal/ChargeModal";
 import { formatCredit } from "../../../util/credit";

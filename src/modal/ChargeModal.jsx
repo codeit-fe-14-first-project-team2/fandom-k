@@ -1,6 +1,6 @@
 import { useState } from "react";
-import Button from "../components/Button";
-import Icon from "../components/Icon";
+import Button from "../components/button/Button";
+import Icon from "../components/icon/Icon";
 import { useCredit, useSetCredit, useSetModal } from "../contexts/CreditContext";
 import "./modal.scss";
 
@@ -18,11 +18,17 @@ export default function ChargeModal() {
 
 	function CreditItem({ credit }) {
 		const isChecked = credit === selected;
+
+		function handleSelectCredit(e) {
+			e.stopPropagation();
+			setSelected(credit);
+		}
 		return (
 			<div
-				className={`${
+				className={`credit-item ${
 					isChecked ? "border-brand-orange" : "border-default"
-				} display-flex justify-sides align-center radius-8 px-20 py-18`}>
+				} display-flex justify-sides align-center radius-8 px-20 py-18`}
+				onClick={() => setSelected(credit)}>
 				<div className="display-flex gap-4 text-20 text-bold">
 					<Icon iconNm="credit" size={16} alt="크레딧 아이콘" />
 					<span>{credit}</span>
@@ -31,7 +37,7 @@ export default function ChargeModal() {
 					type="radio"
 					name="charge-credit"
 					checked={isChecked}
-					onChange={() => setSelected(credit)}
+					onChange={handleSelectCredit}
 				/>
 			</div>
 		);
