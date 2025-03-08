@@ -8,22 +8,32 @@ import "./ChartContainer.scss";
 export default function ChartContainer() {
   const [selectedTab, setSelectedTab] = useState("female");
   const [idolData, setIdolData] = useState([]);
+  const [cursor, setCursor] = useState(0);
 
-  async function getIdolChart({ selectedTab }) {
+  async function handleLoad(options) {
     try {
-      const data = await getChart({ selectedTab });
-      setIdolData(data.idols);
+      const { idols, nextCursor } = await getChart(options);
+      if (cursor === 0) {
+        setIdolData(idols);
+      } else {
+        setIdolData([...idolData, ...idols]);
+      }
+      setCursor(nextCursor);
     } catch (err) {
       console.log(err);
     }
   }
 
+  function handleChartButtonClick() {}
+
+  function handleLoadMore() {
+    handleLoad({ selectedTab, cursor, pageSize: 10 });
+  }
+
   useEffect(() => {
-    getIdolChart({ selectedTab });
+    handleLoad({ selectedTab, cursor, pageSize: 10 });
   }, [selectedTab]);
 
-  function handleChartButtonClick() {}
-  function handleMoreButtonClick() {}
   return (
     <div id="chart-wrapper" className="display-grid justify-center">
       <div id="chart-container" className="display-grid justify-stretch gap-24">
@@ -70,11 +80,7 @@ export default function ChartContainer() {
           ))}
         </ul>
       </div>
-      <button
-        id="btn-more"
-        className="text-bold text-14 line-height-26"
-        onClick={handleMoreButtonClick}
-      >
+      <button id="btn-more" className="text-bold text-14 line-height-26" onClick={handleLoadMore}>
         더 보기
       </button>
     </div>
