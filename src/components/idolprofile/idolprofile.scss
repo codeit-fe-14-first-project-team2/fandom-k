@@ -1,55 +1,63 @@
 .idol-profile-wrapper {
-	background-size: contain;
-	background-repeat: no-repeat;
-	padding: 7px;
-	> .img-wrapper {
-		width: 88px;
-		height: 88px;
-		position: relative;
-		> .selected-icon-wrapper {
-			position: absolute;
-			inset: 0;
-			background: linear-gradient(
-				rgba($color: #f96e68, $alpha: 0.5),
-				rgba($color: #fe578f, $alpha: 0.5)
-			);
-		}
-	}
+  background-size: contain;
+  background-repeat: no-repeat;
+  padding: 7px;
+  > .img-wrapper {
+    width: 88px;
+    height: 88px;
+    position: relative;
+    > .selected-icon-wrapper {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        rgba($color: #f96e68, $alpha: 0.5),
+        rgba($color: #fe578f, $alpha: 0.5)
+      );
+    }
+  }
 }
 .idol-profile-wrapper.profile {
-	background-image: url("../../assets/img/ring_profile.svg");
+  background-image: url("../../assets/img/ring_profile.svg");
 }
 .idol-profile-wrapper.vote {
-	background-image: url("../../assets/img/ring_vote.svg");
+  background-image: url("../../assets/img/ring_vote.svg");
 }
 .idol-profile-wrapper.mypage,
 .idol-profile-wrapper:has(.selected-icon-wrapper) {
-	background-image: url("../../assets/img/ring_active.svg");
+  background-image: url("../../assets/img/ring_active.svg");
 }
 .idol-profile-wrapper.large {
-	> .img-wrapper {
-		width: 115px;
-		height: 115px;
-	}
+  > .img-wrapper {
+    width: 115px;
+    height: 115px;
+  }
 }
+
+.idol-profile-wrapper.medium {
+  > .img-wrapper {
+    width: 70px;
+    height: 70px;
+  }
+}
+
 .idol-profile-wrapper.small {
-	> .img-wrapper {
-		width: 60px;
-		height: 60px;
-	}
+  > .img-wrapper {
+    width: 60px;
+    height: 60px;
+  }
 }
 @media (width < 768px) {
-	/* Mobile */
-	.idol-profile-wrapper {
-		> .img-wrapper {
-			width: 60px;
-			height: 60px;
-		}
-	}
-	.idol-profile-wrapper.large {
-		> .img-wrapper {
-			width: 88px;
-			height: 88px;
-		}
-	}
+  /* Mobile */
+  .idol-profile-wrapper {
+    > .img-wrapper {
+      width: 60px;
+      height: 60px;
+    }
+  }
+  .idol-profile-wrapper.large {
+    > .img-wrapper {
+      width: 88px;
+      height: 88px;
+    }
+  }
 }
