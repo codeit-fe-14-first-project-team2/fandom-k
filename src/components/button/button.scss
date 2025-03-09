@@ -8,12 +8,12 @@ button.primary:disabled {
 button.outlined {
 	border: 1px solid #f1eef9;
 	background-color: rgba($color: #ffffff, $alpha: 0.1);
-	padding: 8px 143px;
+	padding: 8px;
 }
 button.outlined-bottom {
 	border-bottom: 1px solid #f1eef9;
 	background-color: rgba($color: #ffffff, $alpha: 0.1);
-	padding: 8px 143px;
+	padding: 8px;
 }
 button.invert {
 	color: var(--gray-828282);

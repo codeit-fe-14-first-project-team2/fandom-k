@@ -13,14 +13,19 @@ export default function Button({
 	height,
 	isRound = false,
 	onClick,
+	className,
 	children,
 	...props
 }) {
 	return (
 		<button
-			className={[btnStyle, size, isRound ? "round" : "", height ? `height-${height}` : ""].join(
-				" "
-			)}
+			className={[
+				btnStyle,
+				size,
+				isRound ? "round" : "",
+				height ? `height-${height}` : "",
+				className || "",
+			].join(" ")}
 			onClick={onClick}
 			{...props}>
 			{children}
