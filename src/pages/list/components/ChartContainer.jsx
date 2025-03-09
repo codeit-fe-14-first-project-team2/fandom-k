@@ -3,35 +3,35 @@ import Button from "../../../components/button/Button";
 import Chart from "../../../assets/icon/ic_chart.svg";
 import IdolListItem from "./IdolListItem";
 import { getChart } from "../../../api/chart";
+import VoteModal from "../../../modal/VoteModal";
+import { useSetModal } from "../../../contexts/CreditContext";
+
 import "./ChartContainer.scss";
 
 export default function ChartContainer() {
+  const setModal = useSetModal();
   const [selectedTab, setSelectedTab] = useState("female");
   const [idolData, setIdolData] = useState([]);
   const [cursor, setCursor] = useState(0);
 
-  async function handleLoad(options) {
+  async function handleLoad(options, reset = false) {
     try {
       const { idols, nextCursor } = await getChart(options);
-      if (cursor === 0) {
-        setIdolData(idols);
-      } else {
-        setIdolData([...idolData, ...idols]);
-      }
-      setCursor(nextCursor);
+      setIdolData((prevData) => (reset ? idols : [...prevData, ...idols]));
+      // setCursor(nextCursor);
     } catch (err) {
       console.log(err);
     }
   }
 
-  function handleChartButtonClick() {}
-
   function handleLoadMore() {
-    handleLoad({ selectedTab, cursor, pageSize: 10 });
+    handleLoad({ selectedTab, cursor, pageSize: 10 }, false);
   }
 
   useEffect(() => {
-    handleLoad({ selectedTab, cursor, pageSize: 10 });
+    setIdolData([]);
+    setCursor(0);
+    handleLoad({ selectedTab, cursor: 0, pageSize: 10 }, true);
   }, [selectedTab]);
 
   return (
@@ -41,7 +41,10 @@ export default function ChartContainer() {
           <div id="chart-title" className="text-bold">
             이달의 차트
           </div>
-          <Button size="extra-small" onClick={handleChartButtonClick}>
+          <Button
+            size="extra-small"
+            onClick={() => setModal(<VoteModal idolData={idolData} selectedTab={selectedTab} />)}
+          >
             <img src={Chart} alt="차트 이미지"></img>
             <span>차트 투표</span>
           </Button>
