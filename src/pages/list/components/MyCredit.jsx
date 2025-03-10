@@ -6,7 +6,9 @@ import { formatCredit } from "../../../util/credit";
 export default function MyCredit({ credit = 0 }) {
 	const setModal = useSetModal();
 	return (
-		<div className="display-flex justify-sides align-center border-default radius-8 px-64 py-36">
+		<section
+			className="display-flex justify-sides align-center border-default radius-8 px-64 py-36"
+			id="my-credit">
 			<div className="display-grid gap-14">
 				<span className="text-invert-60">내 크레딧</span>
 				<div className="display-flex justify-left align-center gap-4">
@@ -17,6 +19,6 @@ export default function MyCredit({ credit = 0 }) {
 			<button className="text-brand-orange" onClick={() => setModal(<ChargeModal />)}>
 				충전하기
 			</button>
-		</div>
+		</section>
 	);
 }

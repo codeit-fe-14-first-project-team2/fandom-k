@@ -4,6 +4,21 @@
 
 This is a React project created with Vite.
 
+## Skills
+
+<div style='display: flex; gap: 8px'>
+<img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" />
+<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=white" />
+<img src="https://img.shields.io/badge/Scss-CC6699?style=for-the-badge&logo=sass&logoColor=white" />
+<img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" />
+<img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" />
+</div>
+
+## Patterns
+
+- Custom Hook Pattern (ex. [useAsync](./src/hooks/useAsync.js), [useViewportSize](./src/hooks/useViewportSize.js))
+- Extensible Styles Pattern (ex. [Button](./src/components/button/Button.jsx))
+
 ## Goals 💡
 
 ### Codeit
@@ -25,7 +40,7 @@ This is a React project created with Vite.
 #### 고도화
 
 - [ ] 예외 처리
-- [ ] 에러 팝업
+- [x] 에러 팝업
 - [ ] 스켈레톤 UI
 
 #### 기능
@@ -125,7 +140,7 @@ src/
 #### ❗️주의
 
 - 페이지 별 컴포넌트는 페이지 JSX 파일의 하위 폴더 (components) 안에 위치시킴.
-- 페이지 혹은 컴포넌트 별 스타일시트는 JSX 파일과 같은 폴더 안에 위치시킴. <br />(스타일시트 파일명은 소문자로 작명 권장)
+- 페이지 혹은 컴포넌트 별 스타일시트는 JSX 파일과 같은 폴더 안에 위치시킴. <br />(스타일시트 파일명은 **소문자**로 작명 권장)
 - 화면 파일명이 길어지는 경우 최대 35자, 영단어 5개까지로 제한.
 - 목록 컴포넌트는 List, 목록 요소(행, 열 등)은 ListItem으로 끝나는 이름으로 사용.
 - (기타) 상세조회 화면 파일은 Detail, 신규등록/수정 화면 파일은 Form으로 끝나는 이름으로 사용.
@@ -159,7 +174,7 @@ npm install react-router-dom
 npm install sass
 ```
 
-3. send request with axios
+3. Send request with axios
 
 ```
 npm install axios

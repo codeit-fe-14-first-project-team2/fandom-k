@@ -1,85 +1,86 @@
 /* button style */
 button.primary {
-	background: linear-gradient(var(--brand-orange), var(--brand-pink));
+  background: linear-gradient(var(--brand-orange), var(--brand-pink));
 }
 button.primary:disabled {
-	background: var(--gray-828282);
+  background: var(--gray-828282);
+  opacity: 1;
 }
 button.outlined {
-	border: 1px solid #f1eef9;
-	background-color: rgba($color: #ffffff, $alpha: 0.1);
-	padding: 8px 143px;
+  border: 1px solid #f1eef9;
+  background-color: rgba($color: #ffffff, $alpha: 0.1);
+  padding: 8px;
 }
 button.outlined-bottom {
-	border-bottom: 1px solid #f1eef9;
-	background-color: rgba($color: #ffffff, $alpha: 0.1);
-	padding: 8px 143px;
+  border-bottom: 1px solid #f1eef9;
+  background-color: rgba($color: #ffffff, $alpha: 0.1);
+  padding: 8px;
 }
 button.invert {
-	color: var(--gray-828282);
-	background-color: transparent;
+  color: var(--gray-828282);
+  background-color: transparent;
 }
 /* button size */
 button.free {
-	width: inherit;
+  width: inherit;
 }
 button.large {
-	width: 477px;
-	height: 42px;
-	@media (width < 768px) {
-		width: 230px;
-	}
+  width: 477px;
+  height: 48px;
+  @media (width < 768px) {
+    width: 230px;
+  }
 }
 button.semi-large {
-	width: 326px;
-	height: 42px;
+  width: 326px;
+  height: 42px;
 }
 button.medium {
-	width: 295px;
-	height: 42px;
-	gap: 4px;
+  width: 295px;
+  height: 42px;
+  gap: 4px;
 }
 button.semi-small {
-	width: 255px;
-	height: 48px;
-	font-size: 16px;
-	line-height: 26px;
+  width: 255px;
+  height: 48px;
+  font-size: 16px;
+  line-height: 26px;
 }
 button.small {
-	width: 234px;
-	height: 40px;
-	padding: 2px 16px 3px;
-	font-size: 13px;
-	line-height: normal;
-	gap: 4px;
-	@media (width < 768px) {
-		width: 142px;
-	}
+  width: 234px;
+  height: 40px;
+  padding: 2px 16px 3px;
+  font-size: 13px;
+  line-height: normal;
+  gap: 4px;
+  @media (width < 768px) {
+    width: 142px;
+  }
 }
 button.extra-small {
-	width: 128px;
-	height: 32px;
-	padding: 2px 16px 3px;
-	font-size: 13px;
-	line-height: normal;
-	gap: 4px;
+  width: 128px;
+  height: 32px;
+  padding: 2px 16px 3px;
+  font-size: 13px;
+  line-height: normal;
+  gap: 4px;
 }
 /* button height */
 button.height-48 {
-	height: 48px;
+  height: 48px;
 }
 button.height-42 {
-	height: 42px;
+  height: 42px;
 }
 button.height-40 {
-	height: 40px;
+  height: 40px;
 }
 button.height-32 {
-	height: 32px;
+  height: 32px;
 }
 /* button shape */
 button.round {
-	width: 255px;
-	height: 48px;
-	border-radius: 24px;
+  width: 255px;
+  height: 48px;
+  border-radius: 24px;
 }

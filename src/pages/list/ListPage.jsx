@@ -10,7 +10,7 @@ export default function ListPage() {
 	return (
 		<>
 			<Header />
-			<main className="display-grid justify-stretch my-50">
+			<main className="display-grid justify-stretch gap-50 my-50">
 				<MyCredit credit={credit} />
 				<TributeContainer />
 				<ChartContainer />
