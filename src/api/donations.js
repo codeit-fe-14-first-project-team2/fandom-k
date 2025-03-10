@@ -32,7 +32,7 @@ export async function getDonations(cursor = 0, pageSize = 10, priorityIdolIds = 
       params.append("priorityIdolIds", id);
     }
   try {
-    const response = await commonInstance.get(`/${teamName}/${PATH}/gender`, { params });
+    const response = await commonInstance.get(`/${teamName}/${PATH}`, { params });
     if (response.status === HTTP_STATUS.STATUS_OK) return response.data;
   } catch (err) {
     console.log(err);
