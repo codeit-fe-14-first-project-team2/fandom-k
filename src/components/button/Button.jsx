@@ -2,7 +2,7 @@ import "./button.scss";
 /**
  * @param {{
  *  btnStyle: "primary" | "outlined" | "outlined-bottom" | "invert",
- *  size: "free" | "large" | "semi-large" | "medium" | "small" | "extra-small",
+ *  size: "free" | "extra-large" | "large" | "semi-large" | "medium" | "small" | "extra-small",
  *  height: undefined | 48 | 42 | 40 | 32
  *  isRound: boolean
  * }} params

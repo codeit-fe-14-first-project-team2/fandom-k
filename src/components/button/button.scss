@@ -23,6 +23,14 @@ button.invert {
 /* button size */
 button.free {
   width: inherit;
+  min-height: 42px;
+}
+button.extra-large {
+  width: 477px;
+  height: 42px;
+  @media (width < 768px) {
+    width: 327px;
+  }
 }
 button.large {
   width: 477px;
