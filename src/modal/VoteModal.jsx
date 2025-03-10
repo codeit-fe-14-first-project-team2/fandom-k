@@ -36,10 +36,18 @@ export default function VoteModal({ idolData, selectedTab }) {
   }
 
   function ChartListItem({ id, rank, group, name, totalVotes, profilePicture }) {
+    const isSelected = id === selectedId;
     return (
       <div id="modal-list-item" className="display-flex justify-sides align-center">
         <div className="display-flex justify-sides align-center gap-12">
-          <IdolProfile profilePicture={profilePicture} name={name} id={id} size="medium" />
+          <IdolProfile
+            profilePicture={profilePicture}
+            name={name}
+            id={id}
+            size="medium"
+            selected={isSelected}
+            type="vote"
+          />
           <span className="text-regular text-14 text-brand-orange">{rank}</span>
           <div className="display-flex direction-column">
             <span className="text-medium text-14">
