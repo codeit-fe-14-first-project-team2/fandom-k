@@ -3,6 +3,7 @@ import Icon from "../../../components/icon/Icon";
 //import { getDonations } from "../../../api/donations";
 import { useEffect, useState } from "react";
 import TributeMockData from "./TributeMockData.json";
+import "./TributeContainer.scss";
 
 export default function TributeContainer() {
   const [donations, setDonations] = useState([]);
@@ -27,20 +28,19 @@ export default function TributeContainer() {
         후원을 기다리는 조공
       </div>
       <div className="display-flex justify-center">
-        {/* <div>
-          <Button size="extra-small" className="invert my-100">
-            <div>
-              <Icon iconNm="chevron" />
-            </div>
-          </Button>
-        </div> */}
+        {
+          <div>
+            <Button size="extra-small" className="invert my-100 " id="btn-left">
+              <div>
+                <Icon iconNm="chevron" />
+              </div>
+            </Button>
+          </div>
+        }
         <div>
-          <ul
-            className="display-flex justify-center"
-            style={{ flexWrap: "nowrap", gap: "130px" }}
-          >
+          <ul className="display-flex justify-center" id="tribute-box">
             {donations.map((donation) => (
-              <div style={{ position: "relative" }}>
+              <div id="tribute-list">
                 <li key={donation.id} className="donation-item">
                   <img
                     src={donation.imageUrl}
@@ -66,22 +66,26 @@ export default function TributeContainer() {
 
                   <div className="my-20">
                     <div className="text-14 text-gray">{donation.title}</div>
-                    <div style={{ whiteSpace: "nowrap" }}>
-                      {donation.subtitle}
-                    </div>
+                    <div id="donation-subtitle">{donation.subtitle}</div>
                   </div>
                 </li>
               </div>
             ))}
           </ul>
         </div>
-        {/* <div>
-          <Button size="extra-small" className="invert my-100 mx-50">
-            <div>
-              <Icon iconNm="chevron" className="icon-rotate-180" />
-            </div>
-          </Button>
-        </div> */}
+        {
+          <div>
+            <Button
+              size="extra-small"
+              className="invert my-100 mx-50"
+              id="btn-right"
+            >
+              <div>
+                <Icon iconNm="chevron" className="icon-rotate-180" />
+              </div>
+            </Button>
+          </div>
+        }
       </div>
     </div>
   );
