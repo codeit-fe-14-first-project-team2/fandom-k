@@ -43,6 +43,10 @@ html:has(.modal-wrapper) {
   overflow-y: auto;
   padding-right: 8px;
 }
+#modal-list-item {
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
 body ::-webkit-scrollbar-track {
   background-color: transparent;
 }
