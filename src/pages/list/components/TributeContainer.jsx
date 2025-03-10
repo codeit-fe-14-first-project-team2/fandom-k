@@ -3,11 +3,13 @@ import Icon from "../../../components/icon/Icon";
 //import { getDonations } from "../../../api/donations";
 import { useEffect, useState } from "react";
 import TributeMockData from "./TributeMockData.json";
+import { useSetModal } from "../../../contexts/CreditContext";
+import TributeModal from "../../../modal/TributeModal";
 import "./TributeContainer.scss";
 
 export default function TributeContainer() {
   const [donations, setDonations] = useState([]);
-
+  const setModal = useSetModal();
   //async function fetchDonations() {
   //try {
   //const data = await getDonations();
@@ -45,21 +47,15 @@ export default function TributeContainer() {
                   <img
                     src={donation.imageUrl}
                     alt={donation.title}
-                    style={{
-                      width: "200px",
-                      height: "200px",
-                      objectFit: "cover",
-                      borderRadius: "10px",
-                    }}
+                    id="tribute-idol-image"
                   />
 
                   <Button
                     size="extra-small"
-                    style={{
-                      position: "relative",
-                      left: "40px",
-                      bottom: "40px",
-                    }} // justify-center mx-10 같은것들을 클래스네임으로 하면 버튼의 색이 갑자기 없어집니다.
+                    id="btn-donation"
+                    onClick={() =>
+                      setModal(<TributeModal donationIdol={donation.id} />)
+                    }
                   >
                     {"후원하기"}
                   </Button>
