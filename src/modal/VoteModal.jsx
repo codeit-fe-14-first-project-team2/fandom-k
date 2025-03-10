@@ -37,7 +37,7 @@ export default function VoteModal({ idolData, selectedTab }) {
 
   function ChartListItem({ id, rank, group, name, totalVotes, profilePicture }) {
     return (
-      <div className="display-flex justify-sides align-center">
+      <div id="modal-list-item" className="display-flex justify-sides align-center">
         <div className="display-flex justify-sides align-center gap-12">
           <IdolProfile profilePicture={profilePicture} name={name} id={id} size="medium" />
           <span className="text-regular text-14 text-brand-orange">{rank}</span>
@@ -69,7 +69,7 @@ export default function VoteModal({ idolData, selectedTab }) {
             <Icon iconNm="close" size={24} alt="크레딧 충전하기 모달 닫기 아이콘" />
           </button>
         </div>
-        <div className="display-grid justify-stretch gap-8 list-wrapper">
+        <div className="display-grid justify-stretch list-wrapper">
           {idolData.map((idol) => (
             <ChartListItem
               key={idol.id}

@@ -16,9 +16,18 @@
     }
     ul {
       flex-wrap: wrap;
-      gap: 17px 24px;
+      gap: 0px 24px;
       li {
         width: 49%;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 8px 0px;
+        &:nth-last-of-type(1):nth-of-type(odd),
+        &:nth-last-of-type(1):nth-of-type(even) {
+          border-bottom: none;
+        }
+        &:nth-last-of-type(2):nth-of-type(odd) {
+          border-bottom: none;
+        }
       }
     }
     .divider {
