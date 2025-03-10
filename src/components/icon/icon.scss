@@ -10,7 +10,6 @@
 @for $width from 8 through 45 {
   .icon-#{$width} {
     width: #{$width}px;
-    aspect-ratio: 1;
   }
 }
 .icon-credit,

@@ -8,27 +8,28 @@ import "./button.scss";
  * }} params
  */
 export default function Button({
-	btnStyle = "primary",
-	size = "medium",
-	height,
-	isRound = false,
-	onClick,
-	className,
-	children,
-	...props
+  btnStyle = "primary",
+  size = "medium",
+  height,
+  isRound = false,
+  onClick,
+  className,
+  children,
+  ...props
 }) {
-	return (
-		<button
-			className={[
-				btnStyle,
-				size,
-				isRound ? "round" : "",
-				height ? `height-${height}` : "",
-				className || "",
-			].join(" ")}
-			onClick={onClick}
-			{...props}>
-			{children}
-		</button>
-	);
+  return (
+    <button
+      className={[
+        btnStyle,
+        size,
+        isRound ? "round" : "",
+        height ? `height-${height}` : "",
+        className || "",
+      ].join(" ")}
+      onClick={onClick}
+      {...props}
+    >
+      {children}
+    </button>
+  );
 }
