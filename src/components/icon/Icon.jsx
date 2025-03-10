@@ -34,7 +34,7 @@ export default function Icon({
   };
 
   return iconNm.startsWith("credit") ? (
-    <div className={`icon-${iconNm} icon-${size} icon-rotate-${rotate} ${className}`} />
+    <div className={`icon-${iconNm} icon-${size} icon-rotate-${rotate} ${className}`} {...props} />
   ) : (
     <img
       src={ICONS[iconNm]}
