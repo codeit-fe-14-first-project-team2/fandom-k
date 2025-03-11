@@ -7,7 +7,7 @@ import IdolProfile from "../components/idolprofile/IdolProfile";
 import { createVote } from "../api/votes";
 import ErrorModal from "./ErrorModal";
 
-export default function VoteModal({ idolData, selectedTab }) {
+export default function VoteModal({ idolData, selectedTab, onVoteSuccess }) {
   const currentCredit = useCredit();
   const setCredit = useSetCredit();
   const setModal = useSetModal();
@@ -23,6 +23,7 @@ export default function VoteModal({ idolData, selectedTab }) {
       const response = await createVote({ idolId: selectedId });
       if (response) {
         setCredit((prev) => prev - 1000);
+        onVoteSuccess({ selectedTab, cursor: 0, pageSize: 10 }, true);
         setModal();
       }
     } catch (error) {

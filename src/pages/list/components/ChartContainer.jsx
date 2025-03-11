@@ -17,8 +17,14 @@ export default function ChartContainer() {
   async function handleLoad(options, reset = false) {
     try {
       const { idols, nextCursor } = await getChart(options);
-      setIdolData((prevData) => (reset ? idols : [...prevData, ...idols]));
-      // setCursor(nextCursor);
+      setIdolData((prevData) => {
+        const updatedData = reset ? idols : [...prevData, ...idols];
+        const sortedData = updatedData
+          .sort((a, b) => b.totalVotes - a.totalVotes || a.group.localeCompare(b.name))
+          .map((idol, index) => ({ ...idol, rank: index + 1 }));
+        return sortedData;
+      });
+      setCursor(nextCursor);
     } catch (err) {
       console.log(err);
     }
@@ -29,7 +35,6 @@ export default function ChartContainer() {
   }
 
   useEffect(() => {
-    setIdolData([]);
     setCursor(0);
     handleLoad({ selectedTab, cursor: 0, pageSize: 10 }, true);
   }, [selectedTab]);
@@ -43,7 +48,15 @@ export default function ChartContainer() {
           </div>
           <Button
             size="extra-small"
-            onClick={() => setModal(<VoteModal idolData={idolData} selectedTab={selectedTab} />)}
+            onClick={() =>
+              setModal(
+                <VoteModal
+                  idolData={idolData}
+                  selectedTab={selectedTab}
+                  onVoteSuccess={handleLoad}
+                />
+              )
+            }
           >
             <img src={Chart} alt="차트 이미지"></img>
             <span>차트 투표</span>
