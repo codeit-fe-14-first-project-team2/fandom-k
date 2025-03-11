@@ -35,6 +35,7 @@ export default function ChartContainer() {
   }
 
   useEffect(() => {
+    setIdolData([]);
     setCursor(0);
     handleLoad({ selectedTab, cursor: 0, pageSize: 10 }, true);
   }, [selectedTab]);
@@ -96,11 +97,13 @@ export default function ChartContainer() {
           ))}
         </ul>
       </div>
-      <div className="display-flex justify-center">
-        <Button btnStyle="outlined" size="semi-large" onClick={handleLoadMore}>
-          더 보기
-        </Button>
-      </div>
+      {cursor !== null && (
+        <div className="display-flex justify-center">
+          <Button btnStyle="outlined" size="semi-large" onClick={handleLoadMore}>
+            더 보기
+          </Button>
+        </div>
+      )}
     </div>
   );
 }
