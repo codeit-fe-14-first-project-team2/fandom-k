@@ -92,7 +92,7 @@ export default function VoteModal({ idolData, selectedTab, onVoteSuccess }) {
           ))}
         </div>
         <Button size="large" onClick={handleVote} disabled={!selectedId}>
-          <Icon iconNm="credit-white" size={13} alt="투표하기 버튼 아이콘" />
+          <Icon iconNm="credit-white" size={13} aria-label="투표하기 버튼 아이콘" />
           투표하기
         </Button>
         <div className="display-flex justify-center text-medium text-12 line-height-26">

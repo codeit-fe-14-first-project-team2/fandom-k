@@ -31,7 +31,7 @@ export default function ChargeModal() {
         onClick={() => setSelected(credit)}
       >
         <div className="display-flex align-center gap-4 text-20 text-bold">
-          <Icon iconNm="credit" size={16} alt="크레딧 아이콘" />
+          <Icon iconNm="credit" size={16} aria-label="크레딧 아이콘" />
           <span>{credit}</span>
         </div>
         <input
@@ -62,7 +62,7 @@ export default function ChargeModal() {
           ))}
         </div>
         <Button onClick={handleCharge}>
-          <Icon iconNm="credit-white" size={13} alt="충전하기 버튼 아이콘" />
+          <Icon iconNm="credit-white" size={13} aria-label="충전하기 버튼 아이콘 이미지" />
           충전하기
         </Button>
       </section>

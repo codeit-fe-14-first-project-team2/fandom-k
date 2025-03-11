@@ -3,10 +3,13 @@ import Icon from "../../../components/icon/Icon";
 //import { getDonations } from "../../../api/donations";
 import { useEffect, useState } from "react";
 import TributeMockData from "./TributeMockData.json";
+import { useSetModal } from "../../../contexts/CreditContext";
+import TributeModal from "../../../modal/TributeModal";
+import "./TributeContainer.scss";
 
 export default function TributeContainer() {
   const [donations, setDonations] = useState([]);
-
+  const setModal = useSetModal();
   //async function fetchDonations() {
   //try {
   //const data = await getDonations();
@@ -27,61 +30,58 @@ export default function TributeContainer() {
         후원을 기다리는 조공
       </div>
       <div className="display-flex justify-center">
-        {/* <div>
-          <Button size="extra-small" className="invert my-100">
-            <div>
-              <Icon iconNm="chevron" />
-            </div>
-          </Button>
-        </div> */}
+        {
+          <div>
+            <Button size="extra-small" className="invert my-100 " id="btn-left">
+              <div>
+                <Icon iconNm="chevron" />
+              </div>
+            </Button>
+          </div>
+        }
         <div>
-          <ul
-            className="display-flex justify-center"
-            style={{ flexWrap: "nowrap", gap: "130px" }}
-          >
+          <ul className="display-flex justify-center" id="tribute-box">
             {donations.map((donation) => (
-              <div style={{ position: "relative" }}>
+              <div id="tribute-list">
                 <li key={donation.id} className="donation-item">
                   <img
                     src={donation.imageUrl}
                     alt={donation.title}
-                    style={{
-                      width: "200px",
-                      height: "200px",
-                      objectFit: "cover",
-                      borderRadius: "10px",
-                    }}
+                    id="tribute-idol-image"
                   />
 
                   <Button
                     size="extra-small"
-                    style={{
-                      position: "relative",
-                      left: "40px",
-                      bottom: "40px",
-                    }} // justify-center mx-10 같은것들을 클래스네임으로 하면 버튼의 색이 갑자기 없어집니다.
+                    id="btn-donation"
+                    onClick={() =>
+                      setModal(<TributeModal donationIdol={donation.id} />)
+                    }
                   >
                     {"후원하기"}
                   </Button>
 
                   <div className="my-20">
                     <div className="text-14 text-gray">{donation.title}</div>
-                    <div style={{ whiteSpace: "nowrap" }}>
-                      {donation.subtitle}
-                    </div>
+                    <div id="donation-subtitle">{donation.subtitle}</div>
                   </div>
                 </li>
               </div>
             ))}
           </ul>
         </div>
-        {/* <div>
-          <Button size="extra-small" className="invert my-100 mx-50">
-            <div>
-              <Icon iconNm="chevron" className="icon-rotate-180" />
-            </div>
-          </Button>
-        </div> */}
+        {
+          <div>
+            <Button
+              size="extra-small"
+              className="invert my-100 mx-50"
+              id="btn-right"
+            >
+              <div>
+                <Icon iconNm="chevron" className="icon-rotate-180" />
+              </div>
+            </Button>
+          </div>
+        }
       </div>
     </div>
   );
