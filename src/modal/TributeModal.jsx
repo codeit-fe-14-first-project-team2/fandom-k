@@ -1,11 +1,7 @@
 import React, { useState } from "react";
 import Button from "../components/button/Button";
 import Icon from "../components/icon/Icon";
-import {
-  useCredit,
-  useSetCredit,
-  useSetModal,
-} from "../contexts/CreditContext";
+import { useCredit, useSetCredit, useSetModal } from "../contexts/CreditContext";
 import "./modal.scss";
 import "./TributeModal.scss";
 
@@ -17,8 +13,7 @@ const TributeModal = ({ donationIdol }) => {
   const [inputValue, setInputValue] = useState("");
   const [creditMessage, setCreditMessage] = useState("");
   const [inputBorderColor, setInputBorderColor] = useState("white"); // 입력 필드 테두리 색상 상태 추가
-  const isButtonDisabled =
-    isNaN(parseInt(inputValue)) || parseInt(inputValue) < 1;
+  const isButtonDisabled = isNaN(parseInt(inputValue)) || parseInt(inputValue) < 1;
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
@@ -51,7 +46,7 @@ const TributeModal = ({ donationIdol }) => {
     <div className="modal-wrapper display-flex justify-center align-center">
       <section
         id="tribute-modal"
-        className="display-grid gap-20 surface-secondary radius-8 px-16 py-24"
+        className="display-grid jutify-stretch gap-20 surface-secondary radius-8 px-16 py-24"
       >
         <div className="display-flex justify-sides align-center">
           <h3 className="text-secondary text-18 text-medium">후원 하기</h3>
@@ -104,17 +99,15 @@ const TributeModal = ({ donationIdol }) => {
               {creditMessage}
             </div>
           )}
-          <div>
-            <Button
-              size="small"
-              disabled={isButtonDisabled}
-              style={{ backgroundColor: isButtonDisabled ? "gray" : null }}
-              onClick={handleButtonClick}
-            >
-              {"후원하기"}
-            </Button>
-          </div>
         </div>
+        <Button
+          size="free"
+          disabled={isButtonDisabled}
+          style={{ backgroundColor: isButtonDisabled ? "gray" : null }}
+          onClick={handleButtonClick}
+        >
+          후원하기
+        </Button>
       </section>
     </div>
   );
