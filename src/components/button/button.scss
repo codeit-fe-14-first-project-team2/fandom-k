@@ -73,6 +73,23 @@ button.extra-small {
   line-height: normal;
   gap: 4px;
 }
+button.carousel {
+  width: 29px;
+  height: 135px;
+  border-radius: 4px;
+  border: none;
+  background-color: #1b1b1bcc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
 /* button height */
 button.height-48 {
   height: 48px;
