@@ -12,9 +12,11 @@ export default function ChartContainer() {
   const setModal = useSetModal();
   const [selectedTab, setSelectedTab] = useState("female");
   const [idolData, setIdolData] = useState([]);
-  const [cursor, setCursor] = useState(0);
+  const [cursor, setCursor] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   async function handleLoad(options, reset = false) {
+    setLoading(true);
     try {
       const { idols, nextCursor } = await getChart(options);
       setIdolData((prevData) => {
@@ -25,6 +27,7 @@ export default function ChartContainer() {
         return sortedData;
       });
       setCursor(nextCursor);
+      setLoading(false);
     } catch (err) {
       console.log(err);
     }
@@ -83,23 +86,29 @@ export default function ChartContainer() {
             이달의 남자 아이돌
           </button>
         </div>
-        <ul className="display-flex">
-          {idolData.map((idol) => (
-            <IdolListItem
-              key={idol.id}
-              id={idol.id}
-              rank={idol.rank}
-              group={idol.group}
-              name={idol.name}
-              totalVotes={idol.totalVotes}
-              profilePicture={idol.profilePicture}
-            />
-          ))}
-        </ul>
+        {loading ? (
+          <div id="loading-container" className="display-flex justify-center align-center">
+            <div id="spinner"></div>
+          </div>
+        ) : (
+          <ul className="display-flex">
+            {idolData.map((idol) => (
+              <IdolListItem
+                key={idol.id}
+                id={idol.id}
+                rank={idol.rank}
+                group={idol.group}
+                name={idol.name}
+                totalVotes={idol.totalVotes}
+                profilePicture={idol.profilePicture}
+              />
+            ))}
+          </ul>
+        )}
       </div>
-      {cursor !== null && (
+      {!loading && (
         <div className="display-flex justify-center mt-50">
-          <Button btnStyle="outlined" size="semi-large" onClick={handleLoadMore}>
+          <Button disabled={!cursor} btnStyle="outlined" size="semi-large" onClick={handleLoadMore}>
             더 보기
           </Button>
         </div>
