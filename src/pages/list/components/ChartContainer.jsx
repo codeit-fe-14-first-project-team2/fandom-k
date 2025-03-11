@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Button from "../../../components/button/Button";
 import Chart from "../../../assets/icon/ic_chart.svg";
 import IdolListItem from "./IdolListItem";
-import { getChart } from "../../../api/chart";
+import { getChart } from "../../../api/charts";
 import VoteModal from "../../../modal/VoteModal";
 import { useSetModal } from "../../../contexts/CreditContext";
 
