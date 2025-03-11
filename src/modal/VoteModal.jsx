@@ -96,7 +96,9 @@ export default function VoteModal({ idolData, selectedTab, onVoteSuccess }) {
           투표하기
         </Button>
         <div className="display-flex justify-center text-medium text-12 line-height-26">
-          투표하는데<span className="text-brand-orange"> 1000크레딧</span>이 소모됩니다.
+          <p>
+            투표하는데 <span className="text-brand-orange">100 크레딧</span>이 소모됩니다.
+          </p>
         </div>
       </section>
       {errorMessage !== null && <ErrorModal message={errorMessage} />}

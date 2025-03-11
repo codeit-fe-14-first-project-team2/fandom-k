@@ -40,7 +40,7 @@ export default function ChartContainer() {
   }, [selectedTab]);
 
   return (
-    <div id="chart-wrapper" className="display-grid justify-center">
+    <div className="display-grid justify-stretch mt-30">
       <div id="chart-container" className="display-grid justify-stretch gap-24">
         <div className="display-flex justify-sides">
           <div id="chart-title" className="text-bold">
@@ -96,9 +96,11 @@ export default function ChartContainer() {
           ))}
         </ul>
       </div>
-      <button id="btn-more" className="text-bold text-14 line-height-26" onClick={handleLoadMore}>
-        더 보기
-      </button>
+      <div className="display-flex justify-center">
+        <Button btnStyle="outlined" size="semi-large" onClick={handleLoadMore}>
+          더 보기
+        </Button>
+      </div>
     </div>
   );
 }
