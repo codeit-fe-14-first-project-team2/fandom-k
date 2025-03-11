@@ -54,7 +54,7 @@ export default function TributeContainer() {
                     size="extra-small"
                     id="btn-donation"
                     onClick={() =>
-                      setModal(<TributeModal donationIdol={donation.id} />)
+                      setModal(<TributeModal donationIdol={donation} />)
                     }
                   >
                     {"후원하기"}
