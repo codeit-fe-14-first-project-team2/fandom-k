@@ -98,7 +98,7 @@ export default function ChartContainer() {
         </ul>
       </div>
       {cursor !== null && (
-        <div className="display-flex justify-center">
+        <div className="display-flex justify-center mt-50">
           <Button btnStyle="outlined" size="semi-large" onClick={handleLoadMore}>
             더 보기
           </Button>
