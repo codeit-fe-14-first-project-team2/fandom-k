@@ -64,6 +64,9 @@ This is a React project created with Vite.
 ```
 src/
 
++-- api/
+|   +-- class-http-client.js/
+
 +-- assets/
 |   +-- font/
 |   +-- icon/ (.svg files for icon)
