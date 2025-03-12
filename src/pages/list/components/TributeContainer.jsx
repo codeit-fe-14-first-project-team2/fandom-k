@@ -6,23 +6,34 @@ import TributeMockData from "./TributeMockData.json";
 import { useSetModal } from "../../../contexts/CreditContext";
 import TributeModal from "../../../modal/TributeModal";
 import "./TributeContainer.scss";
+import {
+  getDonations,
+  contributeDonation,
+  createDonation,
+  updateDonation,
+  deleteIdol,
+} from "../../../api/donations";
 
 export default function TributeContainer() {
   const [donations, setDonations] = useState([]);
   const setModal = useSetModal();
-  //async function fetchDonations() {
-  //try {
-  //const data = await getDonations();
-  //setDonations(data.list); // 받아온 데이터를 상태에 저장
-  //} catch (err) {
-  // console.error("후원 목록 조회 중 오류 발생:", err);
-  //}
-  //}
 
-  // 컴포넌트 마운트 시 실행
   useEffect(() => {
-    setDonations(TributeMockData);
+    async function fetchDonations() {
+      try {
+        const data = await getDonations();
+        setDonations(data.list); // 수정된 부분
+      } catch (error) {
+        console.error("후원 목록을 가져오는 중 오류 발생:", error);
+      }
+    }
+
+    fetchDonations();
   }, []);
+
+  useEffect(() => {
+    console.dir(donations);
+  }, [donations]);
 
   return (
     <div className="my-50">
@@ -45,7 +56,7 @@ export default function TributeContainer() {
               <div id="tribute-list">
                 <li key={donation.id} className="donation-item">
                   <img
-                    src={donation.imageUrl}
+                    src={donation.idol.profilePicture}
                     alt={donation.title}
                     id="tribute-idol-image"
                   />
