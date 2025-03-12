@@ -1,11 +1,7 @@
 import React, { useState } from "react";
 import Button from "../components/button/Button";
 import Icon from "../components/icon/Icon";
-import {
-  useCredit,
-  useSetCredit,
-  useSetModal,
-} from "../contexts/CreditContext";
+import { useCredit, useSetCredit, useSetModal } from "../contexts/GlobalContext";
 import "./modal.scss";
 import "./TributeModal.scss";
 
@@ -17,8 +13,7 @@ const TributeModal = ({ donationIdol }) => {
   const [inputValue, setInputValue] = useState("");
   const [creditMessage, setCreditMessage] = useState("");
   const [inputBorderColor, setInputBorderColor] = useState("white"); // 입력 필드 테두리 색상 상태 추가
-  const isButtonDisabled =
-    isNaN(parseInt(inputValue)) || parseInt(inputValue) < 1;
+  const isButtonDisabled = isNaN(parseInt(inputValue)) || parseInt(inputValue) < 1;
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);

@@ -4,7 +4,7 @@ import Chart from "../../../assets/icon/ic_chart.svg";
 import IdolListItem from "./IdolListItem";
 import { getChart } from "../../../api/charts";
 import VoteModal from "../../../modal/VoteModal";
-import { useSetModal } from "../../../contexts/CreditContext";
+import { useSetModal } from "../../../contexts/GlobalContext";
 
 import "./ChartContainer.scss";
 

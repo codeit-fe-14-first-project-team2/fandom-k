@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Button from "../components/button/Button";
 import Icon from "../components/icon/Icon";
-import { useCredit, useSetCredit, useSetModal } from "../contexts/CreditContext";
+import { useCredit, useSetCredit, useSetModal } from "../contexts/GlobalContext";
 import "./modal.scss";
 import IdolProfile from "../components/idolprofile/IdolProfile";
 import { createVote } from "../api/votes";
@@ -95,7 +95,7 @@ export default function VoteModal({ idolData, selectedTab }) {
           투표하기
         </Button>
         <div className="display-flex justify-center text-medium text-12 line-height-26">
-          투표하는데<span className="text-brand-orange"> 1000크레딧</span>이 소모됩니다.
+          투표하는데<span className="text-brand-orange ml-2">1000 크레딧</span>이 소모됩니다.
         </div>
       </section>
       {errorMessage !== null && <ErrorModal message={errorMessage} />}
