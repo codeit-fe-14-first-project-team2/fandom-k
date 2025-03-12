@@ -47,8 +47,13 @@ main#my-page {
       > #idol-list {
         grid-template-columns: repeat(8, 1fr);
         grid-template-rows: repeat(2, 1fr);
-        > .idol-list-item > .idol-profile-wrapper:not(.disabled) {
-          cursor: pointer;
+        > .idol-list-item {
+          > .idol-profile-wrapper {
+            cursor: pointer;
+          }
+          > .idol-profile-wrapper.disabled {
+            cursor: not-allowed;
+          }
         }
       }
     }

@@ -19,7 +19,7 @@ export default function FavoriteIdols({ idols = [], onRemove }) {
     </section>
   );
 }
-function FavoriteIdolItem({ onRemove, ...idol }) {
+function FavoriteIdolItem({ onRemove, totalVotes, teamId, ...idol }) {
   return (
     <div className="display-grid justify-center gap-8">
       <div className="profile-wrapper">

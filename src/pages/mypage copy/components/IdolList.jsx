@@ -17,10 +17,11 @@ export default function IdolList({ favoriteIdols = [], onAdd }) {
     [cursor[0], pageSize]
   );
 
-  function IdolSelectItem({ ...idol }) {
+  function IdolSelectItem({ totalVotes, teamId, ...idol }) {
     const isAdded = favoriteIdols.findIndex((el) => el.id === idol.id) >= 0;
     const isSelected = selected.findIndex((el) => el.id === idol.id) >= 0;
     function handleSelect() {
+      if (isAdded) return;
       if (isSelected) setSelected(selected.filter((el) => el.id !== idol.id));
       else setSelected((prev) => [...prev, idol]);
     }
