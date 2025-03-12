@@ -46,7 +46,7 @@ const TributeModal = ({ donationIdol }) => {
     <div className="modal-wrapper display-flex justify-center align-center">
       <section
         id="tribute-modal"
-        className="display-grid gap-20 surface-secondary radius-8 px-16 py-24"
+        className="display-grid jutify-stretch gap-20 surface-secondary radius-8 px-16 py-24"
       >
         <div className="display-flex justify-sides align-center">
           <h3 className="text-secondary text-18 text-medium">후원 하기</h3>
@@ -99,17 +99,15 @@ const TributeModal = ({ donationIdol }) => {
               {creditMessage}
             </div>
           )}
-          <div>
-            <Button
-              size="small"
-              disabled={isButtonDisabled}
-              style={{ backgroundColor: isButtonDisabled ? "gray" : null }}
-              onClick={handleButtonClick}
-            >
-              {"후원하기"}
-            </Button>
-          </div>
         </div>
+        <Button
+          size="free"
+          disabled={isButtonDisabled}
+          style={{ backgroundColor: isButtonDisabled ? "gray" : null }}
+          onClick={handleButtonClick}
+        >
+          후원하기
+        </Button>
       </section>
     </div>
   );
