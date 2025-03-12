@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Button from "../components/button/Button";
 import Icon from "../components/icon/Icon";
-import { useCredit, useSetCredit, useSetModal } from "../contexts/CreditContext";
+import { useCredit, useSetCredit, useSetModal } from "../contexts/GlobalContext";
 import "./modal.scss";
 
 export default function ChargeModal() {

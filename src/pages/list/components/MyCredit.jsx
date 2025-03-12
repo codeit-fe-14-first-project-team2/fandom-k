@@ -1,5 +1,5 @@
 import Icon from "../../../components/icon/Icon";
-import { useSetModal } from "../../../contexts/CreditContext";
+import { useSetModal } from "../../../contexts/GlobalContext";
 import ChargeModal from "../../../modal/ChargeModal";
 import { formatCredit } from "../../../util/credit";
 

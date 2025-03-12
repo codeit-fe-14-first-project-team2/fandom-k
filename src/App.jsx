@@ -2,11 +2,11 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import ListPage from "./pages/list/ListPage";
 import MyPage from "./pages/mypage/MyPage";
-import CreditContextProvider from "./contexts/CreditContext";
+import GlobalContextProvider from "./contexts/GlobalContext";
 
 function App() {
   return (
-    <CreditContextProvider>
+    <GlobalContextProvider>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LandingPage />} />
@@ -14,7 +14,7 @@ function App() {
           <Route path="/mypage" element={<MyPage />} />
         </Routes>
       </BrowserRouter>
-    </CreditContextProvider>
+    </GlobalContextProvider>
   );
 }
 

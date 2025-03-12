@@ -11,6 +11,7 @@ const PATH = "donations";
  *  profilePicture: string,
  *  totalVotes: number
  * }} Idol
+ * - 아이돌 객체
  */
 /**
  * @typedef {{
@@ -25,6 +26,7 @@ const PATH = "donations";
  *  status: boolean,
  *  idol: Idol | undefined
  * }} Donation
+ * - 후원하기 객체
  */
 /**
  * 후원 목록 조회
@@ -53,7 +55,7 @@ export async function getDonations(cursor = 0, pageSize = 10, priorityIdolIds = 
  * @returns {Donation}
  */
 export async function contributeDonation(id, amount) {
-  return await handler.put(PATH, id, { amount });
+  return await handler.put(PATH, `${id}/contribute`, { amount });
 }
 // #region : Optional API
 /**
