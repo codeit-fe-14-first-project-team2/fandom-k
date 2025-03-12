@@ -3,7 +3,7 @@ import Icon from "../../../components/icon/Icon";
 //import { getDonations } from "../../../api/donations";
 import { useEffect, useState } from "react";
 import TributeMockData from "./TributeMockData.json";
-import { useSetModal } from "../../../contexts/CreditContext";
+import { useSetModal } from "../../../contexts/GlobalContext";
 import TributeModal from "../../../modal/TributeModal";
 import "./TributeContainer.scss";
 
@@ -26,9 +26,7 @@ export default function TributeContainer() {
 
   return (
     <div className="my-50">
-      <div className="display-grid justify-stretch my-100 text-24">
-        후원을 기다리는 조공
-      </div>
+      <div className="display-grid justify-stretch my-100 text-24">후원을 기다리는 조공</div>
       <div className="display-flex justify-center">
         {
           <div>
@@ -44,18 +42,12 @@ export default function TributeContainer() {
             {donations.map((donation) => (
               <div id="tribute-list">
                 <li key={donation.id} className="donation-item">
-                  <img
-                    src={donation.imageUrl}
-                    alt={donation.title}
-                    id="tribute-idol-image"
-                  />
+                  <img src={donation.imageUrl} alt={donation.title} id="tribute-idol-image" />
 
                   <Button
                     size="extra-small"
                     id="btn-donation"
-                    onClick={() =>
-                      setModal(<TributeModal donationIdol={donation} />)
-                    }
+                    onClick={() => setModal(<TributeModal donationIdol={donation} />)}
                   >
                     {"후원하기"}
                   </Button>
@@ -71,11 +63,7 @@ export default function TributeContainer() {
         </div>
         {
           <div>
-            <Button
-              size="extra-small"
-              className="invert my-100 mx-50"
-              id="btn-right"
-            >
+            <Button size="extra-small" className="invert my-100 mx-50" id="btn-right">
               <div>
                 <Icon iconNm="chevron" className="icon-rotate-180" />
               </div>
