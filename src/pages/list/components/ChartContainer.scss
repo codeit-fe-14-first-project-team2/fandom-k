@@ -6,7 +6,6 @@
   #chart-tab > button {
     flex-grow: 1;
     padding: 12px;
-
     &.active {
       background-color: rgba(255, 255, 255, 0.1);
       border-bottom: 1px solid #ffffff;
@@ -46,11 +45,6 @@
         border-bottom: none;
       }
     }
-  }
-  .divider {
-    width: 49%;
-    height: 1px;
-    background-color: rgba(255, 255, 255, 0.1);
   }
   @media (width < 1200px) {
     #chart-title {
