@@ -24,7 +24,7 @@ function MyPageContainer() {
   }
 
   return (
-    <main className="display-grid justify-stretch gap-40 my-76" id="my-page">
+    <main className="display-grid justify-stretch gap-40 mx-auto my-76" id="my-page">
       <FavoriteIdols idols={idols} onRemove={handleRemove} />
       <hr />
       <IdolList favoriteIdols={idols} onAdd={handleAdd} />
