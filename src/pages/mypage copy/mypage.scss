@@ -1,0 +1,62 @@
+main#my-page {
+  > #favorite-idols {
+    > div {
+      min-height: 150px;
+      @media (width < 768px) {
+        /* Mobile */
+        min-height: 130px;
+      }
+    }
+    > #favorite-idol-box {
+      .profile-wrapper {
+        position: relative;
+        > button {
+          position: absolute;
+          top: 2px;
+          right: 2px;
+        }
+      }
+    }
+  }
+  > hr {
+    border: 0;
+    height: 1px;
+    background-color: rgba($color: #ffffff, $alpha: 0.1);
+  }
+  > #idol-list-area {
+    #idol-list-box {
+      position: relative;
+      > button {
+        position: absolute;
+        z-index: 1;
+        width: 29px;
+        height: 135px;
+        border-radius: 4px;
+        background-color: rgba($color: #1b1b1bcc, $alpha: 0.8);
+        @media (width < 1300px) {
+          /* Tablet */
+          display: none;
+        }
+      }
+      > button:first-child {
+        left: -64px;
+      }
+      > button:last-child {
+        right: -64px;
+      }
+      > #idol-list {
+        grid-template-columns: repeat(8, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        > .idol-list-item > .idol-profile-wrapper:not(.disabled) {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+  @media (width < 1200px) {
+    /* Tablet */
+  }
+  @media (width < 768px) {
+    /* Mobile */
+  }
+}
