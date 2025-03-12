@@ -66,9 +66,9 @@ button.small {
   }
 }
 button.extra-small {
-  width: 128px;
+  min-width: 128px;
   height: 32px;
-  padding: 2px 16px 3px;
+  padding: 2px 0 3px;
   font-size: 13px;
   line-height: normal;
   gap: 4px;
