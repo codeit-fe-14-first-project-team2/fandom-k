@@ -68,13 +68,7 @@ export default function ChartContainer() {
           <Button
             size="extra-small"
             onClick={() =>
-              setModal(
-                <VoteModal
-                  idolData={idolData}
-                  selectedTab={selectedTab}
-                  onVoteSuccess={handleLoad}
-                />
-              )
+              setModal(<VoteModal selectedTab={selectedTab} onVoteSuccess={handleLoad} />)
             }
           >
             <img src={Chart} alt="차트 이미지"></img>
