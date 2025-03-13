@@ -22,7 +22,9 @@ export default function GlobalContextProvider({ children }) {
   }, []);
 
   return (
-    <GlobalContext value={{ credit, setCredit, setModal, setToast, setLoading }}>
+    <GlobalContext
+      value={{ credit, setCredit, setModal, setToast, setLoading }}
+    >
       {children}
       {modal}
       {toast}
