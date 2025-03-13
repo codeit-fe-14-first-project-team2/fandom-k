@@ -5,15 +5,18 @@ import { getChart } from "../../../api/charts";
 import IdolProfile from "../../../components/idolprofile/IdolProfile";
 import VoteModal from "../../../modal/VoteModal";
 import { useSetModal } from "../../../contexts/GlobalContext";
+import useViewPortSize from "../../../hooks/useViewportSize";
 
 import "./ChartContainer.scss";
 
 export default function ChartContainer() {
   const setModal = useSetModal();
+  const { viewportSize } = useViewPortSize();
   const [selectedTab, setSelectedTab] = useState("female");
   const [idolData, setIdolData] = useState([]);
   const [cursor, setCursor] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [pageSize, setPageSize] = useState(viewportSize === "desktop" ? 10 : 5);
 
   function IdolListItem({ id, rank, group, name, totalVotes, profilePicture }) {
     return (
@@ -36,9 +39,7 @@ export default function ChartContainer() {
       const { idols, nextCursor } = await getChart(options);
       setIdolData((prevData) => {
         const updatedData = reset ? idols : [...prevData, ...idols];
-        const sortedData = updatedData
-          .sort((a, b) => b.totalVotes - a.totalVotes || a.group.localeCompare(b.name))
-          .map((idol, index) => ({ ...idol, rank: index + 1 }));
+        const sortedData = updatedData.map((idol, index) => ({ ...idol, rank: index + 1 }));
         return sortedData;
       });
       setCursor(nextCursor);
@@ -49,14 +50,22 @@ export default function ChartContainer() {
   }
 
   function handleLoadMore() {
-    handleLoad({ selectedTab, cursor, pageSize: 10 }, false);
+    handleLoad({ selectedTab, cursor, pageSize }, false);
   }
+
+  useEffect(() => {
+    if (viewportSize === "desktop") {
+      setPageSize(10);
+    } else {
+      setPageSize(5);
+    }
+  }, [viewportSize]);
 
   useEffect(() => {
     setIdolData([]);
     setCursor(0);
-    handleLoad({ selectedTab, cursor: 0, pageSize: 10 }, true);
-  }, [selectedTab]);
+    handleLoad({ selectedTab, cursor: 0, pageSize }, true);
+  }, [selectedTab, viewportSize, pageSize]);
 
   return (
     <div className="display-grid justify-stretch mt-30">
