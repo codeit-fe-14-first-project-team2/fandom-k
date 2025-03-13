@@ -1,10 +1,8 @@
 import Icon from "../../../components/icon/Icon";
-import { useSetModal } from "../../../contexts/GlobalContext";
 import ChargeModal from "../../../modal/ChargeModal";
 import { formatCredit } from "../../../util/credit";
 
-export default function MyCredit({ credit = 0 }) {
-  const setModal = useSetModal();
+export default function MyCredit({ credit = 0, setModal }) {
   return (
     <section
       className="display-flex justify-sides align-center border-default radius-8 px-64 py-36"
