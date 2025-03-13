@@ -1,9 +1,14 @@
 import React, { useState } from "react";
 import Button from "../components/button/Button";
 import Icon from "../components/icon/Icon";
-import { useCredit, useSetCredit, useSetModal } from "../contexts/GlobalContext";
+import {
+  useCredit,
+  useSetCredit,
+  useSetModal,
+} from "../contexts/GlobalContext";
 import "./modal.scss";
 import "./TributeModal.scss";
+import { contributeDonation } from "../api/donations";
 
 const TributeModal = ({ donationIdol }) => {
   const setModal = useSetModal();
@@ -12,36 +17,53 @@ const TributeModal = ({ donationIdol }) => {
 
   const [inputValue, setInputValue] = useState("");
   const [creditMessage, setCreditMessage] = useState("");
-  const [inputBorderColor, setInputBorderColor] = useState("white"); // 입력 필드 테두리 색상 상태 추가
-  const isButtonDisabled = isNaN(parseInt(inputValue)) || parseInt(inputValue) < 1;
+  const [inputBorderColor, setInputBorderColor] = useState("white");
+  const isButtonDisabled =
+    isNaN(parseInt(inputValue)) || parseInt(inputValue) < 1;
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
     setCreditMessage("");
-    setInputBorderColor("white"); // 입력 값이 변경되면 테두리 색상 초기화
+    setInputBorderColor("white");
   };
 
-  const handleButtonClick = () => {
+  const handleButtonClick = async () => {
     const inputCredit = parseInt(inputValue);
+
     if (isNaN(inputCredit) || inputCredit < 1) {
       setCreditMessage("1 이상의 숫자를 입력해주세요.");
-      setInputBorderColor("red"); // 입력 값이 유효하지 않으면 테두리 색상 변경
+      setInputBorderColor("red");
       return;
     }
 
     if (inputCredit > credit) {
       setCreditMessage("크레딧이 부족합니다.");
-      setInputBorderColor("red"); // 크레딧 부족 시 테두리 색상 변경
+      setInputBorderColor("red");
       return;
     }
 
-    // 크레딧 충분하면 후원 로직 처리
-    setCredit(credit - inputCredit); // 크레딧 차감
-    setCreditMessage("후원 완료!"); // 후원 완료 메시지 표시
-    setInputBorderColor("white"); // 후원 완료 시 테두리 색상 초기화
-    //setTimeout(() => setModal(null), 1500); // 1.5초 후 모달 닫기
-  };
+    console.log("보내는 후원 데이터:", {
+      idolId: donationIdol.id,
+      credit: inputCredit,
+    });
 
+    try {
+      const updatedDonation = await contributeDonation(
+        donationIdol.id,
+        inputCredit
+      );
+      console.log("후원 완료:", updatedDonation);
+
+      setCredit((prevCredit) => prevCredit - inputCredit);
+      setCreditMessage("후원 완료!");
+      setInputBorderColor("white");
+      //setTimeout(() => setModal(null), 1500);
+    } catch (error) {
+      console.error("후원 실패:", error);
+      setCreditMessage("후원에 실패했습니다. 다시 시도해주세요.");
+      setInputBorderColor("red");
+    }
+  };
   return (
     <div className="modal-wrapper display-flex justify-center align-center">
       <section
@@ -56,7 +78,7 @@ const TributeModal = ({ donationIdol }) => {
         </div>
         <div className="display-flex justify-center">
           <img
-            src={donationIdol.imageUrl}
+            src={donationIdol.idol.profilePicture}
             alt={donationIdol.title}
             style={{
               position: "relative",
