@@ -43,7 +43,7 @@ html:has(.modal-wrapper) {
 }
 /* VoteModal */
 #vote-modal .list-wrapper {
-  max-height: 455px;
+  max-height: 600px;
   overflow-y: auto;
   padding-right: 8px;
   > #modal-list-item {

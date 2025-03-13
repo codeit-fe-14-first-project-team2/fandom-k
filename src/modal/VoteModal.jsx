@@ -82,7 +82,7 @@ export default function VoteModal({ selectedTab, onVoteSuccess }) {
       const response = await createVote({ idolId: selectedId });
       if (response) {
         setCredit((prev) => prev - 1000);
-        onVoteSuccess({ selectedTab, cursor: 0, pageSize: 10 }, true);
+        onVoteSuccess({ selectedTab, cursor: 0, pageSize: 6 }, true);
         setModal();
       }
     } catch (error) {
@@ -95,7 +95,7 @@ export default function VoteModal({ selectedTab, onVoteSuccess }) {
       isFirstRender.current = false;
       return;
     }
-    handleLoad({ selectedTab, cursor: 0, pageSize: 10 });
+    handleLoad({ selectedTab, cursor: 0, pageSize: 6 });
   }, []);
 
   useEffect(() => {
