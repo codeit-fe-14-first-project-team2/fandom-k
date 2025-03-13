@@ -5,7 +5,7 @@ import {
   useCredit,
   useSetCredit,
   useSetModal,
-} from "../contexts/CreditContext";
+} from "../contexts/GlobalContext";
 import "./modal.scss";
 import "./TributeModal.scss";
 import { contributeDonation } from "../api/donations";
@@ -43,13 +43,13 @@ const TributeModal = ({ donationIdol }) => {
     }
 
     console.log("보내는 후원 데이터:", {
-      idolId: donationIdol.idolId,
+      idolId: donationIdol.id,
       credit: inputCredit,
     });
 
     try {
       const updatedDonation = await contributeDonation(
-        donationIdol.idolId,
+        donationIdol.id,
         inputCredit
       );
       console.log("후원 완료:", updatedDonation);
