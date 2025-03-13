@@ -3,7 +3,7 @@ import Icon from "../../../components/icon/Icon";
 //import { getDonations } from "../../../api/donations";
 import { useEffect, useState } from "react";
 import TributeMockData from "./TributeMockData.json";
-import { useSetModal } from "../../../contexts/CreditContext";
+import { useSetModal } from "../../../contexts/GlobalContext";
 import TributeModal from "../../../modal/TributeModal";
 import "./TributeContainer.scss";
 import {
