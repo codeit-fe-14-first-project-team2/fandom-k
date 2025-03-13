@@ -22,7 +22,13 @@ export default function ChartContainer() {
     return (
       <li className="display-flex justify-sides align-center">
         <div className="display-flex justify-sides align-center gap-12">
-          <IdolProfile profilePicture={profilePicture} name={name} id={id} size="small" />
+          <IdolProfile
+            profilePicture={profilePicture}
+            name={name}
+            id={id}
+            size="small"
+            type="chart"
+          />
           <span className="text-regular text-16 text-brand-orange">{rank}</span>
           <span className="text-medium text-16">
             {group} {name}
