@@ -93,9 +93,7 @@ const AddInterestedIdols = ({ cursor, setCursor, isLoading, loadMore, option, se
                 <>
                     <section id="ContentTitle">
                         <h2>관심 있는 아이돌을 추가해보세요.</h2>
-                        <ToggleButton>
-                        onClick={handleChange}
-                        </ToggleButton>
+                        <ToggleButton onClick={handleChange}></ToggleButton>
                     </section>
 
                     <section id="CarouselPage">
