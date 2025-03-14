@@ -37,7 +37,7 @@ const InterestedIdols = () => {
                     })}
                 </section>
             ) : (
-                <section id="EmptyMessage">관심있는 아이돌을 추가해주세요!😎</section>
+                <section id="EmptyMessage">관심있는 아이돌을 추가해주세요!</section>
             )}
         </section>
     );

@@ -93,6 +93,9 @@ const AddInterestedIdols = ({ cursor, setCursor, isLoading, loadMore, option, se
                 <>
                     <section id="ContentTitle">
                         <h2>관심 있는 아이돌을 추가해보세요.</h2>
+                        <ToggleButton>
+                        onClick={handleChange}
+                        </ToggleButton>
                     </section>
 
                     <section id="CarouselPage">
@@ -128,3 +131,16 @@ const AddInterestedIdols = ({ cursor, setCursor, isLoading, loadMore, option, se
 };
 
 export default AddInterestedIdols;
+
+const ToggleButton = styled.button`
+    flex: 1;
+    text-align: center;
+    background-color: ${(props) => (props.selected === false ? '#02000e' : '#ffffff1a')};
+    padding: 12px;
+    border: none;
+    border-bottom: ${(props) => (props.selected === false ? 'none' : '1px solid #fff')};
+
+    font-size: 14px;
+    line-height: 18px;
+    color: ${(props) => (props.selected === false ? '#828282' : '#fff')};
+`;
