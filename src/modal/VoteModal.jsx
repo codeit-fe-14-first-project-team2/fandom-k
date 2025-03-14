@@ -62,9 +62,7 @@ export default function VoteModal({ selectedTab, onVoteSuccess }) {
       const { idols, nextCursor } = await getChart(options);
       setIdolData((prevData) => {
         const updatedData = [...prevData, ...idols];
-        const sortedData = updatedData
-          .sort((a, b) => b.totalVotes - a.totalVotes)
-          .map((idol, index) => ({ ...idol, rank: index + 1 }));
+        const sortedData = updatedData.map((idol, index) => ({ ...idol, rank: index + 1 }));
         return sortedData;
       });
       setCursor(nextCursor);
@@ -82,7 +80,7 @@ export default function VoteModal({ selectedTab, onVoteSuccess }) {
       const response = await createVote({ idolId: selectedId });
       if (response) {
         setCredit((prev) => prev - 1000);
-        onVoteSuccess({ selectedTab, cursor: 0, pageSize: 6 }, true);
+        onVoteSuccess({ selectedTab, cursor: 0, pageSize: 10 }, true);
         setModal();
       }
     } catch (error) {
