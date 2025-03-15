@@ -2,11 +2,11 @@ import { useEffect, useState, useRef } from "react";
 import Button from "../components/button/Button";
 import Icon from "../components/icon/Icon";
 import { useCredit, useSetCredit, useSetModal } from "../contexts/GlobalContext";
-import "./modal.scss";
-import IdolProfile from "../components/idolprofile/IdolProfile";
 import { createVote } from "../api/votes";
 import { getChart } from "../api/charts";
 import ErrorModal from "./ErrorModal";
+import ChartItem from "../pages/list/components/ChartItem";
+import "./modal.scss";
 
 export default function VoteModal({ selectedTab, onVoteSuccess }) {
   const currentCredit = useCredit();
@@ -19,43 +19,6 @@ export default function VoteModal({ selectedTab, onVoteSuccess }) {
   const isFirstRender = useRef(true);
   const observerRef = useRef(null);
   const lastItemRef = useRef(null);
-
-  function handleSelectId(e, id) {
-    e.stopPropagation();
-    setSelectedId(id);
-  }
-
-  function ChartListItem({ id, rank, group, name, totalVotes, profilePicture, lastItemRef }) {
-    const isSelected = id === selectedId;
-    return (
-      <div
-        id="modal-list-item"
-        className="display-flex justify-sides align-center"
-        ref={lastItemRef}
-      >
-        <div className="display-flex justify-sides align-center gap-12">
-          <IdolProfile
-            profilePicture={profilePicture}
-            name={name}
-            id={id}
-            size="medium"
-            selected={isSelected}
-            type="vote"
-          />
-          <span className="text-regular text-14 text-brand-orange">{rank}</span>
-          <div className="display-flex direction-column">
-            <span className="text-medium text-14">
-              {group} {name}
-            </span>
-            <span className="text-regular text-14 text-invert-60">
-              {totalVotes.toLocaleString()}표
-            </span>
-          </div>
-        </div>
-        <input type="radio" checked={selectedId === id} onChange={(e) => handleSelectId(e, id)} />
-      </div>
-    );
-  }
 
   async function handleLoad(options) {
     try {
@@ -80,7 +43,7 @@ export default function VoteModal({ selectedTab, onVoteSuccess }) {
       const response = await createVote({ idolId: selectedId });
       if (response) {
         setCredit((prev) => prev - 1000);
-        onVoteSuccess({ selectedTab, cursor: 0, pageSize: 10 }, true);
+        onVoteSuccess([0]);
         setModal();
       }
     } catch (error) {
@@ -134,7 +97,7 @@ export default function VoteModal({ selectedTab, onVoteSuccess }) {
           {idolData.map((idol, index) => {
             const isLastItem = index === idolData.length - 1;
             return (
-              <ChartListItem
+              <ChartItem
                 key={idol.id}
                 id={idol.id}
                 rank={idol.rank}
@@ -143,6 +106,9 @@ export default function VoteModal({ selectedTab, onVoteSuccess }) {
                 totalVotes={idol.totalVotes}
                 profilePicture={idol.profilePicture}
                 lastItemRef={isLastItem ? lastItemRef : null}
+                selectedId={selectedId}
+                onSelect={setSelectedId}
+                type="vote"
               />
             );
           })}

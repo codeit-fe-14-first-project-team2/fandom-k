@@ -46,8 +46,4 @@ html:has(.modal-wrapper) {
   max-height: 600px;
   overflow-y: auto;
   padding-right: 8px;
-  > #modal-list-item {
-    padding: 8px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  }
 }
