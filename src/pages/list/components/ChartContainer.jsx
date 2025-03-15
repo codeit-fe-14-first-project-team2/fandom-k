@@ -2,76 +2,33 @@ import { useEffect, useState } from "react";
 import Button from "../../../components/button/Button";
 import Chart from "../../../assets/icon/ic_chart.svg";
 import { getChart } from "../../../api/charts";
-import IdolProfile from "../../../components/idolprofile/IdolProfile";
 import VoteModal from "../../../modal/VoteModal";
 import { useSetModal } from "../../../contexts/GlobalContext";
 import useViewPortSize from "../../../hooks/useViewportSize";
-
+import useAsync from "../../../hooks/useAsync";
+import ChartItem from "./ChartItem";
 import "./ChartContainer.scss";
 
 export default function ChartContainer() {
+  const [selectedTab, setSelectedTab] = useState("female");
   const setModal = useSetModal();
   const { viewportSize } = useViewPortSize();
-  const [selectedTab, setSelectedTab] = useState("female");
-  const [idolData, setIdolData] = useState([]);
-  const [cursor, setCursor] = useState(null);
-  const [loading, setLoading] = useState(false);
   const [pageSize, setPageSize] = useState(viewportSize === "desktop" ? 10 : 5);
-
-  function IdolListItem({ id, rank, group, name, totalVotes, profilePicture }) {
-    return (
-      <li className="display-flex justify-sides align-center">
-        <div className="display-flex justify-sides align-center gap-12">
-          <IdolProfile
-            profilePicture={profilePicture}
-            name={name}
-            id={id}
-            size="small"
-            type="chart"
-          />
-          <span className="text-regular text-16 text-brand-orange">{rank}</span>
-          <span className="text-medium text-16">
-            {group} {name}
-          </span>
-        </div>
-
-        <span className="text-regular text-16 text-invert-60">{totalVotes.toLocaleString()}표</span>
-      </li>
-    );
-  }
-  async function handleLoad(options, reset = false) {
-    setLoading(true);
-    try {
-      const { idols, nextCursor } = await getChart(options);
-      setIdolData((prevData) => {
-        const updatedData = reset ? idols : [...prevData, ...idols];
-        const sortedData = updatedData.map((idol, index) => ({ ...idol, rank: index + 1 }));
-        return sortedData;
-      });
-      setCursor(nextCursor);
-      setLoading(false);
-    } catch (err) {
-      console.log(err);
-    }
-  }
-
-  function handleLoadMore() {
-    handleLoad({ selectedTab, cursor, pageSize }, false);
-  }
+  const [cursor, setCursor] = useState([0]);
+  const { loading, value: chart } = useAsync(
+    () => getChart({ selectedTab, cursor: 0, pageSize: pageSize * cursor?.length }),
+    [selectedTab, cursor]
+  );
 
   useEffect(() => {
     if (viewportSize === "desktop") {
       setPageSize(10);
+      setCursor([0]);
     } else {
       setPageSize(5);
+      setCursor([0]);
     }
   }, [viewportSize]);
-
-  useEffect(() => {
-    setIdolData([]);
-    setCursor(0);
-    handleLoad({ selectedTab, cursor: 0, pageSize }, true);
-  }, [selectedTab, viewportSize, pageSize]);
 
   return (
     <div className="display-grid justify-stretch mt-30">
@@ -83,7 +40,7 @@ export default function ChartContainer() {
           <Button
             size="extra-small"
             onClick={() =>
-              setModal(<VoteModal selectedTab={selectedTab} onVoteSuccess={handleLoad} />)
+              setModal(<VoteModal selectedTab={selectedTab} onVoteSuccess={setCursor} />)
             }
           >
             <img src={Chart} alt="차트 이미지"></img>
@@ -95,7 +52,10 @@ export default function ChartContainer() {
             className={`${
               selectedTab === "female" ? "active" : ""
             } text-regular line-height-18 letter-spacing-small`}
-            onClick={() => setSelectedTab("female")}
+            onClick={() => {
+              setSelectedTab("female");
+              setCursor([0]);
+            }}
           >
             이달의 여자 아이돌
           </button>
@@ -105,6 +65,7 @@ export default function ChartContainer() {
             } text-regular line-height-18 letter-spacing-small`}
             onClick={() => {
               setSelectedTab("male");
+              setCursor([0]);
             }}
           >
             이달의 남자 아이돌
@@ -115,9 +76,9 @@ export default function ChartContainer() {
             <div id="spinner"></div>
           </div>
         ) : (
-          <ul className="display-flex">
-            {idolData.map((idol) => (
-              <IdolListItem
+          <div id="chart-wrapper" className="display-flex">
+            {chart?.idols.map((idol) => (
+              <ChartItem
                 key={idol.id}
                 id={idol.id}
                 rank={idol.rank}
@@ -125,14 +86,20 @@ export default function ChartContainer() {
                 name={idol.name}
                 totalVotes={idol.totalVotes}
                 profilePicture={idol.profilePicture}
+                type="chart"
               />
             ))}
-          </ul>
+          </div>
         )}
       </div>
       {!loading && (
         <div className="display-flex justify-center mt-50">
-          <Button disabled={!cursor} btnStyle="outlined" size="semi-large" onClick={handleLoadMore}>
+          <Button
+            disabled={!cursor}
+            btnStyle="outlined"
+            size="semi-large"
+            onClick={() => setCursor([chart.nextCursor, ...cursor])}
+          >
             더 보기
           </Button>
         </div>
