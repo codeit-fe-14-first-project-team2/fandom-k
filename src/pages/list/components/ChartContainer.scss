@@ -1,14 +1,24 @@
 #chart-container {
+  gap: 24px;
   #chart-title {
     font-size: 24px;
     line-height: 26px;
   }
-  #chart-tab > button {
-    flex-grow: 1;
-    padding: 12px;
-    &.active {
-      background-color: rgba(255, 255, 255, 0.1);
-      border-bottom: 1px solid #ffffff;
+  #chart-list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px 24px;
+    .chart-list-item {
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .chart-list-item#chart {
+      &:nth-last-of-type(1):nth-of-type(odd),
+      &:nth-last-of-type(1):nth-of-type(even) {
+        border-bottom: none;
+      }
+      &:nth-last-of-type(2):nth-of-type(odd) {
+        border-bottom: none;
+      }
     }
   }
   #loading-container {
@@ -30,13 +40,13 @@
       }
     }
   }
-  #chart-wrapper {
-    flex-wrap: wrap;
-    gap: 0px 24px;
-  }
   @media (width < 1200px) {
     #chart-title {
       font-size: 20px;
+    }
+    #chart-list {
+      grid-template-columns: repeat(1, auto);
+      gap: 16px;
     }
   }
   @media (width < 768px) {

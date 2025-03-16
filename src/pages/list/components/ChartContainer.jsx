@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Button from "../../../components/button/Button";
-import Chart from "../../../assets/icon/ic_chart.svg";
+import Icon from "../../../components/icon/Icon";
 import { getChart } from "../../../api/charts";
 import VoteModal from "../../../modal/VoteModal";
 import { useSetModal } from "../../../contexts/GlobalContext";
@@ -31,53 +31,52 @@ export default function ChartContainer() {
   }, [viewportSize]);
 
   return (
-    <div className="display-grid justify-stretch mt-30">
-      <div id="chart-container" className="display-grid justify-stretch gap-24">
-        <div className="display-flex justify-sides">
-          <div id="chart-title" className="text-bold">
-            이달의 차트
-          </div>
+    <section id="chart-container" className="display-grid justify-stretch mt-30 mb-100">
+      <div className="display-flex justify-sides align-center">
+        <h2 id="chart-title">이달의 차트</h2>
+        <Button
+          size="extra-small"
+          onClick={() =>
+            setModal(<VoteModal selectedTab={selectedTab} onVoteSuccess={setCursor} />)
+          }
+        >
+          <Icon iconNm="chart" size={24} />
+          차트 투표하기
+        </Button>
+      </div>
+      <article id="chart-box" className="display-grid">
+        <div className="display-grid direction-column">
           <Button
-            size="extra-small"
-            onClick={() =>
-              setModal(<VoteModal selectedTab={selectedTab} onVoteSuccess={setCursor} />)
-            }
-          >
-            <img src={Chart} alt="차트 이미지"></img>
-            <span>차트 투표</span>
-          </Button>
-        </div>
-        <div id="chart-tab" className="display-flex">
-          <button
-            className={`${
-              selectedTab === "female" ? "active" : ""
-            } text-regular line-height-18 letter-spacing-small`}
+            size="free"
+            btnStyle={selectedTab === "female" ? "outlined-bottom" : "invert"}
             onClick={() => {
               setSelectedTab("female");
               setCursor([0]);
             }}
+            className="text-regular line-height-18 letter-spacing-small"
           >
             이달의 여자 아이돌
-          </button>
-          <button
-            className={`${
-              selectedTab === "male" ? "active" : ""
-            } text-regular line-height-18 letter-spacing-small`}
+          </Button>
+          <Button
+            size="free"
+            btnStyle={selectedTab === "male" ? "outlined-bottom" : "invert"}
             onClick={() => {
               setSelectedTab("male");
               setCursor([0]);
             }}
+            className="text-regular line-height-18 letter-spacing-small"
           >
             이달의 남자 아이돌
-          </button>
+          </Button>
         </div>
-        {loading ? (
+
+        {!(chart?.idols?.length > 0) ? (
           <div id="loading-container" className="display-flex justify-center align-center">
             <div id="spinner"></div>
           </div>
         ) : (
-          <div id="chart-wrapper" className="display-flex">
-            {chart?.idols.map((idol) => (
+          <div id="chart-list" className="display-grid">
+            {chart?.idols?.map((idol) => (
               <ChartItem
                 key={idol.id}
                 id={idol.id}
@@ -91,19 +90,20 @@ export default function ChartContainer() {
             ))}
           </div>
         )}
-      </div>
-      {!loading && (
-        <div className="display-flex justify-center mt-50">
-          <Button
-            disabled={!cursor}
-            btnStyle="outlined"
-            size="semi-large"
-            onClick={() => setCursor([chart.nextCursor, ...cursor])}
-          >
-            더 보기
-          </Button>
-        </div>
-      )}
-    </div>
+
+        {!loading && (
+          <div className="display-flex justify-center mt-28">
+            <Button
+              disabled={chart?.nextCursor === null}
+              btnStyle="outlined"
+              size="semi-large"
+              onClick={() => setCursor([chart.nextCursor, ...cursor])}
+            >
+              더 보기
+            </Button>
+          </div>
+        )}
+      </article>
+    </section>
   );
 }

@@ -20,7 +20,7 @@ export default function ChartItem({
   return (
     <div
       id={type}
-      className="display-flex justify-sides align-center item-wrapper"
+      className="display-flex justify-sides align-center chart-list-item"
       ref={lastItemRef}
     >
       <div className="display-flex justify-sides align-center gap-12">
