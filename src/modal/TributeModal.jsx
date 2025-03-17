@@ -54,7 +54,7 @@ const TributeModal = ({ donationIdol }) => {
       );
       console.log("후원 완료:", updatedDonation);
 
-      setCredit((prevCredit) => prevCredit - inputCredit);
+      setCredit(credit - inputCredit);
       setCreditMessage("후원 완료!");
       setInputBorderColor("white");
       //setTimeout(() => setModal(null), 1500);
