@@ -5,6 +5,7 @@ import plusIcon from '../../../assets/icon/Ic_plus_24px.svg';
 import arrowIcon from '../../../assets/icon/ic_arrow_left.svg';
 import { MyDispatchContext, MyStateContext } from '../MyPage';
 import { toast } from 'react-toastify';
+import styled from 'styled-components';
 import useDataNum from '../../../hooks/useDataNum';
 import useScrollTo from '../../../hooks/useScrollTo';
 import usePagination from '../../../hooks/usePagination';
@@ -93,7 +94,9 @@ const AddInterestedIdols = ({ cursor, setCursor, isLoading, loadMore, option, se
                 <>
                     <section id="ContentTitle">
                         <h2>관심 있는 아이돌을 추가해보세요.</h2>
+                        <section id="ContentNav">
                         <ToggleButton onClick={handleChange}></ToggleButton>
+                        </section>
                     </section>
 
                     <section id="CarouselPage">
