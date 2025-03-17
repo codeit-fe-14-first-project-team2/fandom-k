@@ -11,6 +11,7 @@ const PATH = "donations";
  *  profilePicture: string,
  *  totalVotes: number
  * }} Idol
+ * - 아이돌 객체
  */
 /**
  * @typedef {{
@@ -25,6 +26,7 @@ const PATH = "donations";
  *  status: boolean,
  *  idol: Idol | undefined
  * }} Donation
+ * - 후원하기 객체
  */
 /**
  * 후원 목록 조회

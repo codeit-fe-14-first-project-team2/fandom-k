@@ -1,91 +1,109 @@
 import { useEffect, useState } from "react";
 import Button from "../../../components/button/Button";
-import Chart from "../../../assets/icon/ic_chart.svg";
-import IdolListItem from "./IdolListItem";
+import Icon from "../../../components/icon/Icon";
 import { getChart } from "../../../api/charts";
 import VoteModal from "../../../modal/VoteModal";
 import { useSetModal } from "../../../contexts/GlobalContext";
-
+import useViewPortSize from "../../../hooks/useViewportSize";
+import useAsync from "../../../hooks/useAsync";
+import ChartItem from "./ChartItem";
 import "./ChartContainer.scss";
 
 export default function ChartContainer() {
-  const setModal = useSetModal();
   const [selectedTab, setSelectedTab] = useState("female");
-  const [idolData, setIdolData] = useState([]);
-  const [cursor, setCursor] = useState(0);
-
-  async function handleLoad(options, reset = false) {
-    try {
-      const { idols, nextCursor } = await getChart(options);
-      setIdolData((prevData) => (reset ? idols : [...prevData, ...idols]));
-      // setCursor(nextCursor);
-    } catch (err) {
-      console.log(err);
-    }
-  }
-
-  function handleLoadMore() {
-    handleLoad({ selectedTab, cursor, pageSize: 10 }, false);
-  }
+  const setModal = useSetModal();
+  const { viewportSize } = useViewPortSize();
+  const [pageSize, setPageSize] = useState(viewportSize === "desktop" ? 10 : 5);
+  const [cursor, setCursor] = useState([0]);
+  const { loading, value: chart } = useAsync(
+    () => getChart({ selectedTab, cursor: 0, pageSize: pageSize * cursor?.length }),
+    [selectedTab, cursor]
+  );
 
   useEffect(() => {
-    setIdolData([]);
-    setCursor(0);
-    handleLoad({ selectedTab, cursor: 0, pageSize: 10 }, true);
-  }, [selectedTab]);
+    if (viewportSize === "desktop") {
+      setPageSize(10);
+      setCursor([0]);
+    } else {
+      setPageSize(5);
+      setCursor([0]);
+    }
+  }, [viewportSize]);
 
   return (
-    <div id="chart-wrapper" className="display-grid justify-center">
-      <div id="chart-container" className="display-grid justify-stretch gap-24">
-        <div className="display-flex justify-sides">
-          <div id="chart-title" className="text-bold">
-            이달의 차트
-          </div>
+    <section id="chart-container" className="display-grid justify-stretch mt-30 mb-100">
+      <div className="display-flex justify-sides align-center">
+        <h2 id="chart-title">이달의 차트</h2>
+        <Button
+          size="extra-small"
+          onClick={() =>
+            setModal(<VoteModal selectedTab={selectedTab} onVoteSuccess={setCursor} />)
+          }
+        >
+          <Icon iconNm="chart" size={24} />
+          차트 투표하기
+        </Button>
+      </div>
+      <article id="chart-box" className="display-grid">
+        <div className="display-grid direction-column">
           <Button
-            size="extra-small"
-            onClick={() => setModal(<VoteModal idolData={idolData} selectedTab={selectedTab} />)}
-          >
-            <img src={Chart} alt="차트 이미지"></img>
-            <span>차트 투표</span>
-          </Button>
-        </div>
-        <div id="chart-tab" className="display-flex">
-          <button
-            className={`${
-              selectedTab === "female" ? "active" : ""
-            } text-regular line-height-18 letter-spacing-small`}
-            onClick={() => setSelectedTab("female")}
+            size="free"
+            btnStyle={selectedTab === "female" ? "outlined-bottom" : "invert"}
+            onClick={() => {
+              setSelectedTab("female");
+              setCursor([0]);
+            }}
+            className="text-regular line-height-18 letter-spacing-small"
           >
             이달의 여자 아이돌
-          </button>
-          <button
-            className={`${
-              selectedTab === "male" ? "active" : ""
-            } text-regular line-height-18 letter-spacing-small`}
+          </Button>
+          <Button
+            size="free"
+            btnStyle={selectedTab === "male" ? "outlined-bottom" : "invert"}
             onClick={() => {
               setSelectedTab("male");
+              setCursor([0]);
             }}
+            className="text-regular line-height-18 letter-spacing-small"
           >
             이달의 남자 아이돌
-          </button>
+          </Button>
         </div>
-        <ul className="display-flex">
-          {idolData.map((idol) => (
-            <IdolListItem
-              key={idol.id}
-              id={idol.id}
-              rank={idol.rank}
-              group={idol.group}
-              name={idol.name}
-              totalVotes={idol.totalVotes}
-              profilePicture={idol.profilePicture}
-            />
-          ))}
-        </ul>
-      </div>
-      <button id="btn-more" className="text-bold text-14 line-height-26" onClick={handleLoadMore}>
-        더 보기
-      </button>
-    </div>
+
+        {!(chart?.idols?.length > 0) ? (
+          <div id="loading-container" className="display-flex justify-center align-center">
+            <div id="spinner"></div>
+          </div>
+        ) : (
+          <div id="chart-list" className="display-grid">
+            {chart?.idols?.map((idol) => (
+              <ChartItem
+                key={idol.id}
+                id={idol.id}
+                rank={idol.rank}
+                group={idol.group}
+                name={idol.name}
+                totalVotes={idol.totalVotes}
+                profilePicture={idol.profilePicture}
+                type="chart"
+              />
+            ))}
+          </div>
+        )}
+
+        {!loading && (
+          <div className="display-flex justify-center mt-28">
+            <Button
+              disabled={chart?.nextCursor === null}
+              btnStyle="outlined"
+              size="semi-large"
+              onClick={() => setCursor([chart.nextCursor, ...cursor])}
+            >
+              더 보기
+            </Button>
+          </div>
+        )}
+      </article>
+    </section>
   );
 }

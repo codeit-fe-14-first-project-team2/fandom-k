@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 export default function useViewPortSize() {
-  const getViewportType = (size) => (size < 768 ? "mobile" : size < 1300 ? "tablet" : "desktop");
+  const getViewportType = (size) => (size < 768 ? "mobile" : size < 1200 ? "tablet" : "desktop");
   const [viewportSize, setViewportSize] = useState(getViewportType(window.innerWidth));
 
   useEffect(() => {

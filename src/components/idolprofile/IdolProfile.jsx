@@ -8,7 +8,7 @@ import "./idolprofile.scss";
 	id: number,
   size: "large" | "medium" | "small",
 	selected: boolean,
-	type: "profile" | "vote" | "mypage",
+	type: "profile" | "chart" | "vote" | "mypage",
 	onSelect?: (id) => void,
 }} params
  */
