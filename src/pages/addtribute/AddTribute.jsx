@@ -37,7 +37,7 @@ export default function AddTribute() {
 		<>
 			<Header />
 			<main className="display-grid justify-stretch gap-40 my-50" id="add-tribute">
-				<div className="display-grid gap-12">
+				<div className="display-grid gap-12" id="form-header">
 					<div className="display-flex justify-sides align-upper">
 						<h1 className="text-26">후원을 받을 조공 생성하기</h1>
 						<Link to="/add_idol">
