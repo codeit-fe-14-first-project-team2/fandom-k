@@ -9,6 +9,8 @@ export default function TributeContainer() {
   const [donations, setDonations] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+  const [touchStartX, setTouchStartX] = useState(0);
+  const [touchEndX, setTouchEndX] = useState(0);
 
   const itemsPerPage = 4;
 
@@ -28,7 +30,7 @@ export default function TributeContainer() {
     fetchDonations();
   }, []);
 
-  // 후원 성공 시 목록 갱신 함수
+  // 후원 성공 시 목록 갱신
   const handleDonationSuccess = () => {
     fetchDonations();
   };
@@ -42,6 +44,24 @@ export default function TributeContainer() {
   const prevSlide = () => {
     if (currentIndex - itemsPerPage >= 0) {
       setCurrentIndex(currentIndex - itemsPerPage);
+    }
+  };
+
+  // 터치 이벤트 핸들러
+  const handleTouchStart = (e) => {
+    setTouchStartX(e.touches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    setTouchEndX(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    const swipeDistance = touchStartX - touchEndX;
+    if (swipeDistance > 50) {
+      nextSlide();
+    } else if (swipeDistance < -50) {
+      prevSlide();
     }
   };
 
@@ -60,6 +80,9 @@ export default function TributeContainer() {
         <div
           className="display-flex justify-left align-center"
           id="tribute-list"
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
         >
           <button
             id="btn-left"
