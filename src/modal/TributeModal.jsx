@@ -10,7 +10,7 @@ import "./modal.scss";
 import "./TributeModal.scss";
 import { contributeDonation } from "../api/donations";
 
-const TributeModal = ({ donationIdol }) => {
+const TributeModal = ({ donationIdol, onDonationSuccess }) => {
   const setModal = useSetModal();
   const setCredit = useSetCredit();
   const credit = useCredit();
@@ -54,16 +54,25 @@ const TributeModal = ({ donationIdol }) => {
       );
       console.log("후원 완료:", updatedDonation);
 
+      // 크레딧 업데이트
       setCredit(credit - inputCredit);
       setCreditMessage("후원 완료!");
       setInputBorderColor("white");
-      //setTimeout(() => setModal(null), 1500);
+
+      // 성공 콜백 호출 - 부모 컴포넌트에서 목록 갱신
+      if (onDonationSuccess) {
+        onDonationSuccess();
+      }
+
+      // 모달 닫기
+      setTimeout(() => setModal(null), 1500);
     } catch (error) {
       console.error("후원 실패:", error);
       setCreditMessage("후원에 실패했습니다. 다시 시도해주세요.");
       setInputBorderColor("red");
     }
   };
+
   return (
     <div className="modal-wrapper display-flex justify-center align-center">
       <section
