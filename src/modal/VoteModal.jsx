@@ -6,7 +6,6 @@ import { createVote } from "../api/votes";
 import { getChart } from "../api/charts";
 import ErrorModal from "./ErrorModal";
 import ChartItem from "../pages/list/components/ChartItem";
-import "./modal.scss";
 
 export default function VoteModal({ selectedTab, onVoteSuccess }) {
   const currentCredit = useCredit();
@@ -16,7 +15,6 @@ export default function VoteModal({ selectedTab, onVoteSuccess }) {
   const [errorMessage, setErrorMessage] = useState(null);
   const [idolData, setIdolData] = useState([]);
   const [cursor, setCursor] = useState(0);
-  const isFirstRender = useRef(true);
   const observerRef = useRef(null);
   const lastItemRef = useRef(null);
 
@@ -52,10 +50,6 @@ export default function VoteModal({ selectedTab, onVoteSuccess }) {
   }
 
   useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-      return;
-    }
     handleLoad({ selectedTab, cursor: 0, pageSize: 6 });
   }, []);
 
