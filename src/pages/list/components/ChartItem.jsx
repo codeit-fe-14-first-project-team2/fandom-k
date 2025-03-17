@@ -1,4 +1,5 @@
 import IdolProfile from "../../../components/idolprofile/IdolProfile";
+import "./ChartItem.scss";
 
 export default function ChartItem({
   id,

@@ -1,0 +1,14 @@
+.chart-list-item {
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.chart-list-item#chart {
+  &:nth-last-of-type(1):nth-of-type(odd),
+  &:nth-last-of-type(1):nth-of-type(even) {
+    border-bottom: none;
+  }
+  &:nth-last-of-type(2):nth-of-type(odd) {
+    border-bottom: none;
+  }
+}
