@@ -1,83 +1,100 @@
 #tribute-container {
-  > #tribute-list {
-    position: relative;
-    > #btn-left,
-    > #btn-right {
-      z-index: 1;
-      position: absolute;
-      > img {
-        width: 40px;
-      }
-    }
-    > #btn-left {
-      left: -80px;
-    }
-    > #btn-right {
-      right: -80px;
-    }
-    > #tribute-box {
-      flex-wrap: nowrap;
-      > .donation-item {
-        max-width: 282px;
-        width: 100%;
-        > .img-wrapper {
-          position: relative;
-          > .gradient {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            background: linear-gradient(transparent 70%, #000000);
-          }
-          > button {
-            position: absolute;
-            bottom: 20px;
-            left: 24px;
-            right: 24px;
-          }
-        }
-        > .donation-item-info {
-          position: relative;
-          > .donation-item-title > * {
-            width: inherit;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            overflow-x: hidden;
-          }
-          > .donation-item-graph {
-            height: 26px;
-            border-bottom: 1px solid white;
-          }
-          > .graph-line {
-            position: absolute;
-            left: 0;
-            bottom: 0px;
-            height: 1px;
-            width: calc(100% * var(--p));
-            background-color: var(--brand-orange);
-          }
-        }
-      }
-    }
+	> #tribute-header {
+		position: relative;
+		> .toast-message {
+			top: -200%;
+			right: 0;
+			position: absolute;
+			background-color: var(--gray-828282);
+			padding: 16px 24px;
+			border-radius: 9999px;
+			display: none;
+		}
+		@media (width >= 1200px) {
+			> a:hover + .toast-message {
+				display: block;
+			}
+		}
+	}
+	> #tribute-list {
+		position: relative;
+		> #btn-left,
+		> #btn-right {
+			z-index: 1;
+			position: absolute;
+			> img {
+				width: 40px;
+			}
+		}
+		> #btn-left {
+			left: -80px;
+		}
+		> #btn-right {
+			right: -80px;
+		}
+		> #tribute-box {
+			flex-wrap: nowrap;
+			> .donation-item {
+				max-width: 282px;
+				width: 100%;
+				> .img-wrapper {
+					position: relative;
+					> .gradient {
+						width: 100%;
+						height: 100%;
+						position: absolute;
+						background: linear-gradient(transparent 70%, #000000);
+					}
+					> button {
+						position: absolute;
+						bottom: 20px;
+						left: 24px;
+						right: 24px;
+					}
+				}
+				> .donation-item-info {
+					position: relative;
+					> .donation-item-title > * {
+						width: inherit;
+						text-overflow: ellipsis;
+						white-space: nowrap;
+						overflow-x: hidden;
+					}
+					> .donation-item-graph {
+						height: 26px;
+						border-bottom: 1px solid white;
+					}
+					> .graph-line {
+						position: absolute;
+						left: 0;
+						bottom: 0px;
+						height: 1px;
+						width: calc(100% * var(--p));
+						background-color: var(--brand-orange);
+					}
+				}
+			}
+		}
 
-    @media (width < 1200px) {
-      /* Tablet */
-      > button {
-        display: none;
-        overflow-x: scroll;
-      }
-    }
-    @media (width < 768px) {
-      /* Mobile */
-      > #tribute-box > .donation-item > .img-wrapper {
-        width: 158px;
-        max-width: none;
-        > button {
-          bottom: 8px;
-          left: 8px;
-          right: 8px;
-          width: calc(100% - 16px);
-        }
-      }
-    }
-  }
+		@media (width < 1200px) {
+			/* Tablet */
+			> button {
+				display: none;
+				overflow-x: scroll;
+			}
+		}
+		@media (width < 768px) {
+			/* Mobile */
+			> #tribute-box > .donation-item > .img-wrapper {
+				width: 158px;
+				max-width: none;
+				> button {
+					bottom: 8px;
+					left: 8px;
+					right: 8px;
+					width: calc(100% - 16px);
+				}
+			}
+		}
+	}
 }
