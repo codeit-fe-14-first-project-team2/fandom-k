@@ -36,6 +36,9 @@ $align-list: (
     align-items: $align;
   }
 }
+.display-flex.flex-wrap {
+  flex-wrap: wrap;
+}
 .display-flex.direction-row {
   flex-direction: row;
 }
@@ -98,16 +101,16 @@ $align-list: (
   margin-right: auto;
 }
 @for $margin from 1 through 100 {
-  .pl-#{calc($margin * 2)} {
+  .ml-#{calc($margin * 2)} {
     margin-left: #{calc($margin * 2)}px;
   }
-  .pr-#{calc($margin * 2)} {
+  .mr-#{calc($margin * 2)} {
     margin-right: #{calc($margin * 2)}px;
   }
-  .pt-#{calc($margin * 2)} {
+  .mt-#{calc($margin * 2)} {
     margin-top: #{calc($margin * 2)}px;
   }
-  .pb-#{calc($margin * 2)} {
+  .mb-#{calc($margin * 2)} {
     margin-bottom: #{calc($margin * 2)}px;
   }
   .mx-#{calc($margin * 2)} {

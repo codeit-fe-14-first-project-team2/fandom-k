@@ -4,16 +4,17 @@ button.primary {
 }
 button.primary:disabled {
   background: var(--gray-828282);
+  opacity: 1;
 }
 button.outlined {
   border: 1px solid #f1eef9;
   background-color: rgba($color: #ffffff, $alpha: 0.1);
-  padding: 8px 143px;
+  padding: 8px;
 }
 button.outlined-bottom {
   border-bottom: 1px solid #f1eef9;
   background-color: rgba($color: #ffffff, $alpha: 0.1);
-  padding: 8px 143px;
+  padding: 8px;
 }
 button.invert {
   color: var(--gray-828282);
@@ -22,10 +23,18 @@ button.invert {
 /* button size */
 button.free {
   width: inherit;
+  min-height: 42px;
+}
+button.extra-large {
+  width: 477px;
+  height: 42px;
+  @media (width < 768px) {
+    width: 327px;
+  }
 }
 button.large {
   width: 477px;
-  height: 42px;
+  height: 48px;
   @media (width < 768px) {
     width: 230px;
   }
@@ -38,6 +47,12 @@ button.medium {
   width: 295px;
   height: 42px;
   gap: 4px;
+}
+button.semi-small {
+  width: 255px;
+  height: 48px;
+  font-size: 16px;
+  line-height: 26px;
 }
 button.small {
   width: 234px;
@@ -67,15 +82,26 @@ button.carousel {
   display: flex;
   align-items: center;
   justify-content: center;
-
   &:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-   }
-
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
   @media (max-width: 768px) {
-      display: none;
-   };
+    display: none;
+  }
+}
+/* button height */
+button.height-48 {
+  height: 48px;
+}
+button.height-42 {
+  height: 42px;
+}
+button.height-40 {
+  height: 40px;
+}
+button.height-32 {
+  height: 32px;
 }
 /* button shape */
 button.round {

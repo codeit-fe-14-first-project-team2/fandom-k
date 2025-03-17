@@ -1,52 +1,48 @@
 #my-page {
-    section {
-      color: #f6f6f8;
-      font-weight: 700;
-      font-size: 24px;
-      line-height: 26px;
-    } 
-    
-    #ContentWrapper {
+  section {
+    color: #f6f6f8;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 26px;
+  }
+  #ContentWrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding-bottom: 81px;
-    
+
     @media (max-width: 1280px) {
-    padding-bottom: 40px;
-     }
+      padding-bottom: 40px;
     }
-    
-    #ContentTitle {
+  }
+  #ContentTitle {
     width: 1200px;
     padding-top: 40px;
     display: flex;
     flex-direction: column;
-    
+
     @media (max-width: 1280px) {
-        width: 700px;
-     }
-    @media (max-width: 768px) {
-        width: 328px;
-     }
+      width: 700px;
     }
-    
-    #ContentNav {
+    @media (max-width: 768px) {
+      width: 328px;
+    }
+  }
+  #ContentNav {
     width: 1200px;
     height: 42px;
     margin-top: 30px;
     display: flex;
     flex-direction: row;
-    
+
     @media (max-width: 1280px) {
-        width: 700px;
-     }
-    @media (max-width: 768px) {
-        width: 328px;
-     }
+      width: 700px;
     }
-    
-    #CarouselPage {
+    @media (max-width: 768px) {
+      width: 328px;
+    }
+  }
+  #CarouselPage {
     width: 1322px;
     display: flex;
     flex-direction: row;
@@ -54,17 +50,15 @@
     align-items: center;
     gap: 32px;
     margin: 32px 0 48px;
-    
     @media (max-width: 1280px) {
-        width: 700px;
-        gap: 27px;
-     }
-    @media (max-width: 768px) {
-        width: 328px;
-     }
+      width: 700px;
+      gap: 27px;
     }
-    
-    #IdolList {
+    @media (max-width: 768px) {
+      width: 328px;
+    }
+  }
+  #IdolList {
     display: grid;
     grid-template: 1fr 1fr / repeat(8, 128px);
     gap: 24px;
@@ -81,29 +75,25 @@
     padding: 0px 1px;
 
     @media (max-width: 1280px) {
-        grid-template-columns: repeat(4, 128px);
-
-        width: 586px;
-        height: 394px;
-     }
-
+      grid-template-columns: repeat(4, 128px);
+      width: 586px;
+      height: 394px;
+    }
     @media (max-width: 768px) {
-        grid-template-columns: repeat(3, 98px);
-        grid-column-gap: 17px;
-
-        width: 330px;
-        height: 330px;
-        overflow-x: scroll;
-     }
-
+      grid-template-columns: repeat(3, 98px);
+      grid-column-gap: 17px;
+      width: 330px;
+      height: 330px;
+      overflow-x: scroll;
+    }
     ::-webkit-scrollbar {
-        display: none;
-     }
-
+      display: none;
+    }
     -ms-overflow-style: none;
     scrollbar-width: none;
-    }
+  }
 
+<<<<<<< HEAD
     #ButtonInner {
         display: flex;
         flex-direction: row;
@@ -120,20 +110,22 @@
     }
 
     #IdolWrapper {
+=======
+  #IdolWrapper {
+>>>>>>> a196008a652b48f8264870e4d4ce8899e38a25e0
     width: 1200px;
     margin: 0px auto;
     padding: 76px 0px 40px;
     border-bottom: 1px solid #ffffff1a;
-
     @media (max-width: 1280px) {
-        width: 700px;
-     }
-    @media (max-width: 768px) {
-        width: 328px;
-     }
+      width: 700px;
     }
+    @media (max-width: 768px) {
+      width: 328px;
+    }
+  }
 
-    #InterestedIdolList {
+  #InterestedIdolList {
     display: flex;
     width: 100%;
     gap: 24px;
@@ -142,21 +134,19 @@
     overflow-y: hidden;
     align-items: center;
     padding: 1px 1px;
-    
     ::-webkit-scrollbar {
-        display: none;
-     }
-    
-    @media (max-width: 768px) {
-            gap: 0;
-            flex-wrap: nowrap;
-     }
+      display: none;
     }
+    @media (max-width: 768px) {
+      gap: 0;
+      flex-wrap: nowrap;
+    }
+  }
 
-    #EmptyMessage {
+  #EmptyMessage {
     margin: 52px 0 34px;
     font-size: 18px;
     color: #ffffff;
     text-align: center;
-    }
+  }
 }

@@ -1,0 +1,27 @@
+.icon-rotate-90 {
+  transform: rotate(90deg);
+}
+.icon-rotate-180 {
+  transform: rotate(180deg);
+}
+.icon-rotate-270 {
+  transform: rotate(270deg);
+}
+@for $width from 8 through 45 {
+  .icon-#{$width} {
+    width: #{$width}px;
+    min-height: #{$width}px;
+  }
+}
+.icon-credit,
+.icon-credit-white {
+  background-size: 150%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.icon-credit {
+  background-image: url("../../assets/img/credit.svg");
+}
+.icon-credit-white {
+  background-image: url("../../assets/icon/ic_credit.svg");
+}
