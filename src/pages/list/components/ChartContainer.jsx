@@ -4,16 +4,18 @@ import Icon from "../../../components/icon/Icon";
 import { getChart } from "../../../api/charts";
 import VoteModal from "../../../modal/VoteModal";
 import { useSetModal } from "../../../contexts/GlobalContext";
+import { useSetLoading } from "../../../contexts/GlobalContext";
 import useViewPortSize from "../../../hooks/useViewportSize";
 import useAsync from "../../../hooks/useAsync";
 import ChartItem from "./ChartItem";
 import "./ChartContainer.scss";
 
 export default function ChartContainer() {
-  const [selectedTab, setSelectedTab] = useState("female");
   const setModal = useSetModal();
+  const setLoading = useSetLoading();
   const { viewportSize } = useViewPortSize();
   const [pageSize, setPageSize] = useState(viewportSize === "desktop" ? 10 : 5);
+  const [selectedTab, setSelectedTab] = useState("female");
   const [cursor, setCursor] = useState([0]);
   const { loading, value: chart } = useAsync(
     () => getChart({ selectedTab, cursor: 0, pageSize: pageSize * cursor?.length }),
@@ -29,6 +31,14 @@ export default function ChartContainer() {
       setCursor([0]);
     }
   }, [viewportSize]);
+
+  useEffect(() => {
+    if (loading) {
+      setLoading(true);
+    } else {
+      setLoading(false);
+    }
+  }, [chart]);
 
   return (
     <section id="chart-container" className="display-grid justify-stretch mt-30 mb-100">
@@ -70,28 +80,13 @@ export default function ChartContainer() {
           </Button>
         </div>
 
-        {!(chart?.idols?.length > 0) ? (
-          <div id="loading-container" className="display-flex justify-center align-center">
-            <div id="spinner"></div>
-          </div>
-        ) : (
-          <div id="chart-list" className="display-grid">
-            {chart?.idols?.map((idol) => (
-              <ChartItem
-                key={idol.id}
-                id={idol.id}
-                rank={idol.rank}
-                group={idol.group}
-                name={idol.name}
-                totalVotes={idol.totalVotes}
-                profilePicture={idol.profilePicture}
-                type="chart"
-              />
-            ))}
-          </div>
-        )}
+        <div id="chart-list" className="display-grid">
+          {chart?.idols?.map((idol) => (
+            <ChartItem key={idol.id} type="chart" {...idol} />
+          ))}
+        </div>
 
-        {!loading && (
+        {chart?.idols.length > 0 && (
           <div className="display-flex justify-center mt-28">
             <Button
               disabled={chart?.nextCursor === null}
