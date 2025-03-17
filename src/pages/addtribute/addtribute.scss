@@ -1,4 +1,10 @@
 main#add-tribute {
+	> #form-header a {
+		display: block;
+		@media (width < 768px) {
+			display: none;
+		}
+	}
 	> form {
 		> .input-wrapper {
 			display: grid;
@@ -30,6 +36,12 @@ main#add-tribute {
 					top: 6px;
 					right: 6px;
 				}
+			}
+		}
+		@media (width < 768px) {
+			> .input-wrapper > .display-flex:has(input#keyword) {
+				display: grid;
+				gap: 8px;
 			}
 		}
 	}
