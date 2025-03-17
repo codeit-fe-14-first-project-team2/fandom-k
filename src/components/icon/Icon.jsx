@@ -8,6 +8,17 @@ import Delete from "../../assets/icon/ic_delete.svg";
 import Plus from "../../assets/icon/Ic_plus_24px.svg"; // 빌드 테스트
 import "./icon.scss";
 
+const ICONS = {
+	"button-left": ButtonLeft,
+	"button-right": ButtonRight,
+	chart: Chart,
+	check: Check,
+	chevron: Chevron,
+	close: Close,
+	delete: Delete,
+	plus: Plus,
+};
+
 /**
  * @param {{
  *  iconNm: "button-left" | "button-right" | "chart" | "check" | "chevron" | "close" | "credit" | "credit-white" | "delete" | "plus",
@@ -22,25 +33,10 @@ export default function Icon({
 	className = "",
 	...props
 }) {
-	const ICONS = {
-		"button-left": ButtonLeft,
-		"button-right": ButtonRight,
-		chart: Chart,
-		check: Check,
-		chevron: Chevron,
-		close: Close,
-		delete: Delete,
-		plus: Plus,
-	};
-
-	return iconNm.startsWith("credit") ? (
-		<div className={`icon-${iconNm} icon-${size} icon-rotate-${rotate} ${className}`} {...props} />
-	) : (
-		<img
-			src={ICONS[iconNm]}
-			className={`icon-${iconNm} icon-${size} icon-rotate-${rotate} ${className}`}
-			alt="아이콘 이미지"
-			{...props}
-		/>
-	);
+	const iconClassnames = `icon-${iconNm} icon-${size} icon-rotate-${rotate} ${className}`;
+	const iconProps = { ...props, className: iconClassnames };
+	if (iconNm.startsWith("credit")) return <div {...iconProps} />;
+	iconProps.src = ICONS[iconNm];
+	iconProps.alt = props.alt || "아이콘 이미지";
+	return <img {...iconProps} />;
 }
