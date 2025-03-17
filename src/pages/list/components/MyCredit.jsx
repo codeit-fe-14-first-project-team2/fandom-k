@@ -1,17 +1,23 @@
+import Icon from "../../../components/icon/Icon";
+import ChargeModal from "../../../modal/ChargeModal";
 import { formatCredit } from "../../../util/credit";
-import IconCredit from "../../../assets/img/credit.svg";
 
-export default function MyCredit({ credit = 0 }) {
+export default function MyCredit({ credit = 0, setModal }) {
   return (
-    <div className="display-flex justify-sides align-center border-default radius-8 px-64 py-36">
+    <section
+      className="display-flex justify-sides align-center border-default radius-8 px-64 py-36"
+      id="my-credit"
+    >
       <div className="display-grid gap-14">
         <span className="text-invert-60">내 크레딧</span>
-        <div className="display-left align-center gap-4">
-          <img src={IconCredit} alt="크레딧 아이콘 이미지" />
+        <div className="display-flex justify-left align-center gap-4">
+          <Icon iconNm="credit" size={16} aria-label="크레딧 아이콘 이미지" />
           <span className="text-bold text-24">{formatCredit(credit)}</span>
         </div>
       </div>
-      <button className="text-brand-orange">충전하기</button>
-    </div>
+      <button className="text-brand-orange" onClick={() => setModal(<ChargeModal />)}>
+        충전하기
+      </button>
+    </section>
   );
 }

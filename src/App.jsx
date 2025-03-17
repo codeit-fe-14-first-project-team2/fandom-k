@@ -1,21 +1,23 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import GlobalContextProvider from "./contexts/GlobalContext";
 import LandingPage from "./pages/LandingPage";
 import ListPage from "./pages/list/ListPage";
 import MyPage from "./pages/mypage/MyPage";
-import CreditContextProvider from "./contexts/CreditContext";
+import NotFound from "./pages/notfound/NotFound";
+
+const router = createBrowserRouter([
+	{ path: "/", element: <LandingPage /> },
+	{ path: "/list", element: <ListPage /> },
+	{ path: "/mypage", element: <MyPage /> },
+	{ path: "*", element: <NotFound /> },
+]);
 
 function App() {
-  return (
-    <CreditContextProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/list" element={<ListPage />} />
-          <Route path="/mypage" element={<MyPage />} />
-        </Routes>
-      </BrowserRouter>
-    </CreditContextProvider>
-  );
+	return (
+		<GlobalContextProvider>
+			<RouterProvider router={router} />
+		</GlobalContextProvider>
+	);
 }
 
 export default App;
