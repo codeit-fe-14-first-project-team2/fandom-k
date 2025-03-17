@@ -51,7 +51,7 @@ export default function AddIdol() {
 						<h1 className="text-26">아이돌 등록하기</h1>
 						<Link to="/add_tribute">
 							<Button btnStyle="outlined" size="extra-small">
-								후원 생성하기
+								조공 생성하기
 							</Button>
 						</Link>
 					</div>
@@ -70,13 +70,14 @@ export default function AddIdol() {
 								</button>
 							</div>
 						) : (
-							<input type="file" accept="image/*" name="profile-picture" onChange={onUploadImage} />
+							<input type="file" accept="image/*" id="profile-picture" onChange={onUploadImage} />
 						)}
 					</div>
 					<div className="input-wrapper">
 						<label htmlFor="group">그룹명</label>
 						<input
 							type="text"
+							id="group"
 							placeholder="그룹명을 입력해주세요."
 							value={formData.group}
 							onChange={(e) => setFormData({ ...formData, group: e.target.value })}
@@ -88,7 +89,7 @@ export default function AddIdol() {
 							<div className="display-flex gap-8">
 								<input
 									type="radio"
-									name="gender"
+									id="gender"
 									value="female"
 									checked={formData.gender === "female"}
 									onChange={(e) => setFormData({ ...formData, gender: "female" })}
@@ -98,7 +99,7 @@ export default function AddIdol() {
 							<div className="display-flex gap-8">
 								<input
 									type="radio"
-									name="gender"
+									id="gender"
 									value="male"
 									checked={formData.gender === "male"}
 									onChange={(e) => setFormData({ ...formData, gender: "male" })}
@@ -111,6 +112,7 @@ export default function AddIdol() {
 						<label htmlFor="name">이름</label>
 						<input
 							type="text"
+							id="name"
 							placeholder="아이돌의 활동명을 입력해주세요."
 							value={formData.name}
 							onChange={(e) => setFormData({ ...formData, name: e.target.value })}
