@@ -93,16 +93,11 @@ export default function VoteModal({ selectedTab, onVoteSuccess }) {
             return (
               <ChartItem
                 key={idol.id}
-                id={idol.id}
-                rank={idol.rank}
-                group={idol.group}
-                name={idol.name}
-                totalVotes={idol.totalVotes}
-                profilePicture={idol.profilePicture}
                 lastItemRef={isLastItem ? lastItemRef : null}
                 selectedId={selectedId}
                 onSelect={setSelectedId}
                 type="vote"
+                {...idol}
               />
             );
           })}
