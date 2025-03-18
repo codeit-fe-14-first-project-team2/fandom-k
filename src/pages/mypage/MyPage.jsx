@@ -1,7 +1,7 @@
 import axios from "axios";
 import styled from 'styled-components';
 import React, { createContext, useEffect, useState } from "react";
-import { getIdols } from "../../api/idols";
+import { getIdolList } from "../../api/idols";
 import Header from "../../components/header/Header";
 import { ErrorBoundary } from 'react-error-boundary';
 import { getRankedChart } from '../../api/charts';
@@ -30,7 +30,7 @@ const MyPage = () => {
        
       // 옵션에 따라 데이터 로드 (전체, 여자, 남자)
        if (option === 'total') {
-        result = await getIdols({ cursor, pageSize: dataNum });
+        result = await getIdolList({ cursor, pageSize: dataNum });
         handleDataUpdate(result?.list, 'result.list'); // 데이터 검사 및 업데이트
     } else if (option === 'female' || option === 'male') {
         result = await getRankedChart({ gender: option, cursor, pageSize: dataNum });
