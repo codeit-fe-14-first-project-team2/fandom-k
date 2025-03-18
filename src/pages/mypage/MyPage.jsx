@@ -1,9 +1,11 @@
 import axios from "axios";
+import styled from 'styled-components';
 import React, { createContext, useEffect, useState } from "react";
 import { getIdolList } from "../../api/idols";
 import Header from "../../components/header/Header";
+import { ErrorBoundary } from 'react-error-boundary';
+import { getRankedChart } from '../../api/charts';
 import useDataNum from "../../hooks/useDataNum";
-import "./mypage.scss";
 import AddInterestedIdols from "./components/AddInterestedIdols";
 import InterestedIdols from "./components/InterestedIdols";
 
@@ -25,11 +27,16 @@ const MyPage = () => {
     try {
       setIsLoading(true); // 로딩 시작
       let result;
-      if (option === "total") {
+       
+      // 옵션에 따라 데이터 로드 (전체, 여자, 남자)
+       if (option === 'total') {
         result = await getIdolList({ cursor, pageSize: dataNum });
-        handleDataUpdate(result?.list, "result.list"); // 데이터 검사 및 업데이트
-      }
-      setCursor(result?.nextCursor); // 다음 커서 업데이트
+        handleDataUpdate(result?.list, 'result.list'); // 데이터 검사 및 업데이트
+    } else if (option === 'female' || option === 'male') {
+        result = await getRankedChart({ gender: option, cursor, pageSize: dataNum });
+        handleDataUpdate(result?.idols, 'result.idols'); // 데이터 검사 및 업데이트
+    }
+    setCursor(result?.nextCursor); // 다음 커서 업데이트
     } catch (error) {
       if (axios.isAxiosError(error)) {
         // 에러가 Axios 요청에서 발생한 경우
@@ -68,8 +75,8 @@ const MyPage = () => {
   return (
     <>
       <Header />
-      <main className="display-grid justify-center my-76">
-        <section>
+      <ErrorBoundary FallbackComponent={ErrorPage}>
+       <StyledMyPage>
           <MyStateContext.Provider value={{ datas, selectedDatas, checkedIdols }}>
             <MyDispatchContext.Provider value={{ setDatas, setSelectedDatas, setCheckedIdols }}>
               <InterestedIdols />
@@ -83,11 +90,20 @@ const MyPage = () => {
                 error={error}
               />
             </MyDispatchContext.Provider>
-          </MyStateContext.Provider>
-        </section>
-      </main>
+           </MyStateContext.Provider>
+          </StyledMyPage>
+        </ErrorBoundary>
     </>
   );
 };
 
 export default MyPage;
+
+const StyledMyPage = styled.div`
+    h2 {
+        color: #f6f6f8;
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 26px;
+    }
+`;
