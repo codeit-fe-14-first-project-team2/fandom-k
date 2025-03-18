@@ -5,7 +5,7 @@ import Chevron from "../../assets/icon/ic_arrow_left.svg";
 import Chart from "../../assets/icon/ic_chart.svg";
 import Check from "../../assets/icon/ic_check.svg";
 import Delete from "../../assets/icon/ic_delete.svg";
-import Plus from "../../assets/icon/ic_plus_24px.svg";
+import Plus from "../../assets/icon/Ic_plus_24px.svg";
 import "./icon.scss";
 
 /**
