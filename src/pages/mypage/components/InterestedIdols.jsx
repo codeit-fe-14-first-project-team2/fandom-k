@@ -1,6 +1,6 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect } from "react";
 import IdolProfile from "../../../components/IdolProfile"
-import { MyDispatchContext, MyStateContext } from '../MyPage';
+import { MyDispatchContext, MyStateContext } from "../MyPage";
 import "../../mypage.scss"
 
 const InterestedIdols = () => {
@@ -27,7 +27,7 @@ const InterestedIdols = () => {
     };
 
     return (
-        <section id='IdolWrapper'>
+        <section id="IdolWrapper">
             <h2>내가 관심있는 아이돌</h2>
 
             {selectedDatas.length > 0 ? (

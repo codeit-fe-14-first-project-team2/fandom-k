@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback } from "react";
 
 const usePagination = (scrollTo) => {
     const [page, setPage] = useState(0);
