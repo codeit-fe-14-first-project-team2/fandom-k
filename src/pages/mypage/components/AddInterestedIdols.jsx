@@ -18,14 +18,6 @@ const AddInterestedIdols = ({ cursor, setCursor, isLoading, loadMore, option, se
     const { ref: idolListRef, scrollTo } = useScrollTo(); // 훅 사용
     const { page, setPage, handleNextPage, handlePrevPage } = usePagination(scrollTo);
 
-    const handleChange = (e) => {
-        setOption(e.target.value); // 옵션을 업데이트함.
-        setPage(0); // 페이지를 0으로 초기화.
-        setDatas([]);
-        setCursor(null); // 커서를 초기화.
-        setCheckedIdols([]); // 체크된 아이돌을 초기화.
-    };
-
     // '추가하기' 버튼 클릭 시 호출되는 함수
     const handleAddClick = () => {
         if (!checkedIdols.length) {
@@ -93,9 +85,6 @@ const AddInterestedIdols = ({ cursor, setCursor, isLoading, loadMore, option, se
                 <>
                     <section id="ContentTitle">
                         <h2>관심 있는 아이돌을 추가해보세요.</h2>
-                        <section id="ContentNav">
-                        <Button id="toggle" onClick={handleChange}></Button>
-                        </section>
                     </section>
 
                     <section id="CarouselPage">
