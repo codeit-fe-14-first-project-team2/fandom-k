@@ -1,5 +1,5 @@
 import { useContext, useMemo, useEffect, useRef, useCallback } from "react";
-import styled from 'styled-components';
+import styled from "styled-components";
 import IdolProfile from "../../../components/idolprofile/IdolProfile"
 import Button from "../../../components/button/Button";
 import plusIcon from "../../../assets/icon/Ic_plus_24px.svg";
@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 import useDataNum from "../../../hooks/useDataNum";
 import useScrollTo from "../../../hooks/useScrollTo";
 import usePagination from "../../../hooks/usePagination";
-import RefreshButton from '../../../components/RefreshButton';
+import RefreshButton from "../../../components/RefreshButton";
 
 
 const AddInterestedIdols = ({ cursor, isLoading, loadMore, option, error, onRetry }) => {
