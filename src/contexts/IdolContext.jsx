@@ -9,7 +9,7 @@ export default function IdolContextProvider({ children }) {
   const [idols, setIdols] = useState([]);
 
   useEffect(() => {
-    const idolList = localStorage.getItem("credit");
+    const idolList = localStorage.getItem("idols");
     try {
       setIdols(JSON.parse(idolList));
     } catch (err) {
