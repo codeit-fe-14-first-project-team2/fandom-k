@@ -1,13 +1,13 @@
-import { useContext, useMemo, useEffect, useRef, useCallback } from 'react';
+import { useContext, useMemo, useEffect, useRef, useCallback } from "react";
 import IdolProfile from "../../../components/IdolProfile"
-import Button from '../../../components/Button';
-import plusIcon from '../../../assets/icon/Ic_plus_24px.svg';
-import arrowIcon from '../../../assets/icon/ic_arrow_left.svg';
-import { MyDispatchContext, MyStateContext } from '../MyPage';
-import { toast } from 'react-toastify';
-import useDataNum from '../../../hooks/useDataNum';
-import useScrollTo from '../../../hooks/useScrollTo';
-import usePagination from '../../../hooks/usePagination';
+import Button from "../../../components/Button";
+import plusIcon from "../../../assets/icon/Ic_plus_24px.svg";
+import arrowIcon from "../../../assets/icon/ic_arrow_left.svg";
+import { MyDispatchContext, MyStateContext } from "../MyPage";
+import { toast } from "react-toastify";
+import useDataNum from "../../../hooks/useDataNum";
+import useScrollTo from "../../../hooks/useScrollTo";
+import usePagination from "../../../hooks/usePagination";
 import "../../mypage.scss"
 
 const AddInterestedIdols = ({ cursor, setCursor, isLoading, loadMore, option, setOption, error, onRetry }) => {
