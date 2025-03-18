@@ -12,7 +12,7 @@ import "./addinterestedidols.scss"
 
 const AddInterestedIdols = ({ cursor, isLoading, loadMore, option, error, onRetry }) => {
     const { datas, selectedDatas, checkedIdols } = useContext(MyStateContext);
-    const { setDatas, setSelectedDatas, setCheckedIdols } = useContext(MyDispatchContext);
+    const { setSelectedDatas, setCheckedIdols } = useContext(MyDispatchContext);
     const dataNum = useDataNum(); // 페이지당 렌더링되어야 할 아이템 수를 가져옴.
     const lastItemRef = useRef(null); // 마지막 아이템을 참조하는 ref.
     const { ref: idolListRef, scrollTo } = useScrollTo(); // 훅 사용
@@ -103,7 +103,7 @@ const AddInterestedIdols = ({ cursor, isLoading, loadMore, option, error, onRetr
                             ))}
                         </section>
                         <Button id="carousel" onClick={handleNextPage} disabled={isLoading || isDisabled}>
-                            <RotatedIcon src={arrowIcon} alt="다음" />
+                            <img src={arrowIcon} alt="다음" />
                         </Button>
                     </section>
 
