@@ -7,6 +7,7 @@ import { useSetModal } from "../../../contexts/GlobalContext";
 import { useSetLoading } from "../../../contexts/GlobalContext";
 import useViewPortSize from "../../../hooks/useViewportSize";
 import useAsync from "../../../hooks/useAsync";
+import ChartTab from "./ChartTab";
 import ChartItem from "./ChartItem";
 import "./ChartContainer.scss";
 
@@ -55,31 +56,7 @@ export default function ChartContainer() {
         </Button>
       </div>
       <article id="chart-box" className="display-grid">
-        <div className="display-grid direction-column">
-          <Button
-            size="free"
-            btnStyle={selectedTab === "female" ? "outlined-bottom" : "invert"}
-            onClick={() => {
-              setSelectedTab("female");
-              setCursor([0]);
-            }}
-            className="text-regular line-height-18 letter-spacing-small"
-          >
-            이달의 여자 아이돌
-          </Button>
-          <Button
-            size="free"
-            btnStyle={selectedTab === "male" ? "outlined-bottom" : "invert"}
-            onClick={() => {
-              setSelectedTab("male");
-              setCursor([0]);
-            }}
-            className="text-regular line-height-18 letter-spacing-small"
-          >
-            이달의 남자 아이돌
-          </Button>
-        </div>
-
+        <ChartTab selectedTab={selectedTab} setSelectedTab={setSelectedTab} setCursor={setCursor} />
         <div id="chart-list" className="display-grid">
           {chart?.idols?.map((idol) => (
             <ChartItem key={idol.id} type="chart" {...idol} />
