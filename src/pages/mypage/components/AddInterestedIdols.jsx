@@ -10,7 +10,7 @@ import useScrollTo from "../../../hooks/useScrollTo";
 import usePagination from "../../../hooks/usePagination";
 import "./addinterestedidols.scss"
 
-const AddInterestedIdols = ({ cursor, setCursor, isLoading, loadMore, option, setOption, error, onRetry }) => {
+const AddInterestedIdols = ({ cursor, isLoading, loadMore, option, error, onRetry }) => {
     const { datas, selectedDatas, checkedIdols } = useContext(MyStateContext);
     const { setDatas, setSelectedDatas, setCheckedIdols } = useContext(MyDispatchContext);
     const dataNum = useDataNum(); // 페이지당 렌더링되어야 할 아이템 수를 가져옴.
