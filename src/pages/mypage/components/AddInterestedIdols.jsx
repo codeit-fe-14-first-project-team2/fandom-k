@@ -1,6 +1,6 @@
 import { useContext, useMemo, useEffect, useRef, useCallback } from "react";
 import IdolProfile from "../../../components/idolprofile/IdolProfile"
-import Button from "../../../components/Button";
+import Button from "../../../components/button/Button";
 import plusIcon from "../../../assets/icon/Ic_plus_24px.svg";
 import arrowIcon from "../../../assets/icon/ic_arrow_left.svg";
 import { MyDispatchContext, MyStateContext } from "../MyPage";
@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import useDataNum from "../../../hooks/useDataNum";
 import useScrollTo from "../../../hooks/useScrollTo";
 import usePagination from "../../../hooks/usePagination";
-import "././mypage.scss"
+import "./addinterestedidols.scss"
 
 const AddInterestedIdols = ({ cursor, setCursor, isLoading, loadMore, option, setOption, error, onRetry }) => {
     const { datas, selectedDatas, checkedIdols } = useContext(MyStateContext);
@@ -108,10 +108,10 @@ const AddInterestedIdols = ({ cursor, setCursor, isLoading, loadMore, option, se
                     </section>
 
                     <Button onClick={handleAddClick} width="255" height="48" radius="24">
-                        <ButtonInner>
+                        <section id="ButtonInner">
                             <img src={plusIcon} alt="추가" />
                             <span>추가하기</span>
-                        </ButtonInner>
+                        </section>
                     </Button>
                 </>
             )
