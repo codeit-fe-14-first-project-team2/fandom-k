@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { SIZES } from '../utils/Constants';
+import { SIZES } from '../../utils/Constants';
 
 function useDataNum(items = { mobile: 6, tablet: 8, desktop: 16 }) {
     const [dataNum, setDataNum] = useState(() => {
