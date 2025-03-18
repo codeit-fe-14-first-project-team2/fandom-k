@@ -3,7 +3,7 @@ import React, { createContext, useEffect, useState } from "react";
 import { getIdols } from "../../api/idols";
 import Header from "../../components/header/Header";
 import useDataNum from "../../hooks/useDataNum";
-import "../mypage.scss";
+import "./mypage.scss";
 import AddInterestedIdols from "./components/AddInterestedIdols";
 import InterestedIdols from "./components/InterestedIdols";
 
