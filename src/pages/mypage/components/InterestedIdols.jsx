@@ -1,5 +1,5 @@
 import { useContext, useEffect } from 'react';
-import IdolProfile from '../../../components/IdolProfile';
+import IdolProfile from "../../../components/IdolProfile"
 import { MyDispatchContext, MyStateContext } from '../MyPage';
 import "../../mypage.scss"
 
