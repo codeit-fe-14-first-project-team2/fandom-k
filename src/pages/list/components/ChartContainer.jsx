@@ -4,16 +4,19 @@ import Icon from "../../../components/icon/Icon";
 import { getChart } from "../../../api/charts";
 import VoteModal from "../../../modal/VoteModal";
 import { useSetModal } from "../../../contexts/GlobalContext";
+import { useSetLoading } from "../../../contexts/GlobalContext";
 import useViewPortSize from "../../../hooks/useViewportSize";
 import useAsync from "../../../hooks/useAsync";
+import ChartTab from "./ChartTab";
 import ChartItem from "./ChartItem";
 import "./ChartContainer.scss";
 
 export default function ChartContainer() {
-  const [selectedTab, setSelectedTab] = useState("female");
   const setModal = useSetModal();
+  const setLoading = useSetLoading();
   const { viewportSize } = useViewPortSize();
   const [pageSize, setPageSize] = useState(viewportSize === "desktop" ? 10 : 5);
+  const [selectedTab, setSelectedTab] = useState("female");
   const [cursor, setCursor] = useState([0]);
   const { loading, value: chart } = useAsync(
     () => getChart({ selectedTab, cursor: 0, pageSize: pageSize * cursor?.length }),
@@ -30,6 +33,14 @@ export default function ChartContainer() {
     }
   }, [viewportSize]);
 
+  useEffect(() => {
+    if (loading) {
+      setLoading(true);
+    } else {
+      setLoading(false);
+    }
+  }, [chart]);
+
   return (
     <section id="chart-container" className="display-grid justify-stretch mt-30 mb-100">
       <div className="display-flex justify-sides align-center">
@@ -45,53 +56,14 @@ export default function ChartContainer() {
         </Button>
       </div>
       <article id="chart-box" className="display-grid">
-        <div className="display-grid direction-column">
-          <Button
-            size="free"
-            btnStyle={selectedTab === "female" ? "outlined-bottom" : "invert"}
-            onClick={() => {
-              setSelectedTab("female");
-              setCursor([0]);
-            }}
-            className="text-regular line-height-18 letter-spacing-small"
-          >
-            이달의 여자 아이돌
-          </Button>
-          <Button
-            size="free"
-            btnStyle={selectedTab === "male" ? "outlined-bottom" : "invert"}
-            onClick={() => {
-              setSelectedTab("male");
-              setCursor([0]);
-            }}
-            className="text-regular line-height-18 letter-spacing-small"
-          >
-            이달의 남자 아이돌
-          </Button>
+        <ChartTab selectedTab={selectedTab} setSelectedTab={setSelectedTab} setCursor={setCursor} />
+        <div id="chart-list" className="display-grid">
+          {chart?.idols?.map((idol) => (
+            <ChartItem key={idol.id} type="chart" {...idol} />
+          ))}
         </div>
 
-        {!(chart?.idols?.length > 0) ? (
-          <div id="loading-container" className="display-flex justify-center align-center">
-            <div id="spinner"></div>
-          </div>
-        ) : (
-          <div id="chart-list" className="display-grid">
-            {chart?.idols?.map((idol) => (
-              <ChartItem
-                key={idol.id}
-                id={idol.id}
-                rank={idol.rank}
-                group={idol.group}
-                name={idol.name}
-                totalVotes={idol.totalVotes}
-                profilePicture={idol.profilePicture}
-                type="chart"
-              />
-            ))}
-          </div>
-        )}
-
-        {!loading && (
+        {chart?.idols.length > 0 && (
           <div className="display-flex justify-center mt-28">
             <Button
               disabled={chart?.nextCursor === null}
