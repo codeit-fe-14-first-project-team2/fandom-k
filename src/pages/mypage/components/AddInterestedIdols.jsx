@@ -1,6 +1,6 @@
 import { useContext, useMemo, useEffect, useRef, useCallback } from "react";
 import IdolProfile from "../../../components/idolprofile/IdolProfile"
-import Button from "../../../components/Button";
+import Button from "../../../components/button/Button";
 import plusIcon from "../../../assets/icon/Ic_plus_24px.svg";
 import arrowIcon from "../../../assets/icon/ic_arrow_left.svg";
 import { MyDispatchContext, MyStateContext } from "../MyPage";
