@@ -1,10 +1,4 @@
->section {
-  color: #f6f6f8;
-  font-weight: 700;
-  font-size: 24px;
-  line-height: 26px;
-
- #IdolWrapper {
+section.IdolWrapper {
 
     width: 1200px;
     margin: 0px auto;
@@ -18,7 +12,7 @@
     }
   }
 
-  #InterestedIdolList {
+  section.InterestedIdolList {
     display: flex;
     width: 100%;
     gap: 24px;
@@ -27,7 +21,7 @@
     overflow-y: hidden;
     align-items: center;
     padding: 1px 1px;
-    ::-webkit-scrollbar {
+    :-webkit-scrollbar {
       display: none;
     }
     @media (max-width: 768px) {
@@ -36,11 +30,10 @@
     }
   }
 
-  #EmptyMessage {
+  section.EmptyMessage {
     margin: 52px 0 34px;
     font-size: 18px;
     color: #ffffff;
     text-align: center;
   }
 
-}
