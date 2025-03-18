@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react";
 import IdolProfile from "../../../components/idolprofile/IdolProfile"
 import { MyDispatchContext, MyStateContext } from "../MyPage";
-import "../../mypage.scss"
+import "././mypage.scss"
 
 const InterestedIdols = () => {
     const { selectedDatas } = useContext(MyStateContext);
