@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { createContext, useEffect, useState } from "react";
-import { getIdols } from "../../api/idols";
+import { getIdolList } from "../../api/idols";
 import Header from "../../components/header/Header";
 import useDataNum from "../../hooks/useDataNum";
 import "./mypage.scss";
@@ -26,7 +26,7 @@ const MyPage = () => {
       setIsLoading(true); // 로딩 시작
       let result;
       if (option === "total") {
-        result = await getIdols({ cursor, pageSize: dataNum });
+        result = await getIdolList({ cursor, pageSize: dataNum });
         handleDataUpdate(result?.list, "result.list"); // 데이터 검사 및 업데이트
       }
       setCursor(result?.nextCursor); // 다음 커서 업데이트
@@ -89,3 +89,5 @@ const MyPage = () => {
     </>
   );
 };
+
+export default MyPage;
