@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import useDataNum from "../../../hooks/useDataNum";
 import useScrollTo from "../../../hooks/useScrollTo";
 import usePagination from "../../../hooks/usePagination";
-import "../../mypage.scss"
+import "././mypage.scss"
 
 const AddInterestedIdols = ({ cursor, setCursor, isLoading, loadMore, option, setOption, error, onRetry }) => {
     const { datas, selectedDatas, checkedIdols } = useContext(MyStateContext);
