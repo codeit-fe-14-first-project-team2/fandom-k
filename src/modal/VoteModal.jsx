@@ -8,14 +8,13 @@ import ErrorModal from "./ErrorModal";
 import ChartItem from "../pages/list/components/ChartItem";
 
 export default function VoteModal({ selectedTab, onVoteSuccess }) {
-  const currentCredit = useCredit();
+  const credit = useCredit();
   const setCredit = useSetCredit();
   const setModal = useSetModal();
   const [selectedId, setSelectedId] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
   const [idolData, setIdolData] = useState([]);
   const [cursor, setCursor] = useState(0);
-  const isFirstRender = useRef(true);
   const observerRef = useRef(null);
   const lastItemRef = useRef(null);
 
@@ -34,14 +33,14 @@ export default function VoteModal({ selectedTab, onVoteSuccess }) {
   }
 
   async function handleVote() {
-    if (currentCredit < 1000) {
+    if (credit < 1000) {
       setErrorMessage("");
       return;
     }
     try {
       const response = await createVote({ idolId: selectedId });
       if (response) {
-        setCredit((prev) => prev - 1000);
+        setCredit(credit - 1000);
         onVoteSuccess([0]);
         setModal();
       }
@@ -51,10 +50,6 @@ export default function VoteModal({ selectedTab, onVoteSuccess }) {
   }
 
   useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-      return;
-    }
     handleLoad({ selectedTab, cursor: 0, pageSize: 6 });
   }, []);
 
@@ -98,16 +93,11 @@ export default function VoteModal({ selectedTab, onVoteSuccess }) {
             return (
               <ChartItem
                 key={idol.id}
-                id={idol.id}
-                rank={idol.rank}
-                group={idol.group}
-                name={idol.name}
-                totalVotes={idol.totalVotes}
-                profilePicture={idol.profilePicture}
                 lastItemRef={isLastItem ? lastItemRef : null}
                 selectedId={selectedId}
                 onSelect={setSelectedId}
                 type="vote"
+                {...idol}
               />
             );
           })}

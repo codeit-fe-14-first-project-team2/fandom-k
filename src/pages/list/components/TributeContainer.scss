@@ -1,113 +1,100 @@
 #tribute-container {
-  > #tribute-list {
-    position: relative;
-    overflow: visible;
-    > #btn-left,
-    > #btn-right {
-      z-index: 10;
-      position: absolute;
-      > img {
-        width: 40px;
-      }
-    }
+	> #tribute-header {
+		position: relative;
+		> .toast-message {
+			top: -200%;
+			right: 0;
+			position: absolute;
+			background-color: var(--gray-828282);
+			padding: 16px 24px;
+			border-radius: 9999px;
+			display: none;
+		}
+		@media (width >= 1200px) {
+			> a:hover + .toast-message {
+				display: block;
+			}
+		}
+	}
+	> #tribute-list {
+		position: relative;
+		> #btn-left,
+		> #btn-right {
+			z-index: 1;
+			position: absolute;
+			> img {
+				width: 40px;
+			}
+		}
+		> #btn-left {
+			left: -80px;
+		}
+		> #btn-right {
+			right: -80px;
+		}
+		> #tribute-box {
+			flex-wrap: nowrap;
+			> .donation-item {
+				max-width: 282px;
+				width: 100%;
+				> .img-wrapper {
+					position: relative;
+					> .gradient {
+						width: 100%;
+						height: 100%;
+						position: absolute;
+						background: linear-gradient(transparent 70%, #000000);
+					}
+					> button {
+						position: absolute;
+						bottom: 20px;
+						left: 24px;
+						right: 24px;
+					}
+				}
+				> .donation-item-info {
+					position: relative;
+					> .donation-item-title > * {
+						width: inherit;
+						text-overflow: ellipsis;
+						white-space: nowrap;
+						overflow-x: hidden;
+					}
+					> .donation-item-graph {
+						height: 26px;
+						border-bottom: 1px solid white;
+					}
+					> .graph-line {
+						position: absolute;
+						left: 0;
+						bottom: 0px;
+						height: 1px;
+						width: calc(100% * var(--p));
+						background-color: var(--brand-orange);
+					}
+				}
+			}
+		}
 
-    > #btn-left {
-      left: 10px; /* 화면 안쪽으로 이동 */
-    }
-    > #btn-right {
-      right: 10px; /* 동일하게 조정 */
-    }
-
-    > #tribute-box {
-      display: flex;
-      flex-wrap: nowrap;
-      overflow-x: auto; /* Enable horizontal scrolling */
-      scroll-behavior: smooth; /* For smooth scrolling effect */
-      scrollbar-width: none; /* Hide scrollbar for Firefox */
-      -ms-overflow-style: none; /* Hide scrollbar for IE and Edge */
-
-      /* Hide scrollbar for Chrome, Safari and Opera */
-      &::-webkit-scrollbar {
-        display: none;
-      }
-
-      > .donation-item {
-        max-width: 282px;
-        width: 100%;
-        flex: 0 0 auto; /* Prevent items from shrinking */
-        margin-right: 16px; /* Add spacing between items */
-
-        > .img-wrapper {
-          position: relative;
-          > .gradient {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            background: linear-gradient(transparent 70%, #000000);
-          }
-          > button {
-            position: absolute;
-            bottom: 20px;
-            left: 24px;
-            right: 24px;
-          }
-        }
-
-        > .donation-item-info {
-          position: relative;
-          > .donation-item-title > * {
-            width: inherit;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            overflow-x: hidden;
-          }
-          > .donation-item-graph {
-            height: 26px;
-            border-bottom: 1px solid white;
-          }
-          > .graph-line {
-            position: absolute;
-            left: 0;
-            bottom: 0px;
-            height: 1px;
-            width: calc(100% * var(--p));
-            background-color: var(--brand-orange);
-          }
-        }
-      }
-    }
-
-    @media (width < 1200px) {
-      > #tribute-box {
-        overflow-x: auto; /* Ensure horizontal scrolling works */
-        -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-      }
-    }
-
-    @media (width < 768px) {
-      /* Mobile */
-      > #tribute-box {
-        > #btn-left {
-          left: 10px;
-        }
-        > #btn-right {
-          right: 10px;
-        }
-        > .donation-item {
-          max-width: 200px; /* Adjust for better mobile fit */
-
-          > .img-wrapper {
-            width: 100%; /* Make image wrapper full width of item */
-
-            > button {
-              bottom: 8px;
-              left: 8px;
-              right: 8px;
-              width: calc(100% - 16px);
-            }
-          }
-        }
-      }
-    }
-  }
+		@media (width < 1200px) {
+			/* Tablet */
+			> button {
+				display: none;
+				overflow-x: scroll;
+			}
+		}
+		@media (width < 768px) {
+			/* Mobile */
+			> #tribute-box > .donation-item > .img-wrapper {
+				width: 158px;
+				max-width: none;
+				> button {
+					bottom: 8px;
+					left: 8px;
+					right: 8px;
+					width: calc(100% - 16px);
+				}
+			}
+		}
+	}
 }
