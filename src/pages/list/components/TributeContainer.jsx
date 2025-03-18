@@ -4,14 +4,11 @@ import Icon from "../../../components/icon/Icon";
 import Loader from "../../../components/loader/Loader";
 import "./TributeContainer.scss";
 import TributeListItem from "./TributeListItem";
+import UseSwipeSlider from "./UseSwipeSlider";
 
 export default function TributeContainer() {
   const [donations, setDonations] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
-  const [touchStartX, setTouchStartX] = useState(0);
-  const [touchEndX, setTouchEndX] = useState(0);
-
   const itemsPerPage = 4;
 
   async function fetchDonations() {
@@ -35,35 +32,17 @@ export default function TributeContainer() {
     fetchDonations();
   };
 
-  const nextSlide = () => {
-    if (currentIndex + itemsPerPage < donations.length) {
-      setCurrentIndex(currentIndex + itemsPerPage);
-    }
-  };
-
-  const prevSlide = () => {
-    if (currentIndex - itemsPerPage >= 0) {
-      setCurrentIndex(currentIndex - itemsPerPage);
-    }
-  };
-
-  // 터치 이벤트 핸들러
-  const handleTouchStart = (e) => {
-    setTouchStartX(e.touches[0].clientX);
-  };
-
-  const handleTouchMove = (e) => {
-    setTouchEndX(e.touches[0].clientX);
-  };
-
-  const handleTouchEnd = () => {
-    const swipeDistance = touchStartX - touchEndX;
-    if (swipeDistance > 50) {
-      nextSlide();
-    } else if (swipeDistance < -50) {
-      prevSlide();
-    }
-  };
+  const {
+    currentIndex,
+    nextSlide,
+    prevSlide,
+    swipeHandlers,
+    canGoNext,
+    canGoPrev,
+  } = UseSwipeSlider({
+    totalItems: donations.length,
+    itemsPerPage,
+  });
 
   return (
     <section
@@ -80,15 +59,9 @@ export default function TributeContainer() {
         <div
           className="display-flex justify-left align-center"
           id="tribute-list"
-          onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchMove}
-          onTouchEnd={handleTouchEnd}
+          {...swipeHandlers}
         >
-          <button
-            id="btn-left"
-            onClick={prevSlide}
-            disabled={currentIndex === 0}
-          >
+          <button id="btn-left" onClick={prevSlide} disabled={!canGoPrev}>
             <Icon iconNm="button-left" size={40} />
           </button>
           <ul className="display-flex justify-stretch gap-24" id="tribute-box">
@@ -102,11 +75,7 @@ export default function TributeContainer() {
                 />
               ))}
           </ul>
-          <button
-            id="btn-right"
-            onClick={nextSlide}
-            disabled={currentIndex + itemsPerPage >= donations.length}
-          >
+          <button id="btn-right" onClick={nextSlide} disabled={!canGoNext}>
             <Icon iconNm="button-right" size={40} />
           </button>
         </div>
