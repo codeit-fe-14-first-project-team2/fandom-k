@@ -1,10 +1,10 @@
 import axios from "axios";
-import styled from 'styled-components';
+import styled from "styled-components";
 import React, { createContext, useEffect, useState } from "react";
 import { getIdolList } from "../../api/idols";
 import Header from "../../components/header/Header";
-import { ErrorBoundary } from 'react-error-boundary';
-import { getRankedChart } from '../../api/charts';
+import { ErrorBoundary } from "react-error-boundary";
+import { getRankedChart } from "../../api/charts";
 import useDataNum from "../../hooks/useDataNum";
 import AddInterestedIdols from "./components/AddInterestedIdols";
 import InterestedIdols from "./components/InterestedIdols";
