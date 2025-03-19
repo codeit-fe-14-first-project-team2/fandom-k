@@ -4,7 +4,7 @@ import React, { createContext, useEffect, useState } from "react";
 import { getIdolList } from "../../api/idols";
 import Header from "../../components/header/Header";
 import { ErrorBoundary } from "react-error-boundary";
-import { getRankedChart } from "../../api/charts";
+import { getChart } from "../../api/charts";
 import useDataNum from "../../hooks/useDataNum";
 import AddInterestedIdols from "./components/AddInterestedIdols";
 import InterestedIdols from "./components/InterestedIdols";
@@ -33,7 +33,7 @@ const MyPage = () => {
         result = await getIdolList({ cursor, pageSize: dataNum });
         handleDataUpdate(result?.list, 'result.list'); // 데이터 검사 및 업데이트
     } else if (option === 'female' || option === 'male') {
-        result = await getRankedChart({ gender: option, cursor, pageSize: dataNum });
+        result = await getChart({ gender: option, cursor, pageSize: dataNum });
         handleDataUpdate(result?.idols, 'result.idols'); // 데이터 검사 및 업데이트
     }
     setCursor(result?.nextCursor); // 다음 커서 업데이트
