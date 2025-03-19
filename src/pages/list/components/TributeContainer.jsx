@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { getDonations } from "../../../api/donations";
 import Button from "../../../components/button/Button";
 import Icon from "../../../components/icon/Icon";
-import Loader from "../../../components/loader/Loader";
+import Loading from "../../../util/Loading";
 import "./TributeContainer.scss";
 import TributeListItem from "./TributeListItem";
 import UseSwipeSlider from "./UseSwipeSlider";
