@@ -5,53 +5,79 @@ import {
   useCredit,
   useSetCredit,
   useSetModal,
-} from "../contexts/CreditContext";
+} from "../contexts/GlobalContext";
 import "./modal.scss";
 import "./TributeModal.scss";
+import { contributeDonation } from "../api/donations";
 
-const TributeModal = ({ donationIdol }) => {
+const TributeModal = ({ donationIdol, onDonationSuccess }) => {
   const setModal = useSetModal();
   const setCredit = useSetCredit();
   const credit = useCredit();
 
   const [inputValue, setInputValue] = useState("");
   const [creditMessage, setCreditMessage] = useState("");
-  const [inputBorderColor, setInputBorderColor] = useState("white"); // 입력 필드 테두리 색상 상태 추가
+  const [inputBorderColor, setInputBorderColor] = useState("white");
   const isButtonDisabled =
     isNaN(parseInt(inputValue)) || parseInt(inputValue) < 1;
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
     setCreditMessage("");
-    setInputBorderColor("white"); // 입력 값이 변경되면 테두리 색상 초기화
+    setInputBorderColor("white");
   };
 
-  const handleButtonClick = () => {
+  const handleButtonClick = async () => {
     const inputCredit = parseInt(inputValue);
+
     if (isNaN(inputCredit) || inputCredit < 1) {
       setCreditMessage("1 이상의 숫자를 입력해주세요.");
-      setInputBorderColor("red"); // 입력 값이 유효하지 않으면 테두리 색상 변경
+      setInputBorderColor("red");
       return;
     }
 
     if (inputCredit > credit) {
       setCreditMessage("크레딧이 부족합니다.");
-      setInputBorderColor("red"); // 크레딧 부족 시 테두리 색상 변경
+      setInputBorderColor("red");
       return;
     }
 
-    // 크레딧 충분하면 후원 로직 처리
-    setCredit(credit - inputCredit); // 크레딧 차감
-    setCreditMessage("후원 완료!"); // 후원 완료 메시지 표시
-    setInputBorderColor("white"); // 후원 완료 시 테두리 색상 초기화
-    //setTimeout(() => setModal(null), 1500); // 1.5초 후 모달 닫기
+    console.log("보내는 후원 데이터:", {
+      idolId: donationIdol.id,
+      credit: inputCredit,
+    });
+
+    try {
+      const updatedDonation = await contributeDonation(
+        donationIdol.id,
+        inputCredit
+      );
+      console.log("후원 완료:", updatedDonation);
+
+      // 크레딧 업데이트
+      setCredit(credit - inputCredit);
+      setCreditMessage("후원 완료!");
+      setInputBorderColor("white");
+
+      // 성공 콜백 호출 - 부모 컴포넌트에서 목록 갱신
+      if (onDonationSuccess) {
+        onDonationSuccess();
+      }
+
+      // 모달 닫기
+      setTimeout(() => setModal(null), 1500);
+    } catch (error) {
+      console.error("후원 실패:", error);
+      setCreditMessage("후원에 실패했습니다. 다시 시도해주세요.");
+      setInputBorderColor("red");
+    }
   };
 
   return (
     <div className="modal-wrapper display-flex justify-center align-center">
       <section
         id="tribute-modal"
-        className="display-grid gap-20 surface-secondary radius-8 px-16 py-24"
+        className="display-grid jutify-stretch gap-20 surface-secondary radius-8 px-16 py-24"
       >
         <div className="display-flex justify-sides align-center">
           <h3 className="text-secondary text-18 text-medium">후원 하기</h3>
@@ -61,7 +87,7 @@ const TributeModal = ({ donationIdol }) => {
         </div>
         <div className="display-flex justify-center">
           <img
-            src={donationIdol.imageUrl}
+            src={donationIdol.idol.profilePicture}
             alt={donationIdol.title}
             style={{
               position: "relative",
@@ -104,17 +130,15 @@ const TributeModal = ({ donationIdol }) => {
               {creditMessage}
             </div>
           )}
-          <div>
-            <Button
-              size="small"
-              disabled={isButtonDisabled}
-              style={{ backgroundColor: isButtonDisabled ? "gray" : null }}
-              onClick={handleButtonClick}
-            >
-              {"후원하기"}
-            </Button>
-          </div>
         </div>
+        <Button
+          size="free"
+          disabled={isButtonDisabled}
+          style={{ backgroundColor: isButtonDisabled ? "gray" : null }}
+          onClick={handleButtonClick}
+        >
+          후원하기
+        </Button>
       </section>
     </div>
   );
