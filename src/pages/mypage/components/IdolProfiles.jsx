@@ -1,7 +1,7 @@
-import { forwardRef } from 'react';
-import deleteIcon from '../../../assets/icon/ic_delete.svg';
-import checkIcon from '../../../assets/icon/ic_check.svg';
-import styled, { css } from 'styled-components';
+import { forwardRef } from "react";
+import deleteIcon from "../../../assets/icon/ic_delete.svg";
+import checkIcon from "../../../assets/icon/ic_check.svg";
+import styled, { css } from "styled-components";
 
 const IdolProfile = forwardRef(({ idol, selected = false, onCheck = () => {}, checked, onDelete }, ref) => {
     // 체크표시를 하는 함수
@@ -156,4 +156,4 @@ const DeleteButton = styled.img`
         top: 1px;
         left: 64px;
     }
-`;
+`; 
