@@ -3,7 +3,7 @@ import deleteIcon from "../../../assets/icon/ic_delete.svg";
 import checkIcon from "../../../assets/icon/ic_check.svg";
 import styled, { css } from 'styled-components';
 
-const IdolProfile = forwardRef(({ idol, selected = false, onCheck = () => {}, checked, onDelete }, ref) => {
+const IdolIcon = forwardRef(({ idol, selected = false, onCheck = () => {}, checked, onDelete }, ref) => {
     // 체크표시를 하는 함수
     const handleCheckClick = () => {
         const newChecked = !checked;
