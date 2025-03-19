@@ -4,6 +4,7 @@ import { getDonations } from "../../../api/donations";
 import Button from "../../../components/button/Button";
 import Icon from "../../../components/icon/Icon";
 import Loader from "../../../components/loader/Loader";
+import Loading from "./Loading";
 import "./TributeContainer.scss";
 import TributeListItem from "./TributeListItem";
 import UseSwipeSlider from "./UseSwipeSlider";
@@ -82,7 +83,7 @@ export default function TributeContainer() {
 
       {isLoading ? (
         <div className="loading-container">
-          <Loader />
+          <Loading />
         </div>
       ) : (
         <div
