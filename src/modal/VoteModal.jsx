@@ -8,7 +8,7 @@ import ErrorModal from "./ErrorModal";
 import ChartItem from "../pages/list/components/ChartItem";
 
 export default function VoteModal({ selectedTab, onVoteSuccess }) {
-  const currentCredit = useCredit();
+  const credit = useCredit();
   const setCredit = useSetCredit();
   const setModal = useSetModal();
   const [selectedId, setSelectedId] = useState(null);
@@ -33,14 +33,14 @@ export default function VoteModal({ selectedTab, onVoteSuccess }) {
   }
 
   async function handleVote() {
-    if (currentCredit < 1000) {
+    if (credit < 1000) {
       setErrorMessage("");
       return;
     }
     try {
       const response = await createVote({ idolId: selectedId });
       if (response) {
-        setCredit((prev) => prev - 1000);
+        setCredit(credit - 1000);
         onVoteSuccess([0]);
         setModal();
       }
@@ -92,17 +92,12 @@ export default function VoteModal({ selectedTab, onVoteSuccess }) {
             const isLastItem = index === idolData.length - 1;
             return (
               <ChartItem
-                key={idol.id}
-                id={idol.id}
-                rank={idol.rank}
-                group={idol.group}
-                name={idol.name}
-                totalVotes={idol.totalVotes}
-                profilePicture={idol.profilePicture}
+                key={`vote-item-${idol.id}`}
                 lastItemRef={isLastItem ? lastItemRef : null}
                 selectedId={selectedId}
                 onSelect={setSelectedId}
                 type="vote"
+                {...idol}
               />
             );
           })}

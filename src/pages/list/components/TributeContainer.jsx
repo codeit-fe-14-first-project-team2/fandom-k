@@ -6,13 +6,11 @@ import Icon from "../../../components/icon/Icon";
 import Loader from "../../../components/loader/Loader";
 import "./TributeContainer.scss";
 import TributeListItem from "./TributeListItem";
+import UseSwipeSlider from "./UseSwipeSlider";
 
 export default function TributeContainer() {
 	const [donations, setDonations] = useState([]);
-	const [currentIndex, setCurrentIndex] = useState(0);
 	const [isLoading, setIsLoading] = useState(true);
-	const [touchStartX, setTouchStartX] = useState(0);
-	const [touchEndX, setTouchEndX] = useState(0);
 
 	const itemsPerPage = 4;
 
@@ -30,42 +28,29 @@ export default function TributeContainer() {
 
 	useEffect(() => {
 		fetchDonations();
+
+		const refreshInterval = setInterval(async () => {
+			try {
+				const data = await getDonations();
+				setDonations(data.list);
+			} catch (err) {
+				console.error("갱신 오류:", err);
+			}
+		}, 30000);
+
+		return () => clearInterval(refreshInterval);
 	}, []);
 
-	// 후원 성공 시 목록 갱신
+	// 후원 성공 시 목록 갱신 함수
 	const handleDonationSuccess = () => {
 		fetchDonations();
 	};
 
-	const nextSlide = () => {
-		if (currentIndex + itemsPerPage < donations.length) {
-			setCurrentIndex(currentIndex + itemsPerPage);
-		}
-	};
-
-	const prevSlide = () => {
-		if (currentIndex - itemsPerPage >= 0) {
-			setCurrentIndex(currentIndex - itemsPerPage);
-		}
-	};
-
-	// 터치 이벤트 핸들러
-	const handleTouchStart = (e) => {
-		setTouchStartX(e.touches[0].clientX);
-	};
-
-	const handleTouchMove = (e) => {
-		setTouchEndX(e.touches[0].clientX);
-	};
-
-	const handleTouchEnd = () => {
-		const swipeDistance = touchStartX - touchEndX;
-		if (swipeDistance > 50) {
-			nextSlide();
-		} else if (swipeDistance < -50) {
-			prevSlide();
-		}
-	};
+	const { currentIndex, nextSlide, prevSlide, swipeHandlers, canGoNext, canGoPrev } =
+		UseSwipeSlider({
+			totalItems: donations.length,
+			itemsPerPage,
+		});
 
 	return (
 		<section className="display-grid justify-stretch gap-32" id="tribute-container">
@@ -76,18 +61,16 @@ export default function TributeContainer() {
 				</Link>
 				<div className="toast-message">원하는 아이돌의 조공이 없다면 직접 생성해보세요!</div>
 			</div>
+
 			{isLoading ? (
+				// 로딩 중일 때는 로딩 컴포넌트를 표시
 				<div className="loading-container">
-					<Loader />
+					<Loading />
 				</div>
 			) : (
-				<div
-					className="display-flex justify-left align-center"
-					id="tribute-list"
-					onTouchStart={handleTouchStart}
-					onTouchMove={handleTouchMove}
-					onTouchEnd={handleTouchEnd}>
-					<button id="btn-left" onClick={prevSlide} disabled={currentIndex === 0}>
+				// 데이터가 로드되면 정상적인 리스트 표시
+				<div className="display-flex justify-left align-center" id="tribute-list">
+					<button id="btn-left" onClick={prevSlide} disabled={!canGoPrev} type="button">
 						<Icon iconNm="button-left" size={40} />
 					</button>
 					<ul className="display-flex justify-stretch gap-24" id="tribute-box">
@@ -99,10 +82,7 @@ export default function TributeContainer() {
 							/>
 						))}
 					</ul>
-					<button
-						id="btn-right"
-						onClick={nextSlide}
-						disabled={currentIndex + itemsPerPage >= donations.length}>
+					<button id="btn-right" onClick={nextSlide} disabled={!canGoNext} type="button">
 						<Icon iconNm="button-right" size={40} />
 					</button>
 				</div>

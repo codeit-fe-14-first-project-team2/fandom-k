@@ -18,25 +18,41 @@
 	}
 	> #tribute-list {
 		position: relative;
+		overflow: visible;
 		> #btn-left,
 		> #btn-right {
-			z-index: 1;
+			z-index: 10;
 			position: absolute;
 			> img {
 				width: 40px;
 			}
 		}
+
 		> #btn-left {
-			left: -80px;
+			left: 10px;
 		}
 		> #btn-right {
-			right: -80px;
+			right: 10px;
 		}
+
 		> #tribute-box {
+			display: flex;
 			flex-wrap: nowrap;
+			overflow-x: auto;
+			scroll-behavior: smooth;
+			scrollbar-width: none;
+			-ms-overflow-style: none;
+
+			&::-webkit-scrollbar {
+				display: none;
+			}
+
 			> .donation-item {
 				max-width: 282px;
 				width: 100%;
+				flex: 0 0 auto;
+				margin-right: 16px;
+
 				> .img-wrapper {
 					position: relative;
 					> .gradient {
@@ -52,6 +68,7 @@
 						right: 24px;
 					}
 				}
+
 				> .donation-item-info {
 					position: relative;
 					> .donation-item-title > * {
@@ -77,22 +94,33 @@
 		}
 
 		@media (width < 1200px) {
-			/* Tablet */
-			> button {
-				display: none;
-				overflow-x: scroll;
+			> #tribute-box {
+				overflow-x: auto;
+				-webkit-overflow-scrolling: touch;
 			}
 		}
+
 		@media (width < 768px) {
-			/* Mobile */
-			> #tribute-box > .donation-item > .img-wrapper {
-				width: 158px;
-				max-width: none;
-				> button {
-					bottom: 8px;
-					left: 8px;
-					right: 8px;
-					width: calc(100% - 16px);
+			> #tribute-box {
+				> #btn-left {
+					left: 10px;
+				}
+				> #btn-right {
+					right: 10px;
+				}
+				> .donation-item {
+					max-width: 200px;
+
+					> .img-wrapper {
+						width: 100%;
+
+						> button {
+							bottom: 8px;
+							left: 8px;
+							right: 8px;
+							width: calc(100% - 16px);
+						}
+					}
 				}
 			}
 		}
