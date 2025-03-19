@@ -1,94 +1,161 @@
-import { useContext, useEffect } from "react";
-import IdolProfile from "../../../components/idolprofile/IdolProfile";
-import { MyDispatchContext, MyStateContext } from "../MyPage";
-import styled from "styled-components";
+import { forwardRef } from "react";
+import deleteIcon from "../../../assets/icon/ic_delete.svg";
+import checkIcon from "../../../assets/icon/ic_check.svg";
+import styled, { css } from "styled-components";
 
-const InterestedIdols = () => {
-    const { selectedDatas } = useContext(MyStateContext);
-    const { setSelectedDatas } = useContext(MyDispatchContext);
+const IdolProfile = forwardRef(
+	({ idol, selected = false, onCheck = () => {}, checked, onDelete }, ref) => {
+		// 체크표시를 하는 함수
+		const handleCheckClick = () => {
+			const newChecked = !checked;
+			onCheck(idol, newChecked);
+		};
 
-    // 로컬스토리지에서 데이터를 불러옴
-    useEffect(() => {
-        const savedIdols = localStorage.getItem('selectedIdols');
-        if (savedIdols) {
-            setSelectedDatas(JSON.parse(savedIdols));
-        }
-    }, [setSelectedDatas]);
+		// 프로필을 삭제하는 함수
+		const handleDeleteClick = () => onDelete(idol.id);
 
-    // 데이터가 변경될 때마다 로컬스토리지에 저장함
-    useEffect(() => {
-        localStorage.setItem('selectedIdols', JSON.stringify(selectedDatas));
-    }, [selectedDatas]);
+		return (
+			<IdolCard selected={selected} onClick={handleCheckClick} ref={ref}>
+				<IdolImgContainer selected={selected}>
+					<IdolImg src={idol.profilePicture} selected={selected} />
+					{checked && !selected && (
+						<Overlay>
+							<CheckIcon src={checkIcon} alt="체크 아이콘" />
+						</Overlay>
+					)}
+				</IdolImgContainer>
+				<IdolName>{idol.name}</IdolName>
+				<IdolGroup>{idol.group}</IdolGroup>
+				{selected && <DeleteButton onClick={handleDeleteClick} src={deleteIcon} alt="삭제버튼" />}
+			</IdolCard>
+		);
+	}
+);
 
-    // 특정 아이돌을 관심 목록에서 삭제하는 함수
-    const onDelete = (id) => {
-        const nextIdols = selectedDatas.filter((idol) => idol.id !== id);
-        setSelectedDatas(nextIdols);
-    };
+export default IdolProfile;
 
-    return (
-        <IdolWrapper>
-            <h2>내가 관심있는 아이돌</h2>
+// IdolCard는 프로필 카드의 외관을 정의
+const IdolCard = styled.div`
+	width: ${(props) => (props.selected === false ? "128px" : "100px")};
+	height: ${(props) => (props.selected === false ? "183px" : "150px")};
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	position: relative;
 
-            {selectedDatas.length > 0 ? (
-                <InterestedIdolList>
-                    {selectedDatas.map((idol) => {
-                        return <IdolProfile key={idol.id} idol={idol} selected={true} onDelete={onDelete} />;
-                    })}
-                </InterestedIdolList>
-            ) : (
-                <EmptyMessage>관심있는 아이돌을 추가해주세요!😎</EmptyMessage>
-            )}
-        </IdolWrapper>
-    );
-};
+	cursor: ${(props) => (props.selected ? "default" : "pointer")};
 
-export default InterestedIdols;
-
-// IdolWrapper는 관심 아이돌 섹션의 컨테이너를 스타일링
-const IdolWrapper = styled.div`
-    width: 1200px;
-    margin: 0px auto;
-    padding: 76px 0px 40px;
-    border-bottom: 1px solid #ffffff1a;
-
-    @media (max-width: 1280px) {
-        width: 700px;
-    }
-    @media (max-width: 768px) {
-        width: 328px;
-    }
+	@media (max-width: 768px) {
+		width: 98px;
+		min-width: 98px;
+		height: ${(props) => (props.selected === false ? "151px" : "121px")};
+	}
 `;
 
-// InterestedIdolList는 선택된 아이돌 리스트를 스타일링
-const InterestedIdolList = styled.div`
-    display: flex;
-    width: 100%;
-    gap: 24px;
-    margin-top: 32px;
-    overflow-x: auto;
-    overflow-y: hidden;
-    align-items: center;
-    padding: 1px 1px;
+// IdolCardStyles는 이미지와 이미지 컨테이너의 공통 스타일을 정의
+const IdolCardStyles = css`
+	width: ${(props) => (props.selected === false ? "128px" : "100px")};
+	height: ${(props) => (props.selected === false ? "128px" : "100px")};
+	border-radius: 50%;
 
-    /* 스크롤바 숨기기 */
-    ::-webkit-scrollbar {
-        display: none; /* 크롬, 사파리 */
-    }
-
-    -ms-overflow-style: none; /* 인터넷 익스플로러, 엣지 */
-    scrollbar-width: none; /* 파이어폭스 */
-
-    @media (max-width: 768px) {
-        gap: 0;
-        flex-wrap: nowrap;
-    }
+	@media (max-width: 768px) {
+		width: ${(props) => (props.selected === false ? "98px" : "70px")};
+		height: ${(props) => (props.selected === false ? "98px" : "70px")};
+	}
 `;
 
-//EmptyMessage는 관심 아이돌이 없을 때 표시되는 메시지를 스타일링
-const EmptyMessage = styled.p`
-    margin: 52px 0 34px;
-    font-size: 18px;
-    color: #ffffff;
-    text-align: center;
+// IdolImg는 아이돌의 프로필 이미지를 스타일링
+const IdolImg = styled.img`
+	${IdolCardStyles}
+	padding: 7.15px;
+	z-index: -1;
+	object-fit: cover;
+	display: block;
+
+	@media (max-width: 768px) {
+		padding: 5px;
+	}
+`;
+
+// IdolImgContainer는 프로필 이미지 컨테이너를 스타일링
+const IdolImgContainer = styled.div`
+	${IdolCardStyles}
+	display: inline-block;
+	outline: 1.43px solid #f96868;
+	position: relative;
+`;
+
+// Overlay는 체크 상태일 때 표시되는 오버레이를 스타일링
+const Overlay = styled.div`
+	position: absolute;
+	top: 6.52px;
+	left: 6.52px;
+	width: 115px;
+	height: 115px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 2;
+	border-radius: 50%;
+
+	&::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(271.36deg, #f96e68 -9.84%, #fe578f 107.18%);
+		opacity: 0.5;
+		z-index: -1;
+		border-radius: 50%;
+	}
+
+	@media (max-width: 768px) {
+		top: 5px;
+		left: 5px;
+		width: 88px;
+		height: 88px;
+	}
+`;
+
+// CheckIcon은 체크 아이콘의 크기와 위치를 스타일링
+const CheckIcon = styled.img`
+	width: 52.27px;
+	height: 52.27px;
+	z-index: 1;
+`;
+
+// IdolName은 아이돌의 이름 텍스트를 스타일링
+const IdolName = styled.p`
+	font-weight: 700;
+	font-size: 16px;
+	line-height: ${(props) => (props.selected === false ? "27.73px" : "26px")};
+	color: #f4efef;
+	margin: 8px 0 2px;
+`;
+
+//IdolGroup은 아이돌 그룹의 이름 텍스트를 스타일링
+const IdolGroup = styled.p`
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 16.71px;
+	color: #ffffff99;
+`;
+
+// DeleteButton은 삭제 버튼의 크기와 위치를 스타일링
+const DeleteButton = styled.img`
+	position: absolute;
+	width: 31.43px;
+	height: 31.43px;
+	top: 1.43px;
+	left: 70px;
+	cursor: pointer;
+
+	@media (max-width: 768px) {
+		width: 22px;
+		height: 22px;
+		top: 1px;
+		left: 64px;
+	}
 `;
