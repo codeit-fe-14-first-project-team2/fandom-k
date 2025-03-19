@@ -2,6 +2,7 @@ import axios from "axios";
 
 const HTTP_STATUS = { STATUS_OK: 200, STATUS_CREATED: 201 };
 const ERR_DATA = {
+  
   votes: "투표",
   idols: "아이돌",
   donations: "후원",
@@ -75,3 +76,4 @@ class HttpClient {
 export default HttpClient;
 
 export const handler = new HttpClient();
+
