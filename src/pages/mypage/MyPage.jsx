@@ -75,7 +75,7 @@ const MyPage = () => {
 
 	return (
 		<>
-			<Header />
+		<Header />
 			<ErrorBoundary FallbackComponent={ErrorPage}>
 				<StyledMyPage>
 					<MyStateContext.Provider value={{ datas, selectedDatas, checkedIdols }}>
