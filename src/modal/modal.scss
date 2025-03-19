@@ -1,3 +1,4 @@
+/* Modal - Common */
 html:has(.modal-wrapper) {
   overflow-y: hidden;
 }
@@ -20,9 +21,11 @@ html:has(.modal-wrapper) {
     animation: fadeIn 0.3s ease-in-out;
   }
 }
+/* ChargeModal */
 #charge-modal .credit-item {
   cursor: pointer;
 }
+/* ErrorModal */
 #error-modal {
   background-image: url("../assets/img/credit_jewel.svg");
   background-size: 113px;
@@ -38,15 +41,9 @@ html:has(.modal-wrapper) {
   background-size: 187px;
   background-position: center 4px;
 }
+/* VoteModal */
 #vote-modal .list-wrapper {
-  max-height: 455px;
+  max-height: 600px;
   overflow-y: auto;
   padding-right: 8px;
-}
-#modal-list-item {
-  padding: 8px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-body ::-webkit-scrollbar-track {
-  background-color: transparent;
 }

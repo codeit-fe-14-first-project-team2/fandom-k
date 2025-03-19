@@ -11,14 +11,22 @@ import usePagination from "../../../hooks/usePagination";
 import useScrollTo from "../../../hooks/useScrollTo";
 import { MyDispatchContext, MyStateContext } from "../MyPage";
 
-const AddInterestedIdols = ({ cursor, setCursor, isLoading, loadMore, option,  error }) => {
-    const { datas, selectedDatas, checkedIdols } = useContext(MyStateContext);
-    const { setSelectedDatas, setCheckedIdols } = useContext(MyDispatchContext);
-    const dataNum = useDataNum(); // 페이지당 렌더링되어야 할 아이템 수를 가져옴.
-    const lastItemRef = useRef(null); // 마지막 아이템을 참조하는 ref.
-    const { ref: idolListRef, scrollTo } = useScrollTo(); // 훅 사용
-    const { page,  handleNextPage, handlePrevPage } = usePagination(scrollTo);
- 
+const AddInterestedIdols = ({ cursor, isLoading, loadMore, option, setOption, error, onRetry }) => {
+	const { datas, selectedDatas, checkedIdols } = useContext(MyStateContext);
+	const { setSelectedDatas, setCheckedIdols } = useContext(MyDispatchContext);
+	const dataNum = useDataNum(); // 페이지당 렌더링되어야 할 아이템 수를 가져옴.
+	const lastItemRef = useRef(null); // 마지막 아이템을 참조하는 ref.
+	const { ref: idolListRef, scrollTo } = useScrollTo(); // 훅 사용
+	const { page, setPage, handleNextPage, handlePrevPage } = usePagination(scrollTo);
+
+	// 옵션 변경 시 호출되는 함수
+	const handleChange = (value) => {
+		setOption(value); // 옵션을 업데이트함.
+		setPage(0); // 페이지를 0으로 초기화.
+		setDatas([]);
+		setCursor(null); // 커서를 초기화.
+		setCheckedIdols([]); // 체크된 아이돌을 초기화.
+	};
 
 	// '추가하기' 버튼 클릭 시 호출되는 함수
 	const handleAddClick = () => {
@@ -78,12 +86,6 @@ const AddInterestedIdols = ({ cursor, setCursor, isLoading, loadMore, option,  e
 		loadMoreDatas();
 	}, [datas]);
 
-    // 성별 필터 버튼 배열
-    const genderBtnArr = [
-        { value: 'total', option: 'total', title: '전체 아이돌' },
-        { value: 'female', option: 'female', title: '여자 아이돌' },
-        { value: 'male', option: 'male', title: '남자 아이돌' },
-    ];
 
 	// 더 이상 로드할 데이터가 없는지 판단하는 변수.
 	const isDisabled = !cursor && (page + 1) * dataNum >= sortedDatas.length;
@@ -94,9 +96,18 @@ const AddInterestedIdols = ({ cursor, setCursor, isLoading, loadMore, option,  e
 				<>
 					<ContentTitle>
 						<h2>관심 있는 아이돌을 추가해보세요.</h2>
-
+						<ContentNav>
+							{genderBtnArr.map((gender) => (
+								<GenderToggleButton
+									key={gender.value}
+									onClick={() => handleChange(gender.option)}
+									value={gender.value}
+									selected={option === gender.option}>
+									{gender.title}
+								</GenderToggleButton>
+							))}
+						</ContentNav>
 					</ContentTitle>
-
 					<CarouselPage>
 						<CarouselButton onClick={handlePrevPage} disabled={isLoading || page === 0}>
 							<img src={arrowIcon} alt="이전" />
@@ -167,7 +178,33 @@ const ContentTitle = styled.div`
 	}
 `;
 
+const ContentNav = styled.div`
+	width: 1200px;
+	height: 42px;
+	margin-top: 30px;
+	display: flex;
+	flex-direction: row;
 
+	@media (max-width: 1280px) {
+		width: 700px;
+	}
+	@media (max-width: 768px) {
+		width: 328px;
+	}
+`;
+
+const GenderToggleButton = styled.button`
+	flex: 1;
+	text-align: center;
+	background-color: ${(props) => (props.selected === false ? "#02000e" : "#ffffff1a")};
+	padding: 12px;
+	border: none;
+	border-bottom: ${(props) => (props.selected === false ? "none" : "1px solid #fff")};
+
+	font-size: 14px;
+	line-height: 18px;
+	color: ${(props) => (props.selected === false ? "#828282" : "#fff")};
+`;
 
 const CarouselPage = styled.div`
 	width: 1322px;
