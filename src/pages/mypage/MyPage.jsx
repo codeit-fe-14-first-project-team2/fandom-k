@@ -34,7 +34,7 @@ const MyPage = () => {
 				result = await getIdolList(undefined, cursor, dataNum);
 				handleDataUpdate(result?.list, "result.list"); // 데이터 검사 및 업데이트
 			} else if (option === "female" || option === "male") {
-				result = await getChart({ gender: option, cursor, pageSize: dataNum });
+				result = await getChart({ selectedTab: option, cursor, pageSize: dataNum });
 				handleDataUpdate(result?.idols, "result.idols"); // 데이터 검사 및 업데이트
 			}
 			setCursor(result?.nextCursor); // 다음 커서 업데이트

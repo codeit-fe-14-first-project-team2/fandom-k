@@ -11,9 +11,18 @@ import usePagination from "../../../hooks/usePagination";
 import useScrollTo from "../../../hooks/useScrollTo";
 import { MyDispatchContext, MyStateContext } from "../MyPage";
 
-const AddInterestedIdols = ({ cursor, isLoading, loadMore, option, setOption, error, onRetry }) => {
+const AddInterestedIdols = ({
+	cursor,
+	setCursor,
+	isLoading,
+	loadMore,
+	option,
+	setOption,
+	error,
+	onRetry,
+}) => {
 	const { datas, selectedDatas, checkedIdols } = useContext(MyStateContext);
-	const { setSelectedDatas, setCheckedIdols } = useContext(MyDispatchContext);
+	const { setDatas, setSelectedDatas, setCheckedIdols } = useContext(MyDispatchContext);
 	const dataNum = useDataNum(); // 페이지당 렌더링되어야 할 아이템 수를 가져옴.
 	const lastItemRef = useRef(null); // 마지막 아이템을 참조하는 ref.
 	const { ref: idolListRef, scrollTo } = useScrollTo(); // 훅 사용
@@ -21,11 +30,11 @@ const AddInterestedIdols = ({ cursor, isLoading, loadMore, option, setOption, er
 
 	// 옵션 변경 시 호출되는 함수
 	const handleChange = (value) => {
-		setOption(value); // 옵션을 업데이트함.
 		setPage(0); // 페이지를 0으로 초기화.
-		setDatas([]);
 		setCursor(null); // 커서를 초기화.
+		setDatas([]);
 		setCheckedIdols([]); // 체크된 아이돌을 초기화.
+		setOption(value); // 옵션을 업데이트함.
 	};
 
 	// '추가하기' 버튼 클릭 시 호출되는 함수
@@ -41,7 +50,7 @@ const AddInterestedIdols = ({ cursor, isLoading, loadMore, option, setOption, er
 
 	// 아이돌 체크 상태 변경 시 호출되는 함수
 	const handleCheck = (idol) => {
-		const checked = checkedIdols.findIndex((el) => el.id === idol.id) >= 0;
+		const checked = checkedIdols.findIndex((el) => el.id === idol.id) < 0;
 		if (checked) {
 			setCheckedIdols([...checkedIdols, idol]); // 체크된 아이돌을 추가.
 		} else {
