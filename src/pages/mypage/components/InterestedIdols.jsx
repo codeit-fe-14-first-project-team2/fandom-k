@@ -43,7 +43,6 @@ const InterestedIdols = () => {
 								<span className="text-14 text-invert-60">{idol.group}</span>
 							</div>
 						</div>
-					   return <IdolProfile key={idol.id} idol={idol} selected={true} onDelete={onDelete} />
 					))}
 				</InterestedIdolList>
 			) : (
