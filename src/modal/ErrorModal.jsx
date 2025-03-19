@@ -1,6 +1,6 @@
 import Button from "../components/button/Button";
 import Icon from "../components/icon/Icon";
-import { useSetModal } from "../contexts/CreditContext";
+import { useSetModal } from "../contexts/GlobalContext";
 import "./modal.scss";
 
 export default function ErrorModal({ message }) {
