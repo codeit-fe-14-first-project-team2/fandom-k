@@ -19,7 +19,8 @@ export default function ChartContainer() {
   const [selectedTab, setSelectedTab] = useState("female");
   const [cursor, setCursor] = useState([0]);
   const { loading, value: chart } = useAsync(
-    () => getChart({ selectedTab, cursor: 0, pageSize: pageSize * cursor?.length }),
+    () =>
+      getChart({ selectedTab, cursor: 0, pageSize: pageSize * cursor?.length }),
     [selectedTab, cursor]
   );
 
@@ -42,13 +43,18 @@ export default function ChartContainer() {
   }, [chart]);
 
   return (
-    <section id="chart-container" className="display-grid justify-stretch mt-30 mb-100">
+    <section
+      id="chart-container"
+      className="display-grid justify-stretch mt-30 mb-100"
+    >
       <div className="display-flex justify-sides align-center">
         <h2 id="chart-title">이달의 차트</h2>
         <Button
           size="extra-small"
           onClick={() =>
-            setModal(<VoteModal selectedTab={selectedTab} onVoteSuccess={setCursor} />)
+            setModal(
+              <VoteModal selectedTab={selectedTab} onVoteSuccess={setCursor} />
+            )
           }
         >
           <Icon iconNm="chart" size={24} />
@@ -56,7 +62,11 @@ export default function ChartContainer() {
         </Button>
       </div>
       <article id="chart-box" className="display-grid">
-        <ChartTab selectedTab={selectedTab} setSelectedTab={setSelectedTab} setCursor={setCursor} />
+        <ChartTab
+          selectedTab={selectedTab}
+          setSelectedTab={setSelectedTab}
+          setCursor={setCursor}
+        />
         <div id="chart-list" className="display-grid">
           {chart?.idols?.map((idol) => (
             <ChartItem key={idol.id} type="chart" {...idol} />

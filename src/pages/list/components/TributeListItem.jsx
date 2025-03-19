@@ -13,15 +13,16 @@ export default function TributeListItem(donation) {
     donation;
   const setModal = useSetModal();
 
-  // 후원 성공 시 목록을 갱신하는 함수
   const handleDonationSuccess = () => {
-    // TributeContainer에서 목록 갱신 메서드 호출
     if (donation.onDonationSuccess) {
       donation.onDonationSuccess();
     }
   };
 
-  const handleOpenModal = () => {
+  const handleOpenModal = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
     setModal(
       <TributeModal
         donationIdol={donation}
@@ -35,7 +36,15 @@ export default function TributeListItem(donation) {
       <div className="img-wrapper radius-8">
         <div className="gradient" />
         <img src={idol?.profilePicture} alt={`${title} 대표 이미지`} />
-        <Button size="extra-small" id="btn-donation" onClick={handleOpenModal}>
+        <Button
+          size="extra-small"
+          id="btn-donation"
+          onClick={handleOpenModal}
+          // 모바일에서 터치 이벤트가 부모로 전파되지 않도록 함
+          onTouchStart={(e) => {
+            e.stopPropagation();
+          }}
+        >
           후원하기
         </Button>
       </div>
