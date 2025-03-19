@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import ErrorImg from '../assets/image/error.png';
+import ErrorImg from '../assets/img/error.png';
 
 const ErrorPage = () => {
     const listArr = [
