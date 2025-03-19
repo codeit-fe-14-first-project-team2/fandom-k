@@ -108,3 +108,4 @@ const StyledMyPage = styled.div`
 		line-height: 26px;
 	}
 `;
+
