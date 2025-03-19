@@ -78,12 +78,6 @@ const AddInterestedIdols = ({ cursor, isLoading, loadMore, option, setOption, er
 		loadMoreDatas();
 	}, [datas]);
 
-    const genderBtnArr = [
-		{ value: "total", option: "total", title: "전체 아이돌" },
-		{ value: "female", option: "female", title: "여자 아이돌" },
-		{ value: "male", option: "male", title: "남자 아이돌" },
-	];
-
 
 	// 더 이상 로드할 데이터가 없는지 판단하는 변수.
 	const isDisabled = !cursor && (page + 1) * dataNum >= sortedDatas.length;
