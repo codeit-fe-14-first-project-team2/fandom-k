@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-import IdolProfile from "../../../components/idolprofile/IdolProfile"
+import IdolProfile from "../../../components/idolprofile/IdolProfile";
 import { MyDispatchContext, MyStateContext } from "../MyPage";
 import styled from "styled-components";
 

@@ -114,7 +114,6 @@ const AddInterestedIdols = ({ cursor, isLoading, loadMore, option, setOption, er
 							))}
 						</ContentNav>
 					</ContentTitle>
-
 					<CarouselPage>
 						<CarouselButton onClick={handlePrevPage} disabled={isLoading || page === 0}>
 							<img src={arrowIcon} alt="이전" />
