@@ -92,7 +92,7 @@ export default function VoteModal({ selectedTab, onVoteSuccess }) {
             const isLastItem = index === idolData.length - 1;
             return (
               <ChartItem
-                key={idol.id}
+                key={`vote-item-${idol.id}`}
                 lastItemRef={isLastItem ? lastItemRef : null}
                 selectedId={selectedId}
                 onSelect={setSelectedId}
