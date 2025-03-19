@@ -5,7 +5,7 @@ import plusIcon from "../../../assets/icon/Ic_plus_24px.svg";
 import arrowIcon from "../../../assets/icon/ic_arrow_left.svg";
 import RefreshButton from "../../../components/RefreshButton";
 import Button from "../../../components/button/Button";
-import IdolProfile from "../../../components/idolprofile/IdolProfile";
+import IdolProfile from './IdolProfile';
 import useDataNum from "../../../hooks/useDataNum";
 import usePagination from "../../../hooks/usePagination";
 import useScrollTo from "../../../hooks/useScrollTo";
