@@ -1,14 +1,15 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import Loader from "../components/loader/Loader";
+import Toast from "../components/toast/Toast";
 
 /**
  * 크레딧, 크레딧 관련 모달 및 로더를 제어하는 Context API입니다.
  */
-export const CreditContext = createContext();
-
-export default function CreditContextProvider({ children }) {
+export const GlobalContext = createContext();
+export default function GlobalContextProvider({ children }) {
 	const [credit, setCredit] = useState(0);
 	const [modal, setModal] = useState();
+	const [toast, setToast] = useState();
 	const [loading, setLoading] = useState(false);
 
 	useEffect(() => {
@@ -22,29 +23,35 @@ export default function CreditContextProvider({ children }) {
 	}, []);
 
 	return (
-		<CreditContext.Provider value={{ credit, setCredit, setModal, setLoading }}>
+		<GlobalContext value={{ credit, setCredit, setModal, setToast, setLoading }}>
 			{children}
 			{modal}
+			{toast && <Toast message={toast} onClose={() => setToast()} />}
 			{loading && <Loader />}
-		</CreditContext.Provider>
+		</GlobalContext>
 	);
 }
-
 export function useCredit() {
-	const { credit } = useContext(CreditContext);
+	const { credit } = useContext(GlobalContext);
 	return credit;
 }
-
 export function useSetCredit() {
-	const { setCredit } = useContext(CreditContext);
+	const { setCredit } = useContext(GlobalContext);
 	function handleChangeCredit(value = 0) {
 		setCredit(value);
 		localStorage.setItem("credit", value);
 	}
 	return handleChangeCredit;
 }
-
 export function useSetModal() {
-	const { setModal } = useContext(CreditContext);
+	const { setModal } = useContext(GlobalContext);
 	return setModal;
+}
+export function useSetToast() {
+	const { setToast } = useContext(GlobalContext);
+	return setToast;
+}
+export function useSetLoading() {
+	const { setLoading } = useContext(GlobalContext);
+	return setLoading;
 }
