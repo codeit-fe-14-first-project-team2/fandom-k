@@ -6,7 +6,7 @@ import Icon from "../../../components/icon/Icon";
 import Loader from "../../../components/loader/Loader";
 import "./TributeContainer.scss";
 import TributeListItem from "./TributeListItem";
-
+import UseSwipeSlider from "./UseSwipeSlider";
 export default function TributeContainer() {
   const [donations, setDonations] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
