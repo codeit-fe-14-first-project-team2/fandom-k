@@ -5,7 +5,7 @@ import plusIcon from "../../../assets/icon/Ic_plus_24px.svg";
 import arrowIcon from "../../../assets/icon/ic_arrow_left.svg";
 import RefreshButton from "../../../components/RefreshButton";
 import Button from "../../../components/button/Button";
-import IdolProfile from "./IdolProfile";
+import IdolProfile from "../../../components/idolprofile/IdolProfile";
 import useDataNum from "../../../hooks/useDataNum";
 import usePagination from "../../../hooks/usePagination";
 import useScrollTo from "../../../hooks/useScrollTo";
@@ -19,14 +19,6 @@ const AddInterestedIdols = ({ cursor, isLoading, loadMore, option, setOption, er
 	const { ref: idolListRef, scrollTo } = useScrollTo(); // 훅 사용
 	const { page, setPage, handleNextPage, handlePrevPage } = usePagination(scrollTo);
 
-	// 옵션 변경 시 호출되는 함수
-	const handleChange = (value) => {
-		setOption(value); // 옵션을 업데이트함.
-		setPage(0); // 페이지를 0으로 초기화.
-		setDatas([]);
-		setCursor(null); // 커서를 초기화.
-		setCheckedIdols([]); // 체크된 아이돌을 초기화.
-	};
 
 	// '추가하기' 버튼 클릭 시 호출되는 함수
 	const handleAddClick = () => {
@@ -41,7 +33,7 @@ const AddInterestedIdols = ({ cursor, isLoading, loadMore, option, setOption, er
 
 	// 아이돌 체크 상태 변경 시 호출되는 함수
 	const handleCheck = (idol) => {
-		const checked = checkedIdols.findIndex((el) => el.id === idol.id) >= 0;
+		const checked = checkedIdols.findIndex((el) => el.id === idol.id) < 0;
 		if (checked) {
 			setCheckedIdols([...checkedIdols, idol]); // 체크된 아이돌을 추가.
 		} else {
@@ -86,12 +78,6 @@ const AddInterestedIdols = ({ cursor, isLoading, loadMore, option, setOption, er
 		loadMoreDatas();
 	}, [datas]);
 
-    const genderBtnArr = [
-		{ value: "total", option: "total", title: "전체 아이돌" },
-		{ value: "female", option: "female", title: "여자 아이돌" },
-		{ value: "male", option: "male", title: "남자 아이돌" },
-	];
-
 
 	// 더 이상 로드할 데이터가 없는지 판단하는 변수.
 	const isDisabled = !cursor && (page + 1) * dataNum >= sortedDatas.length;
@@ -102,17 +88,6 @@ const AddInterestedIdols = ({ cursor, isLoading, loadMore, option, setOption, er
 				<>
 					<ContentTitle>
 						<h2>관심 있는 아이돌을 추가해보세요.</h2>
-						<ContentNav>
-							{genderBtnArr.map((gender) => (
-								<GenderToggleButton
-									key={gender.value}
-									onClick={() => handleChange(gender.option)}
-									value={gender.value}
-									selected={option === gender.option}>
-									{gender.title}
-								</GenderToggleButton>
-							))}
-						</ContentNav>
 					</ContentTitle>
 					<CarouselPage>
 						<CarouselButton onClick={handlePrevPage} disabled={isLoading || page === 0}>
@@ -164,6 +139,7 @@ const ContentWrapper = styled.div`
 	flex-direction: column;
 	align-items: center;
 	padding-bottom: 81px;
+
 	@media (max-width: 1280px) {
 		padding-bottom: 40px;
 	}
@@ -174,38 +150,13 @@ const ContentTitle = styled.div`
 	padding-top: 40px;
 	display: flex;
 	flex-direction: column;
+
 	@media (max-width: 1280px) {
 		width: 700px;
 	}
 	@media (max-width: 768px) {
 		width: 328px;
 	}
-`;
-
-const ContentNav = styled.div`
-	width: 1200px;
-	height: 42px;
-	margin-top: 30px;
-	display: flex;
-	flex-direction: row;
-	@media (max-width: 1280px) {
-		width: 700px;
-	}
-	@media (max-width: 768px) {
-		width: 328px;
-	}
-`;
-
-const GenderToggleButton = styled.button`
-	flex: 1;
-	text-align: center;
-	background-color: ${(props) => (props.selected === false ? "#02000e" : "#ffffff1a")};
-	padding: 12px;
-	border: none;
-	border-bottom: ${(props) => (props.selected === false ? "none" : "1px solid #fff")};
-	font-size: 14px;
-	line-height: 18px;
-	color: ${(props) => (props.selected === false ? "#828282" : "#fff")};
 `;
 
 const CarouselPage = styled.div`
@@ -216,6 +167,7 @@ const CarouselPage = styled.div`
 	align-items: center;
 	gap: 32px;
 	margin: 32px 0 48px;
+
 	@media (max-width: 1280px) {
 		width: 700px;
 		gap: 27px;
@@ -234,10 +186,12 @@ const CarouselButton = styled.button`
 	display: flex;
 	align-items: center;
 	justify-content: center;
+
 	&:disabled {
 		opacity: 0.5;
 		cursor: not-allowed;
 	}
+
 	@media (max-width: 768px) {
 		display: none;
 	}
@@ -254,6 +208,7 @@ const IdolList = styled.div`
 	place-items: center;
 	justify-content: start;
 	margin: 0 auto;
+
 	overflow-y: hidden;
 	overflow-x: hidden;
 	grid-auto-flow: column;
@@ -261,21 +216,27 @@ const IdolList = styled.div`
 	padding: 0px 1px;
 	height: 398px;
 	padding: 0px 1px;
+
 	@media (max-width: 1280px) {
 		grid-template-columns: repeat(4, 128px);
+
 		width: 586px;
 		height: 394px;
 	}
+
 	@media (max-width: 768px) {
 		grid-template-columns: repeat(3, 98px);
 		grid-column-gap: 17px;
+
 		width: 330px;
 		height: 330px;
 		overflow-x: scroll;
 	}
+
 	::-webkit-scrollbar {
 		display: none;
 	}
+
 	-ms-overflow-style: none;
 	scrollbar-width: none;
 `;
@@ -288,6 +249,7 @@ export const ButtonInner = styled.div`
 	font-size: 16px;
 	line-height: 26px;
 	gap: 8px;
+
 	img {
 		width: 24px;
 		height: 24px;

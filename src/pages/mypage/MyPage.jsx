@@ -13,6 +13,7 @@ import InterestedIdols from "./components/InterestedIdols";
 export const MyStateContext = createContext();
 export const MyDispatchContext = createContext();
 
+// 머지 테스트
 const MyPage = () => {
 	const [datas, setDatas] = useState([]); // 아이돌 데이터 리스트
 	const [checkedIdols, setCheckedIdols] = useState([]); // 체크된 아이돌 리스트
@@ -34,7 +35,7 @@ const MyPage = () => {
 				result = await getIdolList(undefined, cursor, dataNum);
 				handleDataUpdate(result?.list, "result.list"); // 데이터 검사 및 업데이트
 			} else if (option === "female" || option === "male") {
-				result = await getChart({ gender: option, cursor, pageSize: dataNum });
+				result = await getChart({ selectedTab: option, cursor, pageSize: dataNum });
 				handleDataUpdate(result?.idols, "result.idols"); // 데이터 검사 및 업데이트
 			}
 			setCursor(result?.nextCursor); // 다음 커서 업데이트
@@ -107,4 +108,5 @@ const StyledMyPage = styled.div`
 		font-size: 24px;
 		line-height: 26px;
 	}
+
 `;
