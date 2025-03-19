@@ -1,3 +1,4 @@
+
 import Close from "../../assets/btn/btn_delete_24px.svg";
 import ButtonLeft from "../../assets/btn/btn_pagination_arrow_left.svg";
 import ButtonRight from "../../assets/btn/btn_pagination_arrow_right.svg";
