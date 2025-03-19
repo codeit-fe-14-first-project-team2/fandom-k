@@ -1,7 +1,7 @@
 import axios from "axios";
 import styled from "styled-components";
 import React, { createContext, useEffect, useState } from "react";
-import { getIdolList } from "../../api/idols";
+import { getIdolList } from "./../api/idols";
 import Header from "../../components/header/Header";
 import { ErrorBoundary } from "react-error-boundary";
 import { getRankedChart } from "../../api/charts";
