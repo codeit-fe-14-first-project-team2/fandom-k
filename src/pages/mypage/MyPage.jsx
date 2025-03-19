@@ -8,6 +8,7 @@ import { getChart } from "../../api/charts";
 import useDataNum from "../../hooks/useDataNum";
 import AddInterestedIdols from "./components/AddInterestedIdols";
 import InterestedIdols from "./components/InterestedIdols";
+import ErrorPage from '../../components/ErrorPage';
 
 export const MyStateContext = createContext();
 export const MyDispatchContext = createContext();
