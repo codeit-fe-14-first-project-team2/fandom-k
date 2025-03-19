@@ -156,4 +156,4 @@ const DeleteButton = styled.img`
         top: 1px;
         left: 64px;
     }
-`;
+`; 
