@@ -86,15 +86,6 @@ const AddInterestedIdols = ({ cursor, isLoading, loadMore, option, setOption, er
 		loadMoreDatas();
 	}, [datas]);
 
-<<<<<<< HEAD
-=======
-	// 성별 필터 버튼 배열
-	const genderBtnArr = [
-		{ value: "total", option: "total", title: "전체 아이돌" },
-		{ value: "female", option: "female", title: "여자 아이돌" },
-		{ value: "male", option: "male", title: "남자 아이돌" },
-	];
->>>>>>> 8de8cae95f001309b7db2eac0bf4200d80b4d175
 
 	// 더 이상 로드할 데이터가 없는지 판단하는 변수.
 	const isDisabled = !cursor && (page + 1) * dataNum >= sortedDatas.length;
