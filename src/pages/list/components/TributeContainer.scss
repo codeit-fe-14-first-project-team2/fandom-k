@@ -1,111 +1,128 @@
 #tribute-container {
-  > #tribute-list {
-    position: relative;
-    overflow: visible;
-    > #btn-left,
-    > #btn-right {
-      z-index: 10;
-      position: absolute;
-      > img {
-        width: 40px;
-      }
-    }
+	> #tribute-header {
+		position: relative;
+		> .toast-message {
+			top: -200%;
+			right: 0;
+			position: absolute;
+			background-color: var(--gray-828282);
+			padding: 16px 24px;
+			border-radius: 9999px;
+			display: none;
+		}
+		@media (width >= 1200px) {
+			> a:hover + .toast-message {
+				display: block;
+			}
+		}
+	}
+	> #tribute-list {
+		position: relative;
+		overflow: visible;
+		> #btn-left,
+		> #btn-right {
+			z-index: 10;
+			position: absolute;
+			> img {
+				width: 40px;
+			}
+		}
 
-    > #btn-left {
-      left: 10px;
-    }
-    > #btn-right {
-      right: 10px;
-    }
+		> #btn-left {
+			left: 10px;
+		}
+		> #btn-right {
+			right: 10px;
+		}
 
-    > #tribute-box {
-      display: flex;
-      flex-wrap: nowrap;
-      overflow-x: auto;
-      scroll-behavior: smooth;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
+		> #tribute-box {
+			display: flex;
+			flex-wrap: nowrap;
+			overflow-x: auto;
+			scroll-behavior: smooth;
+			scrollbar-width: none;
+			-ms-overflow-style: none;
 
-      &::-webkit-scrollbar {
-        display: none;
-      }
+			&::-webkit-scrollbar {
+				display: none;
+			}
 
-      > .donation-item {
-        max-width: 282px;
-        width: 100%;
-        flex: 0 0 auto;
-        margin-right: 16px;
+			> .donation-item {
+				max-width: 282px;
+				width: 100%;
+				flex: 0 0 auto;
+				margin-right: 16px;
 
-        > .img-wrapper {
-          position: relative;
-          > .gradient {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            background: linear-gradient(transparent 70%, #000000);
-          }
-          > button {
-            position: absolute;
-            bottom: 20px;
-            left: 24px;
-            right: 24px;
-          }
-        }
+				> .img-wrapper {
+					position: relative;
+					> .gradient {
+						width: 100%;
+						height: 100%;
+						position: absolute;
+						background: linear-gradient(transparent 70%, #000000);
+					}
+					> button {
+						position: absolute;
+						bottom: 20px;
+						left: 24px;
+						right: 24px;
+					}
+				}
 
-        > .donation-item-info {
-          position: relative;
-          > .donation-item-title > * {
-            width: inherit;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            overflow-x: hidden;
-          }
-          > .donation-item-graph {
-            height: 26px;
-            border-bottom: 1px solid white;
-          }
-          > .graph-line {
-            position: absolute;
-            left: 0;
-            bottom: 0px;
-            height: 1px;
-            width: calc(100% * var(--p));
-            background-color: var(--brand-orange);
-          }
-        }
-      }
-    }
+				> .donation-item-info {
+					position: relative;
+					> .donation-item-title > * {
+						width: inherit;
+						text-overflow: ellipsis;
+						white-space: nowrap;
+						overflow-x: hidden;
+					}
+					> .donation-item-graph {
+						height: 26px;
+						border-bottom: 1px solid white;
+					}
+					> .graph-line {
+						position: absolute;
+						left: 0;
+						bottom: 0px;
+						height: 1px;
+						width: calc(100% * var(--p));
+						background-color: var(--brand-orange);
+					}
+				}
+			}
+		}
 
-    @media (width < 1200px) {
-      > #tribute-box {
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-      }
-    }
+		@media (width < 1200px) {
+			> #tribute-box {
+				overflow-x: auto;
+				-webkit-overflow-scrolling: touch;
+			}
+		}
 
-    @media (width < 768px) {
-      > #tribute-box {
-        > #btn-left {
-          left: 10px;
-        }
-        > #btn-right {
-          right: 10px;
-        }
-        > .donation-item {
-          max-width: 200px;
+		@media (width < 768px) {
+			> #tribute-box {
+				> #btn-left {
+					left: 10px;
+				}
+				> #btn-right {
+					right: 10px;
+				}
+				> .donation-item {
+					max-width: 200px;
 
-          > .img-wrapper {
-            width: 100%;
+					> .img-wrapper {
+						width: 100%;
 
-            > button {
-              bottom: 8px;
-              left: 8px;
-              right: 8px;
-              width: calc(100% - 16px);
-            }
-          }
-        }
-      }
-    }
-  }
+						> button {
+							bottom: 8px;
+							left: 8px;
+							right: 8px;
+							width: calc(100% - 16px);
+						}
+					}
+				}
+			}
+		}
+	}
 }
