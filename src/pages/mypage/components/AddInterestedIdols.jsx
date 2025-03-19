@@ -41,7 +41,7 @@ const AddInterestedIdols = ({ cursor, isLoading, loadMore, option, setOption, er
 
 	// 아이돌 체크 상태 변경 시 호출되는 함수
 	const handleCheck = (idol) => {
-		const checked = checkedIdols.findIndex((el) => el.id === idol.id) >= 0;
+		const checked = checkedIdols.findIndex((el) => el.id === idol.id) < 0;
 		if (checked) {
 			setCheckedIdols([...checkedIdols, idol]); // 체크된 아이돌을 추가.
 		} else {
