@@ -86,12 +86,7 @@ const AddInterestedIdols = ({ cursor, isLoading, loadMore, option, setOption, er
 		loadMoreDatas();
 	}, [datas]);
 
-	// 성별 필터 버튼 배열
-	const genderBtnArr = [
-		{ value: "total", option: "total", title: "전체 아이돌" },
-		{ value: "female", option: "female", title: "여자 아이돌" },
-		{ value: "male", option: "male", title: "남자 아이돌" },
-	];
+
 
 	// 더 이상 로드할 데이터가 없는지 판단하는 변수.
 	const isDisabled = !cursor && (page + 1) * dataNum >= sortedDatas.length;
@@ -102,17 +97,7 @@ const AddInterestedIdols = ({ cursor, isLoading, loadMore, option, setOption, er
 				<>
 					<ContentTitle>
 						<h2>관심 있는 아이돌을 추가해보세요.</h2>
-						<ContentNav>
-							{genderBtnArr.map((gender) => (
-								<GenderToggleButton
-									key={gender.value}
-									onClick={() => handleChange(gender.option)}
-									value={gender.value}
-									selected={option === gender.option}>
-									{gender.title}
-								</GenderToggleButton>
-							))}
-						</ContentNav>
+						
 					</ContentTitle>
 
 					<CarouselPage>
@@ -185,33 +170,7 @@ const ContentTitle = styled.div`
 	}
 `;
 
-const ContentNav = styled.div`
-	width: 1200px;
-	height: 42px;
-	margin-top: 30px;
-	display: flex;
-	flex-direction: row;
 
-	@media (max-width: 1280px) {
-		width: 700px;
-	}
-	@media (max-width: 768px) {
-		width: 328px;
-	}
-`;
-
-const GenderToggleButton = styled.button`
-	flex: 1;
-	text-align: center;
-	background-color: ${(props) => (props.selected === false ? "#02000e" : "#ffffff1a")};
-	padding: 12px;
-	border: none;
-	border-bottom: ${(props) => (props.selected === false ? "none" : "1px solid #fff")};
-
-	font-size: 14px;
-	line-height: 18px;
-	color: ${(props) => (props.selected === false ? "#828282" : "#fff")};
-`;
 
 const CarouselPage = styled.div`
 	width: 1322px;
