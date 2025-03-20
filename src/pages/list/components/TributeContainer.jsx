@@ -3,48 +3,48 @@ import { Link } from "react-router-dom";
 import { getDonations } from "../../../api/donations";
 import Button from "../../../components/button/Button";
 import Icon from "../../../components/icon/Icon";
-import Loading from "../../../util/Loading";
+import Loader from "../../../components/loader/Loader";
 import "./TributeContainer.scss";
 import TributeListItem from "./TributeListItem";
 import UseSwipeSlider from "./UseSwipeSlider";
 
 export default function TributeContainer() {
-	const [donations, setDonations] = useState([]);
-	const [isLoading, setIsLoading] = useState(true);
+  const [donations, setDonations] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-	const itemsPerPage = 4;
+  const itemsPerPage = 4;
 
-	async function fetchDonations() {
-		setIsLoading(true);
-		try {
-			const data = await getDonations();
-			setDonations(data.list);
-		} catch (err) {
-			console.error("후원 목록 조회 중 오류 발생:", err);
-		} finally {
-			setIsLoading(false);
-		}
-	}
+  async function fetchDonations() {
+    setIsLoading(true);
+    try {
+      const data = await getDonations();
+      setDonations(data.list);
+    } catch (err) {
+      console.error("후원 목록 조회 중 오류 발생:", err);
+    } finally {
+      setIsLoading(false);
+    }
+  }
 
-	useEffect(() => {
-		fetchDonations();
+  useEffect(() => {
+    fetchDonations();
 
-		const refreshInterval = setInterval(async () => {
-			try {
-				const data = await getDonations();
-				setDonations(data.list);
-			} catch (err) {
-				console.error("갱신 오류:", err);
-			}
-		}, 30000);
+    const refreshInterval = setInterval(async () => {
+      try {
+        const data = await getDonations();
+        setDonations(data.list);
+      } catch (err) {
+        console.error("갱신 오류:", err);
+      }
+    }, 30000);
 
-		return () => clearInterval(refreshInterval);
-	}, []);
+    return () => clearInterval(refreshInterval);
+  }, []);
 
-	// 후원 성공 시 목록 갱신 함수
-	const handleDonationSuccess = () => {
-		fetchDonations();
-	};
+  // 후원 성공 시 목록 갱신 함수
+  const handleDonationSuccess = () => {
+    fetchDonations();
+  };
 
   const { currentIndex, nextSlide, prevSlide, swipeHandlers, canGoNext, canGoPrev } =
     UseSwipeSlider({
