@@ -46,47 +46,47 @@ export default function TributeContainer() {
 		fetchDonations();
 	};
 
-	const { currentIndex, nextSlide, prevSlide, swipeHandlers, canGoNext, canGoPrev } =
-		UseSwipeSlider({
-			totalItems: donations.length,
-			itemsPerPage,
-		});
+  const { currentIndex, nextSlide, prevSlide, swipeHandlers, canGoNext, canGoPrev } =
+    UseSwipeSlider({
+      totalItems: donations.length,
+      itemsPerPage,
+    });
 
-	return (
-		<section className="display-grid justify-stretch gap-32" id="tribute-container">
-			<div className="display-flex justify-sides align-lower" id="tribute-header">
-				<h2 className="text-24">후원을 기다리는 조공</h2>
-				<Link to="/add_tribute">
-					<Button size="extra-small">조공 생성하기</Button>
-				</Link>
-				<div className="toast-message">원하는 아이돌의 조공이 없다면 직접 생성해보세요!</div>
-			</div>
+  return (
+    <section className="display-grid justify-stretch gap-32" id="tribute-container">
+      <div className="display-flex justify-sides align-lower" id="tribute-header">
+        <h2 className="text-24">후원을 기다리는 조공</h2>
+        <Link to="/add_tribute">
+          <Button size="extra-small">조공 생성하기</Button>
+        </Link>
+        <div className="toast-message">원하는 아이돌의 조공이 없다면 직접 생성해보세요!</div>
+      </div>
 
-			{isLoading ? (
-				// 로딩 중일 때는 로딩 컴포넌트를 표시
-				<div className="loading-container">
-					<Loading />
-				</div>
-			) : (
-				// 데이터가 로드되면 정상적인 리스트 표시
-				<div className="display-flex justify-left align-center" id="tribute-list">
-					<button id="btn-left" onClick={prevSlide} disabled={!canGoPrev} type="button">
-						<Icon iconNm="button-left" size={40} />
-					</button>
-					<ul className="display-flex justify-stretch gap-24" id="tribute-box">
-						{donations.slice(currentIndex, currentIndex + itemsPerPage).map((donation) => (
-							<TributeListItem
-								key={donation.id}
-								{...donation}
-								onDonationSuccess={handleDonationSuccess}
-							/>
-						))}
-					</ul>
-					<button id="btn-right" onClick={nextSlide} disabled={!canGoNext} type="button">
-						<Icon iconNm="button-right" size={40} />
-					</button>
-				</div>
-			)}
-		</section>
-	);
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <div
+          className="display-flex justify-left align-center"
+          id="tribute-list"
+          {...swipeHandlers}
+        >
+          <button id="btn-left" onClick={prevSlide} disabled={!canGoPrev} type="button">
+            <Icon iconNm="button-left" size={40} />
+          </button>
+          <ul className="display-flex justify-stretch gap-24" id="tribute-box">
+            {donations.slice(currentIndex, currentIndex + itemsPerPage).map((donation) => (
+              <TributeListItem
+                key={donation.id}
+                {...donation}
+                onDonationSuccess={handleDonationSuccess}
+              />
+            ))}
+          </ul>
+          <button id="btn-right" onClick={nextSlide} disabled={!canGoNext} type="button">
+            <Icon iconNm="button-right" size={40} />
+          </button>
+        </div>
+      )}
+    </section>
+  );
 }
