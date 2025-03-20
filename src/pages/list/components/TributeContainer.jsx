@@ -3,52 +3,48 @@ import { Link } from "react-router-dom";
 import { getDonations } from "../../../api/donations";
 import Button from "../../../components/button/Button";
 import Icon from "../../../components/icon/Icon";
-import Loader from "../../../components/loader/Loader";
+import Loading from "../../../util/Loading";
 import "./TributeContainer.scss";
 import TributeListItem from "./TributeListItem";
 import UseSwipeSlider from "./UseSwipeSlider";
+
 export default function TributeContainer() {
-  const [donations, setDonations] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const itemsPerPage = 4;
+	const [donations, setDonations] = useState([]);
+	const [isLoading, setIsLoading] = useState(true);
 
-  async function fetchDonations() {
-    setIsLoading(true);
-    try {
-      const data = await getDonations();
-      setDonations(data.list);
-    } catch (err) {
-      console.error("후원 목록 조회 중 오류 발생:", err);
-    } finally {
-      setIsLoading(false);
-    }
-  }
+	const itemsPerPage = 4;
 
-  useEffect(() => {
-    fetchDonations();
+	async function fetchDonations() {
+		setIsLoading(true);
+		try {
+			const data = await getDonations();
+			setDonations(data.list);
+		} catch (err) {
+			console.error("후원 목록 조회 중 오류 발생:", err);
+		} finally {
+			setIsLoading(false);
+		}
+	}
 
-    const refreshInterval = setInterval(async () => {
-      try {
-        const data = await getDonations();
-        setDonations(data.list);
-      } catch (err) {
-        console.error("갱신 오류:", err);
-      }
-    }, 30000);
+	useEffect(() => {
+		fetchDonations();
 
-    return () => clearInterval(refreshInterval);
-  }, []);
+		const refreshInterval = setInterval(async () => {
+			try {
+				const data = await getDonations();
+				setDonations(data.list);
+			} catch (err) {
+				console.error("갱신 오류:", err);
+			}
+		}, 30000);
 
-  const handleDonationSuccess = () => {
-    setTimeout(async () => {
-      try {
-        const data = await getDonations();
-        setDonations(data.list);
-      } catch (err) {
-        console.error("목록 갱신 오류:", err);
-      }
-    }, 1000);
-  };
+		return () => clearInterval(refreshInterval);
+	}, []);
+
+	// 후원 성공 시 목록 갱신 함수
+	const handleDonationSuccess = () => {
+		fetchDonations();
+	};
 
   const { currentIndex, nextSlide, prevSlide, swipeHandlers, canGoNext, canGoPrev } =
     UseSwipeSlider({

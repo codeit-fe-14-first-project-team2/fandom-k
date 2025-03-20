@@ -46,7 +46,13 @@ This is a React project created with Vite.
 #### 기능
 
 - [x] 아이돌 생성
+
+  - 화면 이미지
+    ![add-idol](./src/assets/thumbnail/add-idol-tablet.png)
+
 - [x] 후원하기 생성
+  - 화면 이미지
+    ![add-tribute](./src/assets/thumbnail/add-tribute-tablet.png)
 
 ## Updates 📝
 
@@ -56,7 +62,10 @@ This is a React project created with Vite.
   - 랜딩 페이지
   - 목록 페이지
   - 마이 페이지
--
+- 250312 2차 개발 시작
+  - 추가 기능 포함 (아이돌 프로필 등록, 조공 신규 생성 등)
+- 250317 프로젝트 배포 및 테스트
+  - 배포 링크: https://fandom-k-neon.vercel.app/ (Vercel Pro Trial)
 
 ## Folder Structure 📁
 
